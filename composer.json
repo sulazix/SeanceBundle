@@ -27,9 +27,6 @@
     "target-dir" : "Interne/SeanceBundle",
     "repositories" : [{
     }],
-    "extra" : {
-    "branch-alias" : {
-            "dev-master" : "1.0.x-dev"
-        }
-    }
+    "minimum-stability": "stable",
+    
 }
