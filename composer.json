@@ -1,0 +1,35 @@
+{
+    "name" : "interne/seancebundle",
+    "description" : "Séance Bundle for Net BS Intranet",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Alaskan - Robin Fave",
+        "email" : "alaskan@vieux-mazel.ch"
+    	},
+	{
+	"name" : "Cabiai",
+	"email" : "tobechanged@no-reply.com"
+	}
+     ],
+    "keywords" : [
+        "seance meeting bundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Interne\\SeanceBundle" : ""
+        }
+    },
+    "target-dir" : "Interne/SeanceBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "master"
+        }
+    }
+}
