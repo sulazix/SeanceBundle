@@ -11,7 +11,7 @@
             "email" : "tobechanged@no-reply.com"
         }
     ],
-    "minimum-stability": "dev-stable",
+    "minimum-stability": "stable",
     "keywords" : [
         "seance meeting bundle"
     ],
