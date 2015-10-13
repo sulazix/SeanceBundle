@@ -21,8 +21,8 @@
     "require" : {
     },
     "autoload" : {
-        "psr-0" : {
-            "Interne\\SeanceBundle" : ""
+        "psr-4" : {
+            "Interne\\SeanceBundle\\" : ""
         }
     },
     "repositories" : [{
