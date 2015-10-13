@@ -3,14 +3,15 @@
     "description" : "Séance Bundle for Net BS Intranet",
     "type" : "symfony-bundle",
     "authors" : [{
-        "name" : "Alaskan - Robin Fave",
-        "email" : "alaskan@vieux-mazel.ch"
-    	},
-	{
-	"name" : "Cabiai",
-	"email" : "tobechanged@no-reply.com"
-	}
-     ],
+            "name" : "Alaskan - Robin Fave",
+            "email" : "alaskan@vieux-mazel.ch"
+        },
+        {
+            "name" : "Cabiai",
+            "email" : "tobechanged@no-reply.com"
+        }
+    ],
+    "minimum-stability": "stable",
     "keywords" : [
         "seance meeting bundle"
     ],
@@ -27,6 +28,4 @@
     "target-dir" : "Interne/SeanceBundle",
     "repositories" : [{
     }],
-    "minimum-stability": "stable",
-    
 }
