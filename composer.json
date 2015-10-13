@@ -11,7 +11,7 @@
             "email" : "tobechanged@no-reply.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev-stable",
     "keywords" : [
         "seance meeting bundle"
     ],
@@ -25,7 +25,6 @@
             "Interne\\SeanceBundle" : ""
         }
     },
-    "target-dir" : "Interne/SeanceBundle",
     "repositories" : [{
     }]
 }
