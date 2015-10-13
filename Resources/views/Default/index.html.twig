@@ -1,0 +1,65 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+
+{% block titre %}Gestionnaire de séance{% endblock %}
+
+{% block content %}
+
+    <div class="ui page grid">
+        <div class="row">
+            <h1>Gestionnaire de séance</h1>
+            <div class="twelve wide column">
+                Vous trouverez bientôt sur cette page un gestionnaire de séance complet ! <br>
+                Les fonctionnalités souhaitées sont :
+                <div class="ui list">
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">PV et OJ</div>
+                            <div class="description">Création d'ordre du jour et écriture de procès verbaux de séances</div>
+                        </div>
+                    </a>
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">Tagging</div>
+                            <div class="description">Système de tag pour marquer un point important, reporter un point, etc.</div>
+                        </div>
+                    </a>
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">Point Stacking</div>
+                            <div class="description">Un réservoir de points - si un point est reporté il vient dans ce réservoir
+                                qui est visible lors de la création de l'ordre du jour des prochaines réunions</div>
+                        </div>
+                    </a>
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">Searching</div>
+                            <div class="description">Recherche poussée via elasticsearch</div>
+                        </div>
+                    </a>
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">Online & Offline </div>
+                            <div class="description">Possibilité de taper des PV sans être connecté (via LocalStorage)</div>
+                        </div>
+                    </a>
+                    <a class="item">
+                        <i class="right triangle icon"></i>
+                        <div class="content">
+                            <div class="header">(Task)</div>
+                            <div class="description">Gestionnaire de tâche et de dates importantes</div>
+                        </div>
+                    </a>
+                </div>
+                Une démonstration statique est/sera disponible ici : <a href="./demo"> lien</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
