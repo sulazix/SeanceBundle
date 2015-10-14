@@ -31,7 +31,7 @@ class Meeting
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
@@ -43,15 +43,22 @@ class Meeting
     private $place;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Container", inversedBy="meetings")
+     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="meetings")
      * @ORM\JoinColumn(name="container_id", referencedColumnName="id")
      */
     private $container;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Item", mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting")
      */
     private $items;
+    
+    public $test;
+
+    public function __construct() {
+        $this->date = new \DateTime();
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -135,5 +142,62 @@ class Meeting
     {
         return $this->name;
     }
-}
 
+    /**
+     * Set container
+     *
+     * @param \Interne\SeanceBundle\Entity\Container $container
+     *
+     * @return Meeting
+     */
+    public function setContainer(\Interne\SeanceBundle\Entity\Container $container = null)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
+
+    /**
+     * Get container
+     *
+     * @return \Interne\SeanceBundle\Entity\Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * Add item
+     *
+     * @param \Interne\SeanceBundle\Entity\Item $item
+     *
+     * @return Meeting
+     */
+    public function addItem(\Interne\SeanceBundle\Entity\Item $item)
+    {
+        $this->items[] = $item;
+
+        return $this;
+    }
+
+    /**
+     * Remove item
+     *
+     * @param \Interne\SeanceBundle\Entity\Item $item
+     */
+    public function removeItem(\Interne\SeanceBundle\Entity\Item $item)
+    {
+        $this->items->removeElement($item);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+}

@@ -43,19 +43,19 @@ class Item
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Container", inversedBy="stackOfItems")
+     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="stackOfItems")
      * @ORM\JoinColumn(name="container_id", referencedColumnName="id")
      */
     private $container;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Meeting", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Meeting", inversedBy="items")
      * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id")
      */
     private $meeting;
 
     /**
-     * @ORM\OneToOne(targetEntity="Interne\SeanceBundle\Item", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Interne\SeanceBundle\Entity\Item", cascade={"persist"})
      */
     private $previous;
 
@@ -141,5 +141,76 @@ class Item
     {
         return $this->position;
     }
-}
 
+    /**
+     * Set container
+     *
+     * @param \Interne\SeanceBundle\Entity\Container $container
+     *
+     * @return Item
+     */
+    public function setContainer(\Interne\SeanceBundle\Entity\Container $container = null)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
+
+    /**
+     * Get container
+     *
+     * @return \Interne\SeanceBundle\Entity\Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * Set meeting
+     *
+     * @param \Interne\SeanceBundle\Entity\Meeting $meeting
+     *
+     * @return Item
+     */
+    public function setMeeting(\Interne\SeanceBundle\Entity\Meeting $meeting = null)
+    {
+        $this->meeting = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * Get meeting
+     *
+     * @return \Interne\SeanceBundle\Entity\Meeting
+     */
+    public function getMeeting()
+    {
+        return $this->meeting;
+    }
+
+    /**
+     * Set previous
+     *
+     * @param \Interne\SeanceBundle\Entity\Item $previous
+     *
+     * @return Item
+     */
+    public function setPrevious(\Interne\SeanceBundle\Entity\Item $previous = null)
+    {
+        $this->previous = $previous;
+
+        return $this;
+    }
+
+    /**
+     * Get previous
+     *
+     * @return \Interne\SeanceBundle\Entity\Item
+     */
+    public function getPrevious()
+    {
+        return $this->previous;
+    }
+}

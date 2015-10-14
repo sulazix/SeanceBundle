@@ -36,12 +36,12 @@ class Container
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Meeting", mappedBy="container")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Meeting", mappedBy="container")
      */
     private $meetings;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Item", mappedBy="container")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="container")
      */
     private $stackOfItems;
 
@@ -104,5 +104,80 @@ class Container
     {
         return $this->description;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->meetings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->stackOfItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add meeting
+     *
+     * @param \Interne\SeanceBundle\Entity\Meeting $meeting
+     *
+     * @return Container
+     */
+    public function addMeeting(\Interne\SeanceBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings[] = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * Remove meeting
+     *
+     * @param \Interne\SeanceBundle\Entity\Meeting $meeting
+     */
+    public function removeMeeting(\Interne\SeanceBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings->removeElement($meeting);
+    }
+
+    /**
+     * Get meetings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeetings()
+    {
+        return $this->meetings;
+    }
+
+    /**
+     * Add stackOfItem
+     *
+     * @param \Interne\SeanceBundle\Entity\Item $stackOfItem
+     *
+     * @return Container
+     */
+    public function addStackOfItem(\Interne\SeanceBundle\Entity\Item $stackOfItem)
+    {
+        $this->stackOfItems[] = $stackOfItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove stackOfItem
+     *
+     * @param \Interne\SeanceBundle\Entity\Item $stackOfItem
+     */
+    public function removeStackOfItem(\Interne\SeanceBundle\Entity\Item $stackOfItem)
+    {
+        $this->stackOfItems->removeElement($stackOfItem);
+    }
+
+    /**
+     * Get stackOfItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStackOfItems()
+    {
+        return $this->stackOfItems;
+    }
+}

@@ -5,6 +5,10 @@ namespace Interne\SeanceBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+use Interne\SeanceBundle\Entity\Meeting;
+use Interne\SeanceBundle\Form\MeetingType;
+
 /**
  * Class NewsController
  * @package Interne\SeanceBundle\Controller
@@ -27,5 +31,16 @@ class DefaultController extends Controller
     public function demoAction()
     {
         return array();
+    }
+
+    /**
+     * @route("/meeting/add")
+     * @Template()
+     */
+    public function addMeetingAction() {
+        $meeting = new Meeting();
+
+        $form = $this->createForm(new MeetingType(), $meeting);
+        return ["form" => $form->createView()];
     }
 }
