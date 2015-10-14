@@ -55,7 +55,7 @@ class Item
     private $meeting;
 
     /**
-     * @ORM\OneToOne(targetEntity="Interne\SeanceBundle\Item", cascade={persist})
+     * @ORM\OneToOne(targetEntity="Interne\SeanceBundle\Item", cascade={"persist"})
      */
     private $previous;
 
