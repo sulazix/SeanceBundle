@@ -28,4 +28,14 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @route("/demo_seance", name="interne_seance_demo_seance")
+     * @Template()
+     */
+    public function seanceAction()
+    {
+        return array();
+    }
+
 }
