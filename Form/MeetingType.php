@@ -6,8 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Interne\SeanceBundle\Field\ItemValueType;
+use Interne\SeanceBundle\Field\AddOrSelectValueType;
 use Interne\SeanceBundle\Entity\ItemRepository;
+use AppBundle\Field\FamilleValueType;
 
 class MeetingType extends AbstractType
 {
@@ -18,14 +19,12 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
-            //->add('date', 'date')
-            ->add('place', 'text')
+            ->add('name', 'text', ["label" => "Nom"])
+            ->add('date', 'datepicker', ["label" => "Date", "attr" => ["class" => "datepicker"]])
+            ->add('place', 'text', ["label" => "Lieu"])
 
             // Choisir depuis le stack de points
-            ->add('items', new ItemValueType, [
-                "label" => 'Point(s)'
-                ])
+            ->add('items', 'semantic', ["class" => "Interne\SeanceBundle\Entity\Item"])
             /*
             ->add('items', 'entity', [
                     'class' => 'InterneSeanceBundle:Item',
@@ -44,7 +43,7 @@ class MeetingType extends AbstractType
                 ])
             //*/
 
-            ->add('save', 'submit');
+            ->add('save', 'submit', ["label" => "Enregistrer"]);
             ;
     }
     
