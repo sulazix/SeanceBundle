@@ -1,5 +1,5 @@
 # SeanceBundle
-Bundle de séance pour le Net BS
+Bundle de séance pour le Net BS (https://github.com/sysmoh/intranetBS)
 
 Pour l'installer : 
 
