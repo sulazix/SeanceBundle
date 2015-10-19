@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Interne\SeanceBundle\Field\AddOrSelectValueType;
 use Interne\SeanceBundle\Entity\ItemRepository;
 use AppBundle\Field\FamilleValueType;
 
@@ -24,24 +23,19 @@ class MeetingType extends AbstractType
             ->add('place', 'text', ["label" => "Lieu"])
 
             // Choisir depuis le stack de points
-            ->add('items', 'semantic', ["class" => "Interne\SeanceBundle\Entity\Item"])
-            /*
+            //*
             ->add('items', 'entity', [
                     'class' => 'InterneSeanceBundle:Item',
                     'property' => 'title',
-                    'placeholder' => 'Créer un nouveau point',
+                    'placeholder' => 'Sélectionner un point',
                     'multiple' => true,
                     'query_builder' => function(ItemRepository $repo) {
-                        return $repo->getContainerStackedItems();
+                        return $repo->createQueryBuilder('i')
+                                ->orderBy('i.title');
                     }
                 ])
-            // Et/Ou créer de nouveaux points
-            ->add('items_new', 'collection', [
-                    'type' => new ItemType,
-                    'allow_add' => true,
-                    'allow_delete' => true
-                ])
-            //*/
+            
+            // TODO : Ajouter la création de points de l'ordre du jour
 
             ->add('save', 'submit', ["label" => "Enregistrer"]);
             ;
