@@ -16,32 +16,14 @@ use Interne\SeanceBundle\Form\MeetingType;
  */
 class DefaultController extends Controller
 {
-    /**
-     * @route("/", name="interne_seance")
-     * @Template()
-     */
     public function indexAction()
     {
-        return array();
+        return $this->render("InterneSeanceBundle:Default:index.html.twig");
     }
-    /**
-     * @route("/demo", name="interne_seance_demo")
-     * @Template()
-     */
+
     public function demoAction()
     {
-        return array();
-    }
-
-    /**
-     * @route("/meeting/add")
-     * @Template()
-     */
-    public function addMeetingAction() {
-        $meeting = new Meeting();
-
-        $form = $this->createForm(new MeetingType(), $meeting);
-        return ["form" => $form->createView()];
+        return $this->render("InterneSeanceBundle:Default:demo.html.twig");
     }
     /**
      * @route("/demo_seance", name="interne_seance_demo_seance")

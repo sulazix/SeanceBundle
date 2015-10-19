@@ -1,0 +1,15 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block content -%}
+    <h1>Créer une réunion</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+	    <li>
+	        <a href="{{ path('meeting') }}">
+	            Retour à la liste
+	        </a>
+	    </li>
+	</ul>
+{% endblock %}

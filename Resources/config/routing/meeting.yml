@@ -1,0 +1,30 @@
+meeting:
+    path:     /
+    defaults: { _controller: "InterneSeanceBundle:Meeting:index" }
+
+meeting_show:
+    path:     /{id}/show
+    defaults: { _controller: "InterneSeanceBundle:Meeting:show" }
+
+meeting_new:
+    path:     /new
+    defaults: { _controller: "InterneSeanceBundle:Meeting:new" }
+
+meeting_create:
+    path:     /create
+    defaults: { _controller: "InterneSeanceBundle:Meeting:create" }
+    methods:  POST
+
+meeting_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "InterneSeanceBundle:Meeting:edit" }
+
+meeting_update:
+    path:     /{id}/update
+    defaults: { _controller: "InterneSeanceBundle:Meeting:update" }
+    methods:  [POST, PUT]
+
+meeting_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "InterneSeanceBundle:Meeting:delete" }
+    methods:  [POST, DELETE]

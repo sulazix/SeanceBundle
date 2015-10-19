@@ -31,7 +31,7 @@ class Meeting
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -52,8 +52,6 @@ class Meeting
      * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting")
      */
     private $items;
-    
-    public $test;
 
     public function __construct() {
         $this->date = new \DateTime();
