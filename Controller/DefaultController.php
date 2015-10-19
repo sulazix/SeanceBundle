@@ -25,25 +25,11 @@ class DefaultController extends Controller
     {
         return $this->render("InterneSeanceBundle:Default:demo.html.twig");
     }
-    /**
-     * @route("/demo_seance", name="interne_seance_demo_seance")
-     * @Template()
-     */
+
     public function seanceAction()
     {
-        return array();
+        return $this->render("InterneSeanceBundle:Default:seance.html.twig");
     }
 
-    /**
-     * @route("/meeting/add")
-     * @Template()
-     */
-    public function addMeetingAction() {
-        $meeting = new Meeting();
 
-        $form = $this->createForm(new MeetingType(), $meeting);
-        return ["form" => $form->createView()];
-        return $this->render("InterneSeanceBundle:Default:demo.html.twig");
-     }
-     
 }

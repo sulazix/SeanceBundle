@@ -9,3 +9,7 @@ interne_seance:
 interne_seance_demo:
     path: /demo
     defaults: { _controller: InterneSeanceBundle:Default:demo }
+
+interne_seance_demo_seance:
+    path: /demo_seance
+    defaults: { _controller: InterneSeanceBundle:Default:seance }
