@@ -33,4 +33,17 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @route("/meeting/add")
+     * @Template()
+     */
+    public function addMeetingAction() {
+        $meeting = new Meeting();
+
+        $form = $this->createForm(new MeetingType(), $meeting);
+        return ["form" => $form->createView()];
+        return $this->render("InterneSeanceBundle:Default:demo.html.twig");
+     }
+     
 }
