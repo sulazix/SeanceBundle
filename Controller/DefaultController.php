@@ -43,4 +43,12 @@ class DefaultController extends Controller
         $form = $this->createForm(new MeetingType(), $meeting);
         return ["form" => $form->createView()];
     }
+    /**
+     * @route("/demo_seance", name="interne_seance_demo_seance")
+     * @Template()
+     */
+    public function seanceAction()
+    {
+        return array();
+    }
 }
