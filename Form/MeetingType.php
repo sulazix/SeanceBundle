@@ -6,9 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Interne\SeanceBundle\Entity\ItemRepository;
-use AppBundle\Field\FamilleValueType;
-
 class MeetingType extends AbstractType
 {
     /**
@@ -18,27 +15,11 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', ["label" => "Nom"])
-            ->add('date', 'datepicker', ["label" => "Date", "attr" => ["class" => "datepicker"]])
-            ->add('place', 'text', ["label" => "Lieu"])
-
-            // Choisir depuis le stack de points
-            //*
-            ->add('items', 'entity', [
-                    'class' => 'InterneSeanceBundle:Item',
-                    'property' => 'title',
-                    'placeholder' => 'Sélectionner un point',
-                    'multiple' => true,
-                    'query_builder' => function(ItemRepository $repo) {
-                        return $repo->createQueryBuilder('i')
-                                ->orderBy('i.title');
-                    }
-                ])
-            
-            // TODO : Ajouter la création de points de l'ordre du jour
-
-            ->add('save', 'submit', ["label" => "Enregistrer"]);
-            ;
+            ->add('name')
+            ->add('date', 'datepicker')
+            ->add('place')
+            ->add('container')
+        ;
     }
     
     /**
