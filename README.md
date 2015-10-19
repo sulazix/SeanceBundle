@@ -18,7 +18,6 @@ Configuration
 
 Enregistrer les routes du bundle dans l'application :
 
-
 ```
 # app/config/routing.yml
 
@@ -27,6 +26,8 @@ interne_seance:
     prefix:   /interne/seance
 
 ```
+
+Mettre à jour les bundles chargés depuis le kernel Symfony :
 
 ```
 # /app/AppKernel.php
