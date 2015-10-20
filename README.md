@@ -48,3 +48,8 @@ Mettre à jour les bundles chargés depuis le kernel Symfony :
 		new Interne\SeanceBundle\InterneSeanceBundle(),
 	);
 ```
+
+Générer les tables en base de données
+-------------------------------------
+
+``` php app/console doctrine:schema:update --force ```
