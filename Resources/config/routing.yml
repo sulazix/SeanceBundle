@@ -2,6 +2,10 @@ interne_seance_meeting:
     resource: "@InterneSeanceBundle/Resources/config/routing/meeting.yml"
     prefix:   /meeting
 
+interne_seance_item:
+    resource: "@InterneSeanceBundle/Resources/config/routing/item.yml"
+    prefix:   /item
+
 interne_seance:
     path: /
     defaults: { _controller: InterneSeanceBundle:Default:index }

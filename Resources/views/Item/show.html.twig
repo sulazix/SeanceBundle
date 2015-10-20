@@ -1,0 +1,40 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block content -%}
+    <h1>Meeting</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ item.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ item.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ item.description }}</td>
+            </tr>
+            <tr>
+                <th>Réunion</th>
+                <td><a href="{{ (item.meeting is not null) ? path('meeting_show', { 'id': item.meeting.id }) : path('meeting') }}">ici</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('meeting') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('meeting_edit', { 'id': item.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

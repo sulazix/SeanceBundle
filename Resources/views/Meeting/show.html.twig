@@ -1,40 +1,58 @@
 {% extends "AppBundle:Layout:layout.html.twig" %}
 
 {% block content -%}
-    <h1>Meeting</h1>
+    <h1>{{ meeting.name }} - ({{ meeting.place }})</h1>
+    <p>{{ meeting.date|date('d-m-Y à H:i') }}</p>
+    <p>
+        <a href="{{ path('meeting_edit', { 'id': meeting.id }) }}">Editer</a>
+    </p>
+    <p> {{ form(delete_form) }}</p>
 
-    <table class="record_properties">
-        <tbody>
+    <h1>Ordre du jour</h1>
+
+    <table class="records_list">
+        <thead>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Actions</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for item in meeting.items %}
             <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
+                <td><a href="{{ path('item_show', { 'id': item.id }) }}">{{ item.id }}</a></td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('item_show', { 'id': item.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('item_edit', { 'id': item.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
             </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ entity.place }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('meeting') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('meeting_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul>
+        <li>
+            <a href="{{ path('item_new', {'meeting_id': app.request.get('id')}) }}">
+                Ajouter un point à l'ordre du jour
+            </a>
+        </li>
+    </ul>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('meeting') }}">
+                Vers la liste des réunions
+            </a>
+        </li>
+    </ul>
 {% endblock %}

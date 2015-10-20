@@ -3,12 +3,19 @@
 namespace Interne\SeanceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
- * Item
+ * Item représente un point d'un ordre du jour, il peut être contenu dans
+ * une réunion ou dans le stack de points d'un conteneur.
+ *
+ * @see InterneSeanceBundle\Entity\Container
+ * @see InterneSeanceBundle\Entity\Meeting
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\ItemRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Item
 {
@@ -25,6 +32,9 @@ class Item
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max="200")
      */
     private $title;
 
@@ -39,6 +49,8 @@ class Item
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
+     *
+     * @Assert\GreaterThan(value="0")
      */
     private $position;
 
@@ -58,6 +70,28 @@ class Item
      * @ORM\OneToOne(targetEntity="Interne\SeanceBundle\Entity\Item", cascade={"persist"})
      */
     private $previous;
+
+
+
+    // ========================================================
+    //                    DOCTRINE EVENTS
+    // ========================================================
+
+    /**
+     * Génère une position à partir des positions existantes
+     * des différents points d'une réunion.
+     *
+     * @ORM\PrePersist
+     */
+    public function generatePosition(LifeCycleEventArgs $event) {
+        $this->setPosition($this->getMeeting()->getNewPosition());
+    }
+
+
+
+    // ========================================================
+    //                    GETTERS / SETTERS
+    // ========================================================
 
 
     /**

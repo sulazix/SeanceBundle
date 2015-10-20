@@ -3,6 +3,7 @@
 namespace Interne\SeanceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Meeting
@@ -25,6 +26,9 @@ class Meeting
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min="4", max="200")
      */
     private $name;
 
@@ -32,6 +36,9 @@ class Meeting
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     *
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -39,9 +46,12 @@ class Meeting
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=255)
+     *
+     * @Assert\Length(max="200")
      */
     private $place;
 
+    // TODO : Add nullable=false to enforce storage of meetings in one container
     /**
      * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="meetings")
      * @ORM\JoinColumn(name="container_id", referencedColumnName="id")
@@ -53,9 +63,20 @@ class Meeting
      */
     private $items;
 
+
+
     public function __construct() {
         $this->date = new \DateTime();
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    // ========================================================
+    //                    GETTERS / SETTERS
+    // ========================================================
+
+    public function getNewPosition() {
+        return $this->getItems()->count() + 1;
     }
 
 

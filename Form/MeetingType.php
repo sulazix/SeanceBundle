@@ -15,10 +15,38 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('date', 'datepicker')
-            ->add('place')
-            ->add('container')
+            ->add('name', 'text', ["label" => "Nom"])
+            ->add('date', 'datepicker', ["label" => "Date et heure"])
+            ->add('place', 'text', ["label" => "Lieu"])
+            ->add('items', 'collection', [
+                    "type" => new ItemType,
+                    "label" => "Points",
+                    "allow_add" => true,
+                    "allow_delete" => true
+                ])
+            /*
+            TODO : Use the following template to render the field :
+            <div class="ui right labeled left icon input">
+              <i class="plus icon"></i>
+              <input placeholder="Enter items" type="text">
+              <a class="ui circle label">
+                Add Item
+              </a>
+            </div>
+             */
+            //->add('items', 'semantic', ['class' => 'InterneSeanceBundle:Item'])
+            /*
+            ->add('items', 'entity', [
+                    'class' => 'InterneSeanceBundle:Item',
+                    'property' => 'title',
+                    'placeholder' => 'Sélectionner un point',
+                    'multiple' => true,
+                    'query_builder' => function(ItemRepository $repo) {
+                        return $repo->createQueryBuilder('i')
+                                ->orderBy('i.title');
+                    }
+                ])
+            //*/
         ;
     }
     

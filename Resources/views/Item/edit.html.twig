@@ -1,0 +1,16 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block content -%}
+    <h1>Edition d'un point de l'ordre du jour</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+		    <li>
+		        <a href="{{ path('meeting_show', {id: item.meeting.id}) }}">
+		            Voir la réunion
+		        </a>
+		    </li>
+		    <li>{{ form(delete_form) }}</li>
+		</ul>
+{% endblock %}

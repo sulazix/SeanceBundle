@@ -1,0 +1,28 @@
+item_show:
+    path:     /{id}/show
+    defaults: { _controller: "InterneSeanceBundle:Item:show" }
+
+item_new:
+    path:     /new/{meeting_id}
+    defaults: { _controller: "InterneSeanceBundle:Item:new", meeting_id: null }
+    requirements:
+        meeting_id: \d+
+
+item_create:
+    path:     /create
+    defaults: { _controller: "InterneSeanceBundle:Item:create" }
+    methods:  POST
+
+item_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "InterneSeanceBundle:Item:edit" }
+
+item_update:
+    path:     /{id}/update
+    defaults: { _controller: "InterneSeanceBundle:Item:update" }
+    methods:  [POST, PUT]
+
+item_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "InterneSeanceBundle:Item:delete" }
+    methods:  [POST, DELETE]

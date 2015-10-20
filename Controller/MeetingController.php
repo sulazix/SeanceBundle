@@ -9,15 +9,19 @@ use Interne\SeanceBundle\Entity\Meeting;
 use Interne\SeanceBundle\Form\MeetingType;
 
 /**
- * Meeting controller.
+ * Controller CRUD des réunions (Meeting entity)
  *
  */
 class MeetingController extends Controller
 {
+    // ========================================================
+    //                  GÉNÉRATION DES VUES
+    // ========================================================
 
     /**
-     * Lists all Meeting entities.
+     * Afficher la liste de toutes les réunions
      *
+     * TODO : Afficher uniquement les réunions du conteneur courant
      */
     public function indexAction()
     {
@@ -29,8 +33,74 @@ class MeetingController extends Controller
             'entities' => $entities,
         ));
     }
+
+
     /**
-     * Creates a new Meeting entity.
+     * Affiche le formulaire de création d'une réunion
+     *
+     */
+    public function newAction()
+    {
+        $entity = new Meeting();
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('InterneSeanceBundle:Meeting:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    /**
+     * Affiche une réunion existante ainsi que les différents points
+     * de l'ordre du jour déjà ajoutés.
+     *
+     * @throw NotFoundException Si l'entité n'a pu être trouvée
+     *
+     */
+    public function showAction(Meeting $meeting)
+    {
+        $deleteForm = $this->createDeleteForm($meeting->getId());
+
+        return $this->render('InterneSeanceBundle:Meeting:show.html.twig', array(
+            'meeting'      => $meeting,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Meeting entity.
+     *
+     * @throw NotFoundException Si l'entité n'a pu être trouvée
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('InterneSeanceBundle:Meeting')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Meeting entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('InterneSeanceBundle:Meeting:edit.html.twig', array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+
+    // ========================================================
+    //                TRAITEMENT DES DONNÉES
+    // ========================================================
+    
+
+    /**
+     * Crée une nouvelle entité Meeting à partir des données reçues.
      *
      */
     public function createAction(Request $request)
@@ -54,105 +124,7 @@ class MeetingController extends Controller
     }
 
     /**
-     * Creates a form to create a Meeting entity.
-     *
-     * @param Meeting $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Meeting $entity)
-    {
-        $form = $this->createForm(new MeetingType(), $entity, array(
-            'action' => $this->generateUrl('meeting_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new Meeting entity.
-     *
-     */
-    public function newAction()
-    {
-        $entity = new Meeting();
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('InterneSeanceBundle:Meeting:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Meeting entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('InterneSeanceBundle:Meeting')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Meeting entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('InterneSeanceBundle:Meeting:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing Meeting entity.
-     *
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('InterneSeanceBundle:Meeting')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Meeting entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('InterneSeanceBundle:Meeting:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-    * Creates a form to edit a Meeting entity.
-    *
-    * @param Meeting $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Meeting $entity)
-    {
-        $form = $this->createForm(new MeetingType(), $entity, array(
-            'action' => $this->generateUrl('meeting_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Meeting entity.
+     * Enregistre les changements d'une entité Meeting existante.
      *
      */
     public function updateAction(Request $request, $id)
@@ -181,8 +153,10 @@ class MeetingController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
+
     /**
-     * Deletes a Meeting entity.
+     * Supprime une entité.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -205,12 +179,54 @@ class MeetingController extends Controller
         return $this->redirect($this->generateUrl('meeting'));
     }
 
+    // ========================================================
+    //               GÉNÉRATION DES FORMULAIRES
+    // ========================================================
+
     /**
-     * Creates a form to delete a Meeting entity by id.
+     * Génère le formulaire d'ajout d'une nouvelle réunion
      *
-     * @param mixed $id The entity id
+     * @param Meeting $entity L'entité
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form Le formulaire
+     */
+    private function createCreateForm(Meeting $entity)
+    {
+        $form = $this->createForm(new MeetingType(), $entity, array(
+            'action' => $this->generateUrl('meeting_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+
+    /**
+    * Génère le formulaire d'édition d'une réunion existante.
+    *
+    * @param Meeting $entity L'entité
+    *
+    * @return \Symfony\Component\Form\Form Le formulaire
+    */
+    private function createEditForm(Meeting $entity)
+    {
+        $form = $this->createForm(new MeetingType(), $entity, array(
+            'action' => $this->generateUrl('meeting_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
+    }
+
+    /**
+     * Génère le formulaire de suppression d'une réunion.
+     *
+     * @param mixed $id L'identifiant de l'entité
+     *
+     * @return \Symfony\Component\Form\Form Le formulaire
      */
     private function createDeleteForm($id)
     {

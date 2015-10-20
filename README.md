@@ -27,6 +27,17 @@ interne_seance:
 
 ```
 
+Enregistrer les services du bundle dans la config :
+
+```
+# app/config/config.yml
+
+imports:
+	# ...
+    - { resource: "@InterneSeanceBundle/Resources/config/services.yml" }
+
+```
+
 Mettre à jour les bundles chargés depuis le kernel Symfony :
 
 ```
