@@ -8,6 +8,8 @@
 $(document).ready(function(){
     $('.menu .item').tab();
     $('.ui.sticky').sticky({context: '#example1'});
+    $('.tag-popup').popup({title   : 'Tagging',content : 'Le tagging permet de reporter ou marquer un point du procès verbal'})
+;
 });
 </script>
     <div class="ui page grid">
@@ -22,15 +24,48 @@ $(document).ready(function(){
                           <button class="disabled olive ui button ">
                               <i class="send icon"></i>Envoyer un rappel
                           </button>
-                          <button class="ui button green">
-                              <i class="write icon"></i> Éditer l'ordre du jour
-                          </button>
                           <button class="ui green button">
-                              <i class="write icon"></i>Écrire le PV
-                          </button>
-                          <button class="ui yellow button">
                               <i class="send icon"></i>Envoyer le PV
                           </button>
+                        </div>
+                        <h3>Ordre du jour</h3>
+                        <div class="ui list">
+                            <a class="item" href="#p1">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header">Tour des branches</div>
+                                </div>
+                            </a>
+                            <a class="item" href="#p2">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header">Soirée des parents</div>
+                                </div>
+                            </a>
+                            <a class="item" href="#p3">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header">Noël de groupe</div>
+                                </div>
+                            </a>
+                            <a class="item"  href="#p4">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header">Formation J+S</div>
+                                </div>
+                            </a>
+                            <a class="item" href="#p5">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header"> Informatique</div>
+                                </div>
+                            </a>
+                            <a class="item" href="#p6">
+                                <i class="right triangle icon"></i>
+                                <div class="content">
+                                    <div class="header"> Rénouvellement du matériel</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                   </div>
@@ -50,47 +85,106 @@ $(document).ready(function(){
                       <div class="active step">
                           <div class="content">
                               <div class="title">Procès verbal</div>
-                              <div class="description">Le procès verbal n'a pas encore été écrit</div>
+                              <div class="description">Le procès verbal n'est pas encore complet</div>
                           </div>
                       </div>
                   </div>
-                <div class="ui pointing secondary menu">
-                  <a class="item active" data-tab="first">Ordre du jour</a>
-                  <a class="item" data-tab="second">Procès verbal</a>
-                  <a class="item" data-tab="third">Présences</a>
+                <div class="ui pointing secondary menu tab_controller">
+                  <a class="item active" data-tab="accueil">Accueil</a>
+                  <a class="item" data-tab="oj">Ordre du jour</a>
+                  <a class="item" data-tab="presence">Présences</a>
                 </div>
-                <div class="ui tab segment active" data-tab="first">
+                <div class="ui tab segment active" data-tab="accueil">
+                    <h3 class="ui dividing header" id="p1"> Tour des branches
+                        <div class="ui red label small">Important <i class="close icon"></i></div>
+                        <div class="ui orange label small">A rediscuter <i class="close icon"></i></div>
+                        <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
+                    </h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <h3 class="ui dividing header" id="p2"> Soirée des parents <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <h3 class="ui dividing header" id="p3"> Noël de groupe <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <h3 class="ui dividing header" id="p4"> Formation J+S<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <h3 class="ui dividing header" id="p5"> Informatique<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <h3 class="ui dividing header" id="p6"> Renouvellement du matériel<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                </div>
+                <div class="ui tab segment" data-tab="oj">
                     <div class="ui list">
                         <a class="item">
                             <i class="right triangle icon"></i>
                             <div class="content">
-                                <div class="header">Tour des branches</div>
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Tour des branches" data-type="text">Tour des branches</span>
+                                </div>
                             </div>
                         </a>
                         <a class="item">
                             <i class="right triangle icon"></i>
                             <div class="content">
-                                <div class="header">Soirée des parents</div>
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Tour des branches" data-type="text">Soirée des parents</span>
+                                </div>
                             </div>
                         </a>
                         <a class="item">
                             <i class="right triangle icon"></i>
                             <div class="content">
-                                <div class="header">Noël de groupe</div>
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Noël de groupe" data-type="text">Noël de groupe</span>
+                                </div>
                             </div>
                         </a>
                         <a class="item">
                             <i class="right triangle icon"></i>
                             <div class="content">
-                                <div class="header">Formation J+S</div>
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Formation J+S" data-type="text">Formation J+S</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="item">
+                            <i class="right triangle icon"></i>
+                            <div class="content">
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Informatique" data-type="text">Informatique</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="item">
+                            <i class="right triangle icon"></i>
+                            <div class="content">
+                                <div class="header">
+                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
+                                    data-name="point_id" data-value="Renouvellement du matériel" data-type="text">Renouvellement du matériel</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="item">
+                            <i class="right triangle icon"></i>
+                            <div class="content">
+                                    <div class="ui small form">
+                                        <div class="field"><input placeholder="Ajouter un point"type="text"></div>
+                                    </div>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="ui tab segment" data-tab="second">
-                  Second
-                </div>
-                <div class="ui tab segment" data-tab="third">
+                <div class="ui tab segment" data-tab="presence">
                   Third
                 </div>
             </div>
