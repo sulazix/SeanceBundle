@@ -6,6 +6,10 @@ interne_seance_item:
     resource: "@InterneSeanceBundle/Resources/config/routing/item.yml"
     prefix:   /item
 
+interne_seance_tag:
+    resource: "@InterneSeanceBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
+    
 interne_seance:
     path: /
     defaults: { _controller: InterneSeanceBundle:Default:index }

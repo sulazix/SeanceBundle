@@ -31,5 +31,4 @@ class DefaultController extends Controller
         return $this->render("InterneSeanceBundle:Default:seance.html.twig");
     }
 
-
 }

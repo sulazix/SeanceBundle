@@ -1,0 +1,81 @@
+{% extends 'AppBundle:Layout:layout.html.twig' %}
+
+{% block titre %}Tags{% endblock %}
+
+{% block content %}
+<div class="ui page grid">
+    <div class="row">
+        <div class="column">
+            <h3>Gestion des Tags</h3>
+            <div class="ui segment">
+                <div class="ui small button addTag">
+                    <i class="add icon"></i>
+                    Ajouter un Tag
+                </div>
+                    <table class="ui celled structured table">
+                        <thead>
+                        <tr>
+                            <th>Nom du tag</th>
+                            <th>Description</th>
+                            <th>Stackable</th>
+                            <th>Trackable</th>
+                            <th>Affichage sur la page d'accueil</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tag in tags %}
+                            <tr>
+
+                                <td>{{ tag.title }}</td>
+                                <td>{{ tag.description }}</td>
+                                <td>
+                                    <!-- Stackable -->
+                                    {%  if tag.moveToStack %}
+                                        <i class="checkmark green icon"></i>
+                                    {% else %}
+                                        <i class="remove red icon"></i>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <!-- Trackable -->
+                                    {%  if tag.isTrackable %}
+                                        <i class="checkmark green icon"></i>
+                                    {% else %}
+                                        <i class="remove red icon"></i>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <!-- Display Home -->
+                                    {%  if tag.displayHome %}
+                                        <i class="checkmark green icon"></i>
+                                    {% else %}
+                                        <i class="remove red icon"></i>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <div class="ui mini icon button popupable editTag" data-id="{{ tag.id }}" data-content="Modifier le tag">
+                                        <i class="configure icon"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+    {% javascripts
+    '@InterneSeanceBundle/Resources/public/js/Meeting/page_manageMeeting_editTag.js'%}
+    <script src="{{ asset_url }}"></script>
+
+    {% endjavascripts %}
+
+{% endblock %}

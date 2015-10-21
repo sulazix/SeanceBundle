@@ -1,0 +1,48 @@
+{%  set header = 'Modifier un tag' %}
+{%  set buttonText = 'Save' %}
+
+
+<div id="form_model_modale" class="ui small modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Modifier un tag
+    </div>
+
+    <div class="content">
+
+        {{ form_start(form,{'attr': {'class': 'ui form'}}) }}
+
+
+        <div class="field">
+            {{ form_widget(form.title) }}
+        </div>
+
+        <div class="field">
+            {{ form_widget(form.description) }}
+        </div>
+
+        <div class="field">
+            {{ form_widget(form.moveToStack) }}
+        </div>
+
+        <div class="field">
+            {{ form_widget(form.isTrackable) }}
+        </div>
+        <div class="field">
+            {{ form_widget(form.displayHome) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+
+        <div class="ui field">
+            <input type="submit" class="ui green button" value="{{ buttonText }}" />
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+    <div class="actions">
+        <div class="ui button">Annuler</div>
+    </div>
+</div>
