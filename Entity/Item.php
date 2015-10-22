@@ -71,12 +71,23 @@ class Item
      */
     private $previous;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Interne\SeanceBundle\Entity\Tag", inversedBy="items")
+    * @ORM\JoinTable(name="seancebundle_item_tag")
+    */
+    private $tags;
 
 
     // ========================================================
     //                    DOCTRINE EVENTS
     // ========================================================
 
+    /**
+    * Constructor 
+    */
+    public function __construct() {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Génère une position à partir des positions existantes
      * des différents points d'une réunion.
@@ -246,5 +257,16 @@ class Item
     public function getPrevious()
     {
         return $this->previous;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    public function addTag(\Interne\SeanceBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+        return $this;
     }
 }

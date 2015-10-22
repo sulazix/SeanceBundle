@@ -4,19 +4,6 @@
 {% block titre %}Gestionnaire de séance{% endblock %}
 
 {% block content %}
-<script>
-$(document).ready(function(){
-    $('.menu .item').tab();
-    $('.ui.sticky')
-        .sticky({
-            scrollContext: '#example1',
-            observeChanges: true,
-            debug: true
-        });
-    $('.tag-popup').popup({title   : 'Tagging',content : 'Le tagging permet de reporter ou marquer un point du procès verbal'})
-;
-});
-</script>
     <div class="ui page grid">
         <div class="row">
             <h1>Gestionnaire de séance - Static demo </h1>
@@ -202,7 +189,9 @@ $(document).ready(function(){
 
 {% block js %}
     {% javascripts
-    '@InterneSeanceBundle/Resources/public/js/Meeting/page_manageMeeting_linkTag.js'%}
+    '@InterneSeanceBundle/Resources/public/js/Meeting/page_manageMeeting_linkTag.js'
+    '@InterneSeanceBundle/Resources/public/js/Meeting/page_seance.js'
+    %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

@@ -34,31 +34,6 @@ class TagController extends Controller
 
     }
 
-    public function showAction()
-    {
-
-    }
-
-    public function newAction()
-    {
-
-    }
-    public function updateAction(Tag $tag, Request $request)
-    {
-        $editedForm = $this->createForm(new TagType(),$tag);
-
-        $editedForm->handleRequest($request);
-
-        if($editedForm->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-        }
-
-        return $this->redirect($this->generateUrl('tag'));
-    }
-
     /**
      * Ajax
      * Affiche le modal qui permet d'assigner un tag à un point du meeting
@@ -73,15 +48,14 @@ class TagController extends Controller
             /*
              * On envoie le formulaire en modal
              */
-            $id = $request->request->get('idPoint');
+            $id = $request->request->get('idItem');
+            $item = $em->getRepository('InterneSeanceBundle:Item')->find($id);
+            $joinTagForm = null;
 
-            $point = null;
-            $modelForm = null;
-            $model = $em->getRepository('AppBundle:Model')->find($id);
-            $modelForm = $this->createForm(new ModelType(),$model,
-                array('action' => $this->generateUrl('model_edit',array('model'=>$id))));
+            $joinTagForm = $this->createForm(new JoinTagType(),$item,
+                array('action' => $this->generateUrl('tag_join',array('item'=>$item))));
 
-            return $this->render('InterneSeanceBundle:Tag:modal_join_tag.html.twig',array('form'=>$modelForm->createView()));
+            return $this->render('InterneSeanceBundle:Tag:modal_join_tag.html.twig',array('form'=>$joinTagForm->createView()));
 
         }
         return new Response();
@@ -141,6 +115,40 @@ class TagController extends Controller
         }
 
         return $this->redirect($this->generateUrl('tag'));
+    }
+
+    public function updateAction(Tag $tag, Request $request)
+    {
+        $editedForm = $this->createForm(new TagType(),$tag);
+
+        $editedForm->handleRequest($request);
+
+        if($editedForm->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+        }
+
+        return $this->redirect($this->generateUrl('tag'));
+    }
+    public function joinTagAction(Item $item, Tag $tag, Request $request){
+        if($tag->getMoveToStack){
+            // Put Item in Meeting's container Stack 
+            $container = $item->getMeeting()->getContainer();
+            $container.addStackOfItem($item);
+
+        }
+        if($tag->getDisplayHome){
+            // action to display in homepage
+        }
+
+        // Assign tag to Item
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+
     }
 
     public function deleteAction()

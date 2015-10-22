@@ -2,25 +2,17 @@ tag:
     path:     /
     defaults: { _controller: "InterneSeanceBundle:Tag:index" }
 
-tag_show:
-    path:     /{id}/show
-    defaults: { _controller: "InterneSeanceBundle:Tag:show" }
-
-tag_new:
-    path:     /new
-    defaults: { _controller: "InterneSeanceBundle:Tag:new" }
-
 _ajax_edit_tag:
-    pattern:     /ajax_edit_get_form_modal
-    defaults: { _controller: "InterneSeanceBundle:Tag:ajaxGetTag" }
-    methods: POST
+    pattern:    /ajax_edit_get_form_modal
+    defaults:   { _controller: "InterneSeanceBundle:Tag:ajaxGetTag" }
+    methods:    POST
     options:
         expose: true
 
 _ajax_join_tag:
-    pattern:  /ajax_jointag_get_form_modal
-    defaults: { _controller: "InterneSeanceBundle:Tag:ajaxJoinTag" }
-    methods: POST
+    pattern:    /ajax_jointag_get_form_modal
+    defaults:   { _controller: "InterneSeanceBundle:Tag:ajaxJoinTag" }
+    methods:    POST
     options:
         expose: true
 
@@ -36,6 +28,9 @@ tag_update:
     methods:  [POST, PUT]
 
 tag_delete:
-    path:     /{id}/delete
+    path:     /{tag}/delete
     defaults: { _controller: "InterneSeanceBundle:Tag:delete" }
     methods:  [POST, DELETE]
+
+tag_join:
+    path:   /{}

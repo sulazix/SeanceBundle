@@ -4,10 +4,10 @@ $('.connectTag').click(function(){
 });
 
 
-function displayModaleConnectTag(idPoint){
+function displayModaleConnectTag(idItem){
 
     //on récupère les valeur du formulaire
-    var data = {idPoint:idPoint};
+    var data = {idItem:idItem};
     $.ajax({
         type: "POST",
         url: Routing.generate('_ajax_join_tag'),

@@ -55,7 +55,24 @@ class Tag
      * @ORM\Column(name="displayHome", type="boolean")
      */
     private $displayHome;
+    /**
+    * @ORM\ManyToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="tags")
+    * @ORM\JoinTable(name="seancebundle_item_tag")
+    */
+    private $items;
 
+
+    /**
+    * Constructor 
+    */
+    public function __construct() {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    // ========================================================
+    //                    GETTERS / SETTERS
+    // ========================================================
 
     /**
      * Get id
@@ -185,6 +202,17 @@ class Tag
     public function getDisplayHome()
     {
         return $this->displayHome;
+    }
+
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    public function addItem(\Interne\SeanceBundle\Entity\Item $item)
+    {
+        $this->items[] = $item;
+        return $this;
     }
 }
 

@@ -9,7 +9,7 @@ interne_seance_item:
 interne_seance_tag:
     resource: "@InterneSeanceBundle/Resources/config/routing/tag.yml"
     prefix:   /tag
-    
+
 interne_seance:
     path: /
     defaults: { _controller: InterneSeanceBundle:Default:index }
