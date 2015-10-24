@@ -4,7 +4,7 @@
 {% block titre %}Gestionnaire de séance{% endblock %}
 
 {% block content %}
-    <div class="ui page grid">
+    <div class="ui page grid" ng-app="seanceApp" ng-controller="MeetingController">
         <div class="row">
             <h1>Gestionnaire de séance - Static demo </h1>
             <h1>Séance du 01 Janvier 2015 </h1>
@@ -22,42 +22,14 @@
                         </div>
                         <h3>Ordre du jour</h3>
                         <div class="ui list">
-                            <a class="item" href="#p1">
+                            {% raw %}
+                            <a ng-repeat="point in points" class="item" href="#{{ point.id }}">
                                 <i class="right triangle icon"></i>
                                 <div class="content">
-                                    <div class="header">Tour des branches</div>
+                                    <div class="header">{{ point.title }}</div>
                                 </div>
                             </a>
-                            <a class="item" href="#p2">
-                                <i class="right triangle icon"></i>
-                                <div class="content">
-                                    <div class="header">Soirée des parents</div>
-                                </div>
-                            </a>
-                            <a class="item" href="#p3">
-                                <i class="right triangle icon"></i>
-                                <div class="content">
-                                    <div class="header">Noël de groupe</div>
-                                </div>
-                            </a>
-                            <a class="item"  href="#p4">
-                                <i class="right triangle icon"></i>
-                                <div class="content">
-                                    <div class="header">Formation J+S</div>
-                                </div>
-                            </a>
-                            <a class="item" href="#p5">
-                                <i class="right triangle icon"></i>
-                                <div class="content">
-                                    <div class="header"> Informatique</div>
-                                </div>
-                            </a>
-                            <a class="item" href="#p6">
-                                <i class="right triangle icon"></i>
-                                <div class="content">
-                                    <div class="header"> Rénouvellement du matériel</div>
-                                </div>
-                            </a>
+                            {% endraw %}
                         </div>
                     </div>
                   </div>
@@ -87,94 +59,30 @@
                   <a class="item" data-tab="presence">Présences</a>
                 </div>
                 <div class="ui tab segment active" data-tab="accueil">
-                    <h3 class="ui dividing header" id="p1"> Tour des branches
-                        <div class="ui red label small">Important <i class="close icon"></i></div>
-                        <div class="ui orange label small">A rediscuter <i class="close icon"></i></div>
-                        <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
-                    </h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <h3 class="ui dividing header" id="p2"> Soirée des parents
-                        <a class="ui label blue small popupable connectTag tag-popup" data-id="1"><i class="add fitted icon"></i>...</a></h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <h3 class="ui dividing header" id="p3"> Noël de groupe <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <h3 class="ui dividing header" id="p4"> Formation J+S<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <h3 class="ui dividing header" id="p5"> Informatique<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    <h3 class="ui dividing header" id="p6"> Renouvellement du matériel<a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a></h3>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
-                    n<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo turpis eget sapien semper tincidunt. Fusce id enim massa. In hac habitasse platea dictumst. Phasellus ut malesuada erat. Nulla in tempor ex. Nunc efficitur efficitur diam pharetra condimentum. Sed vitae diam nec tellus egestas ultrices et nec ligula. In erat velit, ultrices in euismod non, posuere vitae erat.</p>
+                    {% raw %}
+                    <div ng-repeat="point in points">
+                        <h3 class="ui dividing header" id="{{ point.id }}"> {{ point.title }}
+                            <div ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.label }} <i class="close icon"></i></div>
+                            <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
+                        </h3>
+                        <p>
+                            {{ point.description }}
+                        </p>
+                    </div>
+                    {% endraw %}
                 </div>
                 <div class="ui tab segment" data-tab="oj">
                     <div class="ui list">
-                        <a class="item">
+                        {% raw %}
+                        <a ng-repeat="point in points" class="item">
                             <i class="right triangle icon"></i>
                             <div class="content">
                                 <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Tour des branches" data-type="text">Tour des branches</span>
+                                    <span href="#" editable-text="point.title" onbeforesave="updatePoint($data)">{{ point.title }}</span>
                                 </div>
                             </div>
                         </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Tour des branches" data-type="text">Soirée des parents</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Noël de groupe" data-type="text">Noël de groupe</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Formation J+S" data-type="text">Formation J+S</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Informatique" data-type="text">Informatique</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                <div class="header">
-                                    <span href="#" class="xeditable editable-click" data-pk="12" data-url="/interne/validation/ajax/modify-property"
-                                    data-name="point_id" data-value="Renouvellement du matériel" data-type="text">Renouvellement du matériel</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="item">
-                            <i class="right triangle icon"></i>
-                            <div class="content">
-                                    <div class="ui small form">
-                                        <div class="field"><input placeholder="Ajouter un point"type="text"></div>
-                                    </div>
-                            </div>
-                        </a>
+                        {% endraw %}
                     </div>
                 </div>
                 <div class="ui tab segment" data-tab="presence">
@@ -187,8 +95,21 @@
 
 {% endblock %}
 
+{% block css %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/css/xeditable.css'
+
+        output='css/seance.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block js %}
     {% javascripts
+    '@InterneSeanceBundle/Resources/public/js/libraries/angular.js'
+    '@InterneSeanceBundle/Resources/public/js/libraries/xeditable.js'
+    '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
+    '@InterneSeanceBundle/Resources/public/js/controllers/*'
     '@InterneSeanceBundle/Resources/public/js/Meeting/page_manageMeeting_linkTag.js'
     '@InterneSeanceBundle/Resources/public/js/Meeting/page_seance.js'
     %}
