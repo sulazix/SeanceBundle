@@ -36,6 +36,13 @@ imports:
 	# ...
     - { resource: "@InterneSeanceBundle/Resources/config/services.yml" }
 
+
+assetic:
+    # ...
+    bundles:
+        # ...
+        - InterneSeanceBundle
+
 ```
 
 Mettre à jour les bundles chargés depuis le kernel Symfony :
