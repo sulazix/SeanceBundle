@@ -60,30 +60,30 @@
                 </div>
                 <div class="ui tab segment active" data-tab="accueil">
                     {% raw %}
-                    <div ng-repeat="point in points">
-                        <h3 class="ui dividing header" id="{{ point.id }}"> {{ point.title }}
+                    <div class="ui form" ng-repeat="point in points">
+                        <h3 class="ui dividing header" editable-text="point.title" e-class="field" onbeforesave="updatePoint($data)" id="{{ point.id }}"> {{ point.title }}
                             <div ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.label }} <i class="close icon"></i></div>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <p>
-                            {{ point.description }}
-                        </p>
+                        <div editable-textarea="point.description" e-class="field" e-rows="2">
+                            <p>{{ point.description }}</p>
+                        </div>
                     </div>
                     {% endraw %}
                 </div>
                 <div class="ui tab segment" data-tab="oj">
+                    {% raw %}
                     <div class="ui list">
-                        {% raw %}
-                        <a ng-repeat="point in points" class="item">
+                        <a href="#" class="item" ng-repeat="point in points" editable-text="point.title" onbeforesave="updatePoint($data)">
                             <i class="right triangle icon"></i>
                             <div class="content">
                                 <div class="header">
-                                    <span href="#" editable-text="point.title" onbeforesave="updatePoint($data)">{{ point.title }}</span>
+                                <span> {{ point.title }}</span>
                                 </div>
                             </div>
                         </a>
-                        {% endraw %}
                     </div>
+                    {% endraw %}
                 </div>
                 <div class="ui tab segment" data-tab="presence">
                   Third

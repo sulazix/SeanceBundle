@@ -15,9 +15,9 @@ seanceApp.controller('MeetingController', ['$scope',
 
 		
 		$scope.updatePoint = function(data) {
-			console.log("coucou");
-			//$scope.points[index].title = data
-			return true
+			// TODO : Envoyer la requete de mise à jour sur le serveur
+
+			return true;
 		}
 	}]
 );
