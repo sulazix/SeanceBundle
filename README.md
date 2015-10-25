@@ -60,3 +60,12 @@ Générer les tables en base de données
 -------------------------------------
 
 ``` php app/console doctrine:schema:update --force ```
+
+
+Technologies utilisées
+----------------------
+
+- http://symfony.com/
+- http://1.semantic-ui.com/
+- http://vitalets.github.io/angular-xeditable/
+- https://angularjs.org/
