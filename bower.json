@@ -1,0 +1,30 @@
+{
+  "name": "SeanceBundle",
+  "homepage": "https://github.com/sulazix/SeanceBundle",
+  "authors": [
+    "Florian Alonso & Robin Fave"
+  ],
+  "description": "Angular frontend for the bundle",
+  "moduleType": [],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-ui-tinymce": "~0.0.10",
+    "angular-ui-sortable": "~0.13.4",
+    "angular-xeditable": "~0.1.9"
+  },
+  "keywords": [
+    "seance",
+    "bundle",
+    "frontend",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Resources/public/bower_components",
+    "test",
+    "tests"
+  ]
+}
