@@ -65,10 +65,7 @@
                             <span ng-repeat="tag in point.tags" ng-click="removeTag($parent.$index, $index)" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon"></i></span>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <div editable-textarea="point.description" e-class="field" e-cols="70">
-                            <p>{{ point.description }}</p>
-                        </div>
-
+                        <div editable-textarea="point.description" e-class="field" e-cols="70" ng-bind-html="point.description"></div>
                         <div class="ui hidden divider"></div>
                     </div>
                     {% endraw %}
@@ -100,6 +97,7 @@
 {% block css %}
     {% stylesheets
         '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/*.min.css'
 
         output='css/seance.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -109,7 +107,11 @@
 {% block js %}
     {% javascripts
     '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/tinymce.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/themes/modern/theme.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-tinymce/src/tinymce.js'
     '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
     '@InterneSeanceBundle/Resources/public/js/models/*'
     '@InterneSeanceBundle/Resources/public/js/services/*'
