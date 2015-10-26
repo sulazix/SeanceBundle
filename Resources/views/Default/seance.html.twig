@@ -60,14 +60,16 @@
                 </div>
                 <div class="ui tab segment active" data-tab="accueil">
                     {% raw %}
-                    <div class="ui form" ng-repeat="point in points">
-                        <h3 class="ui dividing header" editable-text="point.title" e-class="field" onbeforesave="updatePoint($data)" id="{{ point.id }}"> {{ point.title }}
-                            <div ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.label }} <i class="close icon"></i></div>
+                    <div class="ui small form" ng-repeat="point in points">
+                        <h3 id="{{ point.id }}"> <span editable-text="point.title" e-class="field" onbeforesave="updatePoint($data)">{{ point.title }}</span>
+                            <span ng-repeat="tag in point.tags" ng-click="removeTag($parent.$index, $index)" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon"></i></span>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <div editable-textarea="point.description" e-class="field" e-rows="2">
+                        <div editable-textarea="point.description" e-class="field" e-cols="70">
                             <p>{{ point.description }}</p>
                         </div>
+
+                        <div class="ui hidden divider"></div>
                     </div>
                     {% endraw %}
                 </div>
@@ -97,7 +99,7 @@
 
 {% block css %}
     {% stylesheets
-        '@InterneSeanceBundle/Resources/public/css/xeditable.css'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
 
         output='css/seance.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -106,9 +108,11 @@
 
 {% block js %}
     {% javascripts
-    '@InterneSeanceBundle/Resources/public/js/libraries/angular.js'
-    '@InterneSeanceBundle/Resources/public/js/libraries/xeditable.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.js'
     '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
+    '@InterneSeanceBundle/Resources/public/js/models/*'
+    '@InterneSeanceBundle/Resources/public/js/services/*'
     '@InterneSeanceBundle/Resources/public/js/controllers/*'
     '@InterneSeanceBundle/Resources/public/js/Meeting/page_manageMeeting_linkTag.js'
     '@InterneSeanceBundle/Resources/public/js/Meeting/page_seance.js'
