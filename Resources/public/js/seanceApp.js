@@ -5,7 +5,7 @@
  * DO NOT FORGET TO LOAD THIS FILE BEFORE EVERY OTHER FILE (except angular itself)
  */
 
-var seanceApp = angular.module('seanceApp', ['xeditable', 'ngSanitize', 'ui.tinymce'])
+var seanceApp = angular.module('seanceApp', ['xeditable', 'ngSanitize'])
 ;
 
 seanceApp.run(function(editableOptions, editableThemes) {
