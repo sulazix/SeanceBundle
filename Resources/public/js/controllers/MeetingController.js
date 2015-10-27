@@ -17,5 +17,20 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 			//console.log(itemIndex, tagIndex);
 			delete $scope.points[itemIndex].tags.splice(tagIndex, 1);
 		}
+
+		$scope.sortableOptions = {
+		    update: function(e, ui) {
+		      var logEntry = $scope.points.map(function(i){
+		        return i.value;
+		      }).join(', ');
+		      console.log('Update: ', logEntry);
+		    },
+		    stop: function(e, ui) {
+		      // this callback has the changed model
+		      var logEntry = $scope.points.map(function(i){
+		        return i.value;
+		      }).join(', ');
+		    }
+		  };
 	}]
 );

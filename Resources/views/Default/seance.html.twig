@@ -21,7 +21,7 @@
                           </button>
                         </div>
                         <h3>Ordre du jour</h3>
-                        <div class="ui list">
+                        <div class="ui list" ui-sortable="sortableOptions" ng-model="points">
                             {% raw %}
                             <a ng-repeat="point in points" class="item" href="#{{ point.id }}">
                                 <i class="right triangle icon"></i>
@@ -58,7 +58,7 @@
                   <a class="item" data-tab="oj">Ordre du jour</a>
                   <a class="item" data-tab="presence">Présences</a>
                 </div>
-                <div class="ui tab segment active" data-tab="accueil">
+                <div class="ui tab segment active" data-tab="accueil" ui-sortable="sortableOptions" ng-model="points">
                     {% raw %}
                     <div class="ui small form" ng-repeat="point in points">
                         <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" e-class="field" onbeforesave="updatePoint($data)">{{ point.title }}</span>
@@ -108,6 +108,8 @@
     {% javascripts
     '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-sortable/sortable.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/jquery-ui.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
     '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
     '@InterneSeanceBundle/Resources/public/js/models/*'
