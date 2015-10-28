@@ -18,6 +18,9 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 			delete $scope.points[itemIndex].tags.splice(tagIndex, 1);
 		}
 
+		$scope.tinymceOptions = {
+		};
+
 		$scope.sortableOptions = {
 		    update: function(e, ui) {
 		      var logEntry = $scope.points.map(function(i){
@@ -31,6 +34,6 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 		        return i.value;
 		      }).join(', ');
 		    }
-		  };
+		};
 	}]
 );

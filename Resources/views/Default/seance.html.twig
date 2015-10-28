@@ -62,10 +62,10 @@
                     {% raw %}
                     <div class="ui small form" ng-repeat="point in points">
                         <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" e-class="field" onbeforesave="updatePoint($data)">{{ point.title }}</span>
-                            <span ng-repeat="tag in point.tags" ng-click="removeTag($parent.$index, $index)" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon"></i></span>
+                            <span ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <div editable-textarea="point.description" e-class="field" e-cols="70" ng-bind-html="point.description"></div>
+                        <div editable-textarea="point.description" e-ui-tinymce="tinymceOptions" e-class="field" e-cols="70" ng-bind-html="point.description"></div>
                         <div class="ui hidden divider"></div>
                     </div>
                     {% endraw %}
@@ -97,10 +97,43 @@
 {% block css %}
     {% stylesheets
         '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/*.min.css'
 
         output='css/seance.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/skin.min.css'
+
+        output='js/skins/lightgray/skin.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/content.min.css'
+
+        output='js/skins/lightgray/content.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block fonts %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.ttf'
+        output='js/skins/lightgray/fonts/tinymce.ttf' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.woff'
+        output='js/skins/lightgray/fonts/tinymce.woff' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.svg'
+        output='js/skins/lightgray/fonts/tinymce.svg' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.eot'
+        output='js/skins/lightgray/fonts/tinymce.eot' %}
     {% endstylesheets %}
 {% endblock %}
 
@@ -108,6 +141,9 @@
     {% javascripts
     '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/tinymce.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/themes/modern/theme.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-tinymce/src/tinymce.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-sortable/sortable.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/jquery-ui.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
