@@ -10,7 +10,6 @@
             <h1>Séance du 01 Janvier 2015 </h1>
             <div class="twelve wide column ui segment" id="example1">
                   <div class="right ui rail" >
-                    <div class="ui sticky">
                       <h3>Administration</h3>
                       <div class="ui labeled icon vertical buttons">
                           <button class="disabled olive ui button ">
@@ -31,7 +30,6 @@
                             </a>
                             {% endraw %}
                         </div>
-                    </div>
                   </div>
                   <div class="ui three top attached ordered steps">
                       <div class="completed step">
@@ -58,14 +56,14 @@
                   <a class="item" data-tab="oj">Ordre du jour</a>
                   <a class="item" data-tab="presence">Présences</a>
                 </div>
-                <div class="ui tab segment active" data-tab="accueil" ui-sortable="sortableOptions" ng-model="points">
+                <div class="ui tab segment active" data-tab="accueil">
                     {% raw %}
-                    <div class="ui small form" ng-repeat="point in points">
-                        <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" e-class="field" onbeforesave="updatePoint($data)">{{ point.title }}</span>
+                    <div ng-repeat="point in points">
+                        <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" onbeforesave="updatePoint($data)">{{ point.title }}</span>
                             <span ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <div editable-textarea="point.description" e-ui-tinymce="tinymceOptions" e-class="field" e-cols="70" ng-bind-html="point.description"></div>
+                        <div editable-textarea="point.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="point.description"></div>
                         <div class="ui hidden divider"></div>
                     </div>
                     {% endraw %}

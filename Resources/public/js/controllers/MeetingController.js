@@ -10,6 +10,7 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 		
 		$scope.updatePoint = function(data) {
 			// TODO : Envoyer la requete de mise à jour sur le serveur
+			console.log("Do someting before saving");
 			return true;
 		}
 
