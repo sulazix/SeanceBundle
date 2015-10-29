@@ -71,18 +71,18 @@
                     {% endraw %}
                 </div>
                 <div class="ui tab segment" data-tab="oj">
-                    {% raw %}
                     <div class="ui list">
-                        <a href="#" class="item" ng-repeat="point in points" editable-text="point.title" onbeforesave="updatePoint($data)">
+                    {% raw %}
+                        <a href="#" class="item" ng-repeat="point in points">
                             <i class="right triangle icon"></i>
                             <div class="content">
                                 <div class="header">
-                                <span> {{ point.title }}</span>
+                                <span editable-text="point.title" onbeforesave="updatePoint($data)">{{ point.title }}</span>
                                 </div>
                             </div>
                         </a>
-                    </div>
                     {% endraw %}
+                    </div>
                 </div>
                 <div class="ui tab segment" data-tab="presence">
                   Third
