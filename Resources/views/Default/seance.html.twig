@@ -61,7 +61,7 @@
                     <div ng-repeat="point in points">
                         <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" onbeforesave="updatePoint($data)">{{ point.title || 'vide' }}</span>
                             <span ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
-                            <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
+                            <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
                         </h3>
                         <div editable-textarea="point.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="point.description || 'vide'"></div>
                         <div class="ui hidden divider"></div>
@@ -147,6 +147,7 @@
     '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/jquery-ui.min.js'
     '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
     '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
+    '@InterneSeanceBundle/Resources/public/js/config/*'
     '@InterneSeanceBundle/Resources/public/js/models/*'
     '@InterneSeanceBundle/Resources/public/js/services/*'
     '@InterneSeanceBundle/Resources/public/js/controllers/*'

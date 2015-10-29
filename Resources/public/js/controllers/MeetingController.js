@@ -28,16 +28,10 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 
 		$scope.sortableOptions = {
 		    update: function(e, ui) {
-		      var logEntry = $scope.points.map(function(i){
-		        return i.value;
-		      }).join(', ');
-		      console.log('Update: ', logEntry);
+		    	console.log("[ui-sortable] Updating order!")
 		    },
 		    stop: function(e, ui) {
-		      // this callback has the changed model
-		      var logEntry = $scope.points.map(function(i){
-		        return i.value;
-		      }).join(', ');
+		    	console.log("[ui-sortable] Done !");
 		    }
 		};
 	}]
