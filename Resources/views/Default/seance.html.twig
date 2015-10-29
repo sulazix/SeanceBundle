@@ -25,7 +25,7 @@
                             <a ng-repeat="point in points" class="item" href="#{{ point.id }}">
                                 <i class="right triangle icon"></i>
                                 <div class="content">
-                                    <div class="header">{{ point.title }}</div>
+                                    <div class="header">{{ point.title || 'vide' }}</div>
                                 </div>
                             </a>
                             {% endraw %}
@@ -59,11 +59,11 @@
                 <div class="ui tab segment active" data-tab="accueil">
                     {% raw %}
                     <div ng-repeat="point in points">
-                        <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" onbeforesave="updatePoint($data)">{{ point.title }}</span>
+                        <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" onbeforesave="updatePoint($data)">{{ point.title || 'vide' }}</span>
                             <span ng-repeat="tag in point.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
                             <a class="ui label blue small tag-popup"><i class="add fitted icon"></i>...</a>
                         </h3>
-                        <div editable-textarea="point.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="point.description"></div>
+                        <div editable-textarea="point.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="point.description || 'vide'"></div>
                         <div class="ui hidden divider"></div>
                     </div>
                     {% endraw %}
