@@ -155,4 +155,9 @@
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {% javascripts
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/plugins/autoresize/plugin.min.js'
+    output="js/plugins/autoresize/plugin.min.js"
+    %}
+    {% endjavascripts %}
 {% endblock %}

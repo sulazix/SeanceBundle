@@ -20,6 +20,10 @@ seanceApp.controller('MeetingController', ['$scope', 'MeetingService',
 		}
 
 		$scope.tinymceOptions = {
+			'menubar': false,
+			'width': 'auto',
+			'plugins': 'autoresize',
+			'autoresize_bottom_margin': "30"
 		};
 
 		$scope.sortableOptions = {
