@@ -11,7 +11,7 @@ var seanceApp = angular.module('seanceApp', ['xeditable', 'ngSanitize', 'ui.sort
 seanceApp.run(function(editableOptions, editableThemes) {
 	editableOptions.theme = 'default';
 
-	editableThemes['default'].submitTpl = '<button type="submit" class="editable-submit ui tiny circular green icon button"><i class="checkmark icon"></i></button>'
-	editableThemes['default'].cancelTpl = '<button type="button" class="editable-cancel ui tiny circular red icon button"><i class="remove icon" ng-click="$form.$cancel()"></i></button>'
+	editableThemes['default'].submitTpl = '<button type="submit" class="ui tiny circular green icon button"><i class="white checkmark icon"></i></button>'
+	editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()" class="ui tiny circular red icon button"><i class="white remove icon"></i></button>'
 
 })
