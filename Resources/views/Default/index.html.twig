@@ -6,60 +6,475 @@
 {% block content %}
 
     <div class="ui page grid">
-        <div class="row">
-            <h1>Gestionnaire de séance</h1>
-            <div class="twelve wide column">
-                Vous trouverez bientôt sur cette page un gestionnaire de séance complet ! <br>
-                Les fonctionnalités souhaitées sont :
-                <div class="ui list">
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">PV et OJ</div>
-                            <div class="description">Création d'ordre du jour et écriture de procès verbaux de séances</div>
-                        </div>
-                    </a>
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">Tagging</div>
-                            <div class="description">Système de tag pour marquer un point important, reporter un point, etc.</div>
-                        </div>
-                    </a>
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">Point Stacking</div>
-                            <div class="description">Un réservoir de points - si un point est reporté il vient dans ce réservoir
-                                qui est visible lors de la création de l'ordre du jour des prochaines réunions</div>
-                        </div>
-                    </a>
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">Searching</div>
-                            <div class="description">Recherche poussée via elasticsearch</div>
-                        </div>
-                    </a>
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">Online & Offline </div>
-                            <div class="description">Possibilité de taper des PV sans être connecté (via LocalStorage)</div>
-                        </div>
-                    </a>
-                    <a class="item">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">(Task)</div>
-                            <div class="description">Gestionnaire de tâche et de dates importantes</div>
-                        </div>
-                    </a>
+        <div class="row equal height">
+            <div class="five wide column">
+                <div class="ui icon input large">
+                  <input placeholder="Rechercher une réunion..." type="text">
+                  <i class="search icon"></i>
                 </div>
-                Une démonstration statique est/sera disponible ici : <a href="./demo"> lien</a>
+            </div>
+            <div class="six wide column">
+                <h2 class="ui center aligned icon header">
+                  <i class="blue circular users icon"></i>
+                  Gestionnaire de séances
+                </h2>
+            </div>
+            <div class="five wide column right aligned">
+                <button class="ui green button large">
+                    <i class="plus icon"></i>
+                    Préparer une réunion
+                </button>
             </div>
         </div>
+
+        <div class="sixteen wide column">
+            <h2 class="ui header"><i class="inbox icon"></i> Réserve de points</h2>
+            <div class="ui divider"></div>
+            <div class="ui segment">
+                <div class="ui four cards">
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 1
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 2
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 3
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 4
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 5
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orange card">
+                        <div class="content">
+                            <div class="description">
+                                Point 6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEBUT PROCHAINES REUNIONS -->
+        <div class="sixteen wide column">
+            <h2 class="ui header"><i class="calendar icon"></i>Prochaines réunions</h2>
+            <div class="ui divider"></div>
+            <div class="ui three cards">
+                <div class="yellow card">
+                    <div class="content">
+                        <div class="header">Séance de Maîtrise</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="red remove icon"></i>
+                                <div class="content">
+                                  <div class="title"><acronym title="Le Procès Verbal n'est pas encore complet">PV</acronym></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <div class="ui simple dropdown item">
+                                      <div class="title">
+                                        <i class="right triangle icon"></i>
+                                        ...
+                                      </div>
+                                      <div class="divided menu">
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                      </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">30.10.15</span>
+                    </div>
+                </div> 
+                
+                <div class="yellow card">
+                    <div class="content">
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="red remove icon"></i>
+                                <div class="content">
+                                  <div class="title"><acronym title="Les participants n'ont pas encore été convoqués">Convocation</acronym></div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="red remove icon"></i>
+                                <div class="content">
+                                  <div class="title"><acronym title="Le Procès Verbal n'est pas encore complet">PV</acronym></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">12.12.15</span>
+                    </div>
+                </div> 
+          </div>
+        </div>
+        <!-- FIN PROCHAINES REUNIONS -->
+
+        <!-- DEBUT REUNION PASSEES -->
+        <div class="sixteen wide column">
+            <h2 class="ui header"><i class="calendar outline icon"></i> <span class="content">Réunions passées</span></h2>
+            <div class="ui divider"></div>
+            <div class="ui three cards">
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+                        <div class="header">Séance de Maîtrise</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <div class="ui simple dropdown item">
+                                      <div class="title">
+                                        <i class="right triangle icon"></i>
+                                        ...
+                                      </div>
+                                      <div class="divided menu">
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                        <span class="item">
+                                            <i class="right triangle icon"></i>
+                                            Lorem ipsum dolor sit amet.
+                                        </span>
+                                      </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">04.07.15</span>
+                    </div>
+                </div> 
+                
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">03.09.15</span>
+                    </div>
+                </div> 
+
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">03.09.15</span>
+                    </div>
+                </div> 
+
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">03.09.15</span>
+                    </div>
+                </div> 
+
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">03.09.15</span>
+                    </div>
+                </div> 
+
+                <div class="yellow card">
+                    <div class="content">
+                        <button class="ui mini green button right floated"><i class="send icon"></i></button>
+                        <div class="header">Préparation de séance d'unité</div>
+                        <div class="ui divider"></div>
+                        <div class="description">
+                            <div class="ui small two steps">
+                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">Convocation</div>
+                                </div>
+                              </div>
+                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                                <i class="green checkmark icon"></i>
+                                <div class="content">
+                                  <div class="title">PV</div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <h5 class="header">Ordre du jour</h5>
+                            <div class="ui divided list">
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                                <span class="item">
+                                    <i class="right triangle icon"></i>
+                                    Lorem ipsum dolor sit amet.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span class="left floated">Lausanne</span>
+                        <span class="right floated">03.09.15</span>
+                    </div>
+                </div> 
+          </div>
+        </div>
+        <!-- FIN REUNIONS PASSEES -->
     </div>
+
+    <script>
+    $(document).ready(function(){
+        $('.card-popup').popup({})
+    });
+    </script>
 
 
 {% endblock %}
