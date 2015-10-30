@@ -16,7 +16,7 @@ seanceApp.service('TagService',['APIService', 'Tag',
 				return status;
 			}
 
-			APIService.get('tag.all').success(success).error(failure);
+			APIService.get('_ajax_edit_tag').success(success).error(failure);
 		}
 	}]
 );

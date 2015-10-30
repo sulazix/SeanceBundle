@@ -13,7 +13,10 @@
  * Accessing route : group_name.route1
  */
 seanceApp.constant('routes', {
+	// Will be prepended to all routes
 	'api_base': '/interne/seance',
+
+	// Tag routes
 	'tag' : {
 		'prefix': '/tag',
 		'all': '/all',
