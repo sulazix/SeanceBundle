@@ -8,6 +8,10 @@ Installation
 
 ``` composer require interne/seancebundle --prefer-dist dev-stable ```
 
+> **Note :**
+
+> Veillez à bien lancer la commande ``` bower install ``` dans le répertoire racine du bundle afin d'installer les composants requis pour le frontend
+
 
 Configuration
 -------------
