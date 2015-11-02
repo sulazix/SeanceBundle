@@ -25,6 +25,13 @@ interne_seance:
     resource: "@InterneSeanceBundle/Resources/config/routing.yml"
     prefix:   /interne/seance
 
+
+seance_api:
+    type:     rest
+    resource: "@InterneSeanceBundle/Resources/config/routing_rest.yml"
+    prefix:   /api
+
+
 ```
 
 Enregistrer les services du bundle dans la config :
@@ -42,6 +49,13 @@ assetic:
     bundles:
         # ...
         - InterneSeanceBundle
+
+
+fos_rest:
+    body_listener: true
+    routing_loader:
+        default_format: json
+        include_format: false
 
 ```
 
