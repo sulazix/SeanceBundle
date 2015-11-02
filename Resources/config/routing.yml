@@ -1,23 +1,29 @@
 interne_seance_meeting:
+    type: rest
     resource: "@InterneSeanceBundle/Resources/config/routing/meeting.yml"
-    prefix:   /meeting
+    prefix: /meeting
 
 interne_seance_item:
+    type: rest
     resource: "@InterneSeanceBundle/Resources/config/routing/item.yml"
     prefix:   /item
 
 interne_seance_tag:
+    type: rest
     resource: "@InterneSeanceBundle/Resources/config/routing/tag.yml"
     prefix:   /tag
 
 interne_seance:
+    type: rest
     path: /
     defaults: { _controller: InterneSeanceBundle:Default:index }
 
 interne_seance_demo:
+    type: rest
     path: /demo
     defaults: { _controller: InterneSeanceBundle:Default:demo }
 
 interne_seance_demo_seance:
+    type: rest
     path: /demo_seance
     defaults: { _controller: InterneSeanceBundle:Default:seance }
