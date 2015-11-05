@@ -1,0 +1,21 @@
+/* Semantic UI overrides */
+
+.ui.steps .step.custom.start {
+	padding:5px;
+	padding-left:5px;
+	padding-right: 15px;
+	font-size: 0.7rem;
+}
+
+.ui.steps .step.custom.end {
+	padding:5px;
+	padding-left:15px;
+	padding-right: 15px;
+	font-size: 0.7rem;
+}
+
+/*
+.ui.cards .yellow.card, .ui.cards .red.card, .ui.cards .green.card {
+	box-shadow: 0px 2px 5px 0px #A7A9AC;
+}
+*/

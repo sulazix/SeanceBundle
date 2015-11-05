@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <div class="ui page grid">
+    <div class="ui page grid" ng-app="seanceApp"  ng-controller="ContainerController">
         <div class="row equal height">
             <div class="five wide column">
                 <div class="ui icon input large">
@@ -30,77 +30,45 @@
         <div class="sixteen wide column">
             <h2 class="ui header"><i class="inbox icon"></i> Réserve de points</h2>
             <div class="ui divider"></div>
+            {% raw %}
             <div class="ui segment">
-                <div class="ui four cards">
-                    <div class="orange card">
+                <p ng-show="stack.length == 0">Pas de points ici !</p>
+                <div class="ui four cards" ng-show="stack.length > 0">
+                    <div class="orange card" ng-repeat="item in stack">
                         <div class="content">
                             <div class="description">
-                                Point 1
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="orange card">
-                        <div class="content">
-                            <div class="description">
-                                Point 2
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="orange card">
-                        <div class="content">
-                            <div class="description">
-                                Point 3
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="orange card">
-                        <div class="content">
-                            <div class="description">
-                                Point 4
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="orange card">
-                        <div class="content">
-                            <div class="description">
-                                Point 5
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="orange card">
-                        <div class="content">
-                            <div class="description">
-                                Point 6
+                                {{ item.title }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endraw %}
         </div>
 
         <!-- DEBUT PROCHAINES REUNIONS -->
-        <div class="sixteen wide column">
+        <div class="sixteen wide column" ng-controller="MeetingController">
             <h2 class="ui header"><i class="calendar icon"></i>Prochaines réunions</h2>
             <div class="ui divider"></div>
-            <div class="ui three cards">
-                <div class="yellow card">
+            <div class="ui segment" ng-show="activeMeetings().length == 0">
+                <p>Pas de réunions ici !</p>
+            </div>
+            <div class="ui three cards" ng-show="activeMeetings().length > 0">
+
+                {% raw %}
+                <div class="yellow card" ng-repeat="meeting in activeMeetings()">
                     <div class="content">
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Séance de Maîtrise</a></div>
+                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
                         <div class="ui divider"></div>
                         <div class="description">
                             <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                              <div class="step custom start">
                                 <i class="green checkmark icon"></i>
                                 <div class="content">
                                   <div class="title">Convocation</div>
                                 </div>
                               </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                              <div class="step custom end" >
                                 <i class="red remove icon"></i>
                                 <div class="content">
                                   <div class="title"><acronym title="Le Procès Verbal n'est pas encore complet">PV</acronym></div>
@@ -110,36 +78,20 @@
 
                             <h5 class="header">Ordre du jour</h5>
                             <div class="ui divided list">
-                                <span class="item">
+                                <span class="item" ng-repeat="item in meeting.items.slice(0, 2)">
                                     <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
+                                    {{ item.title }}
                                 </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
+                                <span class="item" ng-if="meeting.items.length > 2">
                                     <div class="ui simple dropdown item">
                                       <div class="title">
                                         <i class="right triangle icon"></i>
                                         ...
                                       </div>
                                       <div class="divided menu">
-                                        <span class="item">
+                                        <span class="item" ng-repeat="item in meeting.items.slice(2, meeting.items.length)">
                                             <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
+                                            {{ item.title }}
                                         </span>
                                       </div>
                                     </div>
@@ -148,72 +100,39 @@
                         </div>
                     </div>
                     <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">30.10.15</span>
+                        <span class="left floated">{{ meeting.place }}</span>
+                        <span class="right floated">{{ meeting.date | date:'dd.MM.yy' }}</span>
                     </div>
                 </div> 
-                
-                <div class="red card">
-                    <div class="content">
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="red remove icon"></i>
-                                <div class="content">
-                                  <div class="title"><acronym title="Les participants n'ont pas encore été convoqués">Convocation</acronym></div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="red remove icon"></i>
-                                <div class="content">
-                                  <div class="title"><acronym title="Le Procès Verbal n'est pas encore complet">PV</acronym></div>
-                                </div>
-                              </div>
-                            </div>
+            {% endraw %}
 
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">12.12.15</span>
-                    </div>
-                </div> 
           </div>
         </div>
         <!-- FIN PROCHAINES REUNIONS -->
 
         <!-- DEBUT REUNION PASSEES -->
-        <div class="sixteen wide column">
+        <div class="sixteen wide column" ng-controller="MeetingController">
             <h2 class="ui header"><i class="calendar outline icon"></i> <span class="content">Réunions passées</span></h2>
             <div class="ui divider"></div>
-            <div class="ui three cards">
-                <div class="green card">
+            <div class="ui segment" ng-show="pastMeetings().length == 0">
+                <p>Pas de réunions ici !</p>
+            </div>
+            <div class="ui three cards" ng-show="pastMeetings().length > 0">
+                {% raw %}
+                <div class="green card"  ng-repeat="meeting in pastMeetings()">
                     <div class="content">
                         <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Séance de Maîtrise</a></div>
+                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
                         <div class="ui divider"></div>
                         <div class="description">
                             <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                              <div class="step custom start">
                                 <i class="green checkmark icon"></i>
                                 <div class="content">
                                   <div class="title">Convocation</div>
                                 </div>
                               </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
+                              <div class="step custom end">
                                 <i class="green checkmark icon"></i>
                                 <div class="content">
                                   <div class="title">PV</div>
@@ -223,36 +142,20 @@
 
                             <h5 class="header">Ordre du jour</h5>
                             <div class="ui divided list">
-                                <span class="item">
+                                <span class="item" ng-repeat="item in meeting.items.slice(0, 2)">
                                     <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
+                                    {{ item.title }}
                                 </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
+                                <span class="item" ng-if="meeting.items.length > 2">
                                     <div class="ui simple dropdown item">
                                       <div class="title">
                                         <i class="right triangle icon"></i>
                                         ...
                                       </div>
                                       <div class="divided menu">
-                                        <span class="item">
+                                        <span class="item" ng-repeat="item in meeting.items.slice(2, meeting.items.length)">
                                             <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
-                                        </span>
-                                        <span class="item">
-                                            <i class="right triangle icon"></i>
-                                            Lorem ipsum dolor sit amet.
+                                            {{ item.title }}
                                         </span>
                                       </div>
                                     </div>
@@ -261,210 +164,12 @@
                         </div>
                     </div>
                     <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">04.07.15</span>
+                        <span class="left floated">{{ meeting.place }}</span>
+                        <span class="right floated">{{ meeting.date | date:'dd.MM.yy' }}</span>
                     </div>
-                </div> 
+                </div>
+                {% endraw %} 
                 
-                <div class="green card">
-                    <div class="content">
-                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">03.09.15</span>
-                    </div>
-                </div> 
-
-                <div class="green card">
-                    <div class="content">
-                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">03.09.15</span>
-                    </div>
-                </div> 
-
-                <div class="green card">
-                    <div class="content">
-                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">03.09.15</span>
-                    </div>
-                </div> 
-
-                <div class="green card">
-                    <div class="content">
-                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">03.09.15</span>
-                    </div>
-                </div> 
-
-                <div class="yellow card">
-                    <div class="content">
-                        <button class="ui mini green button right floated card-popup" data-content="Envoyer le PV"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">Préparation de séance d'unité</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step" style="padding:5px; padding-left:5px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step"  style="padding:5px; padding-left:15px; padding-right: 15px; font-size: 0.7rem; width:auto;">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                                <span class="item">
-                                    <i class="right triangle icon"></i>
-                                    Lorem ipsum dolor sit amet.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">Lausanne</span>
-                        <span class="right floated">03.09.15</span>
-                    </div>
-                </div> 
           </div>
         </div>
         <!-- FIN REUNIONS PASSEES -->
@@ -477,4 +182,82 @@
     </script>
 
 
+{% endblock %}
+
+{% block css %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
+        '@InterneSeanceBundle/Resources/public/css/style.css'
+
+        output='css/seance.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/skin.min.css'
+
+        output='js/skins/lightgray/skin.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/content.min.css'
+
+        output='js/skins/lightgray/content.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block fonts %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.ttf'
+        output='js/skins/lightgray/fonts/tinymce.ttf' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.woff'
+        output='js/skins/lightgray/fonts/tinymce.woff' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.svg'
+        output='js/skins/lightgray/fonts/tinymce.svg' %}
+    {% endstylesheets %}
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.eot'
+        output='js/skins/lightgray/fonts/tinymce.eot' %}
+    {% endstylesheets %}
+{% endblock %}
+
+{% block js %}
+    {% javascripts
+    '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-router/release/angular-ui-router.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/tinymce.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/ngstorage/ngStorage.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/themes/modern/theme.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-tinymce/src/tinymce.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-sortable/sortable.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/jquery-ui.min.js'
+    '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
+    '@InterneSeanceBundle/Resources/public/js/seanceApp.js'
+    '@InterneSeanceBundle/Resources/public/js/filters/*'
+    '@InterneSeanceBundle/Resources/public/js/config/*'
+    '@InterneSeanceBundle/Resources/public/js/models/*'
+    '@InterneSeanceBundle/Resources/public/js/services/UserService.js'
+    '@InterneSeanceBundle/Resources/public/js/services/MeetingService.js'
+    '@InterneSeanceBundle/Resources/public/js/services/ContainerService.js'
+    '@InterneSeanceBundle/Resources/public/js/services/ItemService.js'
+    '@InterneSeanceBundle/Resources/public/js/services/TagService.js'
+    '@InterneSeanceBundle/Resources/public/js/services/APIService.js'
+    '@InterneSeanceBundle/Resources/public/js/controllers/*'
+    '@InterneSeanceBundle/Resources/public/js/Meeting/*'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts
+    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/plugins/autoresize/plugin.min.js'
+    output="js/plugins/autoresize/plugin.min.js"
+    %}
+    {% endjavascripts %}
 {% endblock %}

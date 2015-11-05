@@ -1,25 +1,59 @@
 
-seanceApp.service('MeetingService',['$http', 'Meeting', 'Item', 'Tag',
-	function ($http, Meeting, Item, Tag) {
+seanceApp.service('MeetingService',['APIService', 'Meeting',
+	function (APIService, Meeting) {
 		var that = this;
 
+		that.fetchAll = function(containerId) {
+			// TODO : Use the container id
+			return APIService.get('get_meetings');
+		}
+
+		/**
+		 * Sends a request for retrieving a Meeting entity corresponding to
+		 * the id passed as parameter
+		 * 
+		 * @param int id The id of the Meeting to be retrieved
+		 * 
+		 * @return Promise The resulting promise
+		 */
 		that.fetch = function(id) {
+			return APIService.get('get_meeting', {'id': id});
+		}
 
-			var important = new Tag(1, "Important", "Marquer comme important", "red");
+		/**
+		 * Posts a request with data related to a new Meeting entity
+		 * 
+		 * @param  json meeting The JSON object of the Meeting entity
+		 * 
+		 * @return Promise 	The resulting promise
+		 */
+		that.create = function(meeting) {
+			// TODO : Send post request
+		}
 
-			var rediscuter = new Tag(2, "À rediscuter", "Marquer comme à rediscuter déplacera le point pour la prochaine réunion", "orange")
 
-			var items = [
-				new Item(1, 'Tour des branches', "", 1, [important, rediscuter] ),
-				new Item(2, 'Soirée des parents', "", 2, [rediscuter]),
-				new Item(3, 'Noël de groupe', "", 3, [rediscuter]),
-				new Item(4, 'Formation J+S', "", 4, [rediscuter]),
-				new Item(5, 'Informatique', "", 5, [rediscuter]),
-				new Item(6, 'Rénouvellement du matériel', "", 6, [rediscuter]),
+		/**
+		 * Posts a request with data related to an existing Meeting entity.
+		 * 
+		 * @param  json meeting The JSON object of the Meeting entity, the 'id' property of the
+		 * JSON MUST be an existing id!
+		 * 
+		 * @return Promise 	The resulting promise
+		 */
+		that.update = function(meeting) {
+			// TODO : Send update request
+		}
 
-			];
 
-			return new Meeting(1, 'Séance de Maîtrise', '2015-10-26', 'Lausanne', items)
+		/**
+		 * Sends a request to delete an existing Meeting entity.
+		 * 
+		 * @param  int id The id of the meeting
+		 * 
+		 * @return Promise 	The resulting promise
+		 */
+		that.delete = function(id) {
+			// TODO : Send a delete request
 		}
 	}]
 );
