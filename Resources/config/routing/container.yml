@@ -1,0 +1,5 @@
+get_containers:
+    type: rest
+    path: /all
+    defaults: { _controller: InterneSeanceBundle:Container:getContainers }
+    methods: [GET]

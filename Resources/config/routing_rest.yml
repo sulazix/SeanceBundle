@@ -9,3 +9,8 @@ interne_seance_item:
     prefix: /meeting/{id}/item
     requirements:
         id: \d+
+
+interne_seance_container:
+    type: rest
+    resource: "@InterneSeanceBundle/Resources/config/routing/container.yml"
+    prefix: /container
