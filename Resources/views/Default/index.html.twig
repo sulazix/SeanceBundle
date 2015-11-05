@@ -9,7 +9,7 @@
         <div class="row equal height">
             <div class="five wide column">
                 <div class="ui icon input large">
-                  <input placeholder="Rechercher une réunion..." type="text">
+                  <input placeholder="Rechercher une réunion..." type="text" ng-model="search">
                   <i class="search icon"></i>
                 </div>
             </div>
@@ -53,10 +53,12 @@
             <div class="ui segment" ng-show="activeMeetings().length == 0">
                 <p>Pas de réunions ici !</p>
             </div>
+            <div class="ui segment" ng-show="(activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
+                <p>Aucun résultat.</p>
+            </div>
             <div class="ui three cards" ng-show="activeMeetings().length > 0">
-
                 {% raw %}
-                <div class="yellow card" ng-repeat="meeting in activeMeetings()">
+                <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place']">
                     <div class="content">
                         <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
                         <div class="ui divider"></div>
@@ -117,9 +119,12 @@
             <div class="ui segment" ng-show="pastMeetings().length == 0">
                 <p>Pas de réunions ici !</p>
             </div>
+            <div class="ui segment" ng-show="(pastMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
+                <p>Aucun résultat.</p>
+            </div>
             <div class="ui three cards" ng-show="pastMeetings().length > 0">
                 {% raw %}
-                <div class="green card"  ng-repeat="meeting in pastMeetings()">
+                <div class="green card"  ng-repeat="meeting in pastMeetings() | searchFilter:search:['name', 'date', 'place']">
                     <div class="content">
                         <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
                         <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
