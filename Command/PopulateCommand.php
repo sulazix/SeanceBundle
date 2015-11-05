@@ -61,6 +61,7 @@ class PopulateCommand extends ContainerAwareCommand
             for($j = 0; $j < $meetings_to_create; $j++) {
                 $meeting = $this->createMeeting();
                 $container->addMeeting($meeting);
+                $meeting->setContainer($container);
 
                 // Create the related items
                 $items_to_create = rand($this->minNbItems, $this->maxNbItems);
