@@ -1,7 +1,21 @@
 
-seanceApp.service('MeetingService',['APIService', 'Meeting',
-	function (APIService, Meeting) {
+seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'ContainerService',
+	function ($rootScope, APIService, Meeting, ContainerService) {
 		var that = this;
+
+		that.lookup = function(id) {
+			var result = false;
+			angular.forEach(that.getMeetings(), function(meeting, key){
+				if (meeting.id == id)
+					result = meeting;
+			});
+
+			return result;
+		}
+
+		that.getMeetings = function() {
+			return ContainerService.getSelectedContainer().meetings;
+		}
 
 		that.fetchAll = function(containerId) {
 			// TODO : Use the container id

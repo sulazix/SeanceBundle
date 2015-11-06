@@ -5,186 +5,16 @@
 
 {% block content %}
 
-    <div class="ui page grid" ng-app="seanceApp"  ng-controller="ContainerController">
-        <div class="row equal height">
-            <div class="five wide column">
-                <div class="ui icon input large">
-                  <input placeholder="Rechercher une réunion..." type="text" ng-model="search">
-                  <i class="search icon"></i>
-                </div>
-            </div>
-            <div class="six wide column">
-                <h2 class="ui center aligned icon header">
-                  <i class="blue circular users icon"></i>
-                  Gestionnaire de séances
-                </h2>
-            </div>
-            <div class="five wide column right aligned">
-                <button class="ui green button large">
-                    <i class="plus icon"></i>
-                    Préparer une réunion
-                </button>
-            </div>
-        </div>
-
-        <div class="sixteen wide column">
-            <h2 class="ui header"><i class="inbox icon"></i> Réserve de points</h2>
-            <div class="ui divider"></div>
-            {% raw %}
-            <div class="ui segment">
-                <p ng-show="stack.length == 0">Pas de points ici !</p>
-                <div class="ui four cards" ng-show="stack.length > 0">
-                    <div class="orange card" ng-repeat="item in stack">
-                        <div class="content">
-                            <div class="description">
-                                {{ item.title }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endraw %}
-        </div>
-
-        <!-- DEBUT PROCHAINES REUNIONS -->
-        <div class="sixteen wide column" ng-controller="MeetingController">
-            <h2 class="ui header"><i class="calendar icon"></i>Prochaines réunions</h2>
-            <div class="ui divider"></div>
-            <div class="ui segment" ng-show="activeMeetings().length == 0">
-                <p>Pas de réunions ici !</p>
-            </div>
-            <div class="ui segment" ng-show="(activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
-                <p>Aucun résultat.</p>
-            </div>
-            <div class="ui three cards" ng-show="activeMeetings().length > 0">
-                {% raw %}
-                <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place']">
-                    <div class="content">
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step custom start">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step custom end" >
-                                <i class="red remove icon"></i>
-                                <div class="content">
-                                  <div class="title"><acronym title="Le Procès Verbal n'est pas encore complet">PV</acronym></div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item" ng-repeat="item in meeting.items.slice(0, 2)">
-                                    <i class="right triangle icon"></i>
-                                    {{ item.title }}
-                                </span>
-                                <span class="item" ng-if="meeting.items.length > 2">
-                                    <div class="ui simple dropdown item">
-                                      <div class="title">
-                                        <i class="right triangle icon"></i>
-                                        ...
-                                      </div>
-                                      <div class="divided menu">
-                                        <span class="item" ng-repeat="item in meeting.items.slice(2, meeting.items.length)">
-                                            <i class="right triangle icon"></i>
-                                            {{ item.title }}
-                                        </span>
-                                      </div>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">{{ meeting.place }}</span>
-                        <span class="right floated">{{ meeting.date | date:'dd.MM.yy' }}</span>
-                    </div>
-                </div> 
-            {% endraw %}
-
-          </div>
-        </div>
-        <!-- FIN PROCHAINES REUNIONS -->
-
-        <!-- DEBUT REUNION PASSEES -->
-        <div class="sixteen wide column" ng-controller="MeetingController">
-            <h2 class="ui header"><i class="calendar outline icon"></i> <span class="content">Réunions passées</span></h2>
-            <div class="ui divider"></div>
-            <div class="ui segment" ng-show="pastMeetings().length == 0">
-                <p>Pas de réunions ici !</p>
-            </div>
-            <div class="ui segment" ng-show="(pastMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
-                <p>Aucun résultat.</p>
-            </div>
-            <div class="ui three cards" ng-show="pastMeetings().length > 0">
-                {% raw %}
-                <div class="green card"  ng-repeat="meeting in pastMeetings() | searchFilter:search:['name', 'date', 'place']">
-                    <div class="content">
-                        <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-                        <div class="header"><a href="{{ path('interne_seance_demo_seance') }}">{{ meeting.name }}</a></div>
-                        <div class="ui divider"></div>
-                        <div class="description">
-                            <div class="ui small two steps">
-                              <div class="step custom start">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">Convocation</div>
-                                </div>
-                              </div>
-                              <div class="step custom end">
-                                <i class="green checkmark icon"></i>
-                                <div class="content">
-                                  <div class="title">PV</div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <h5 class="header">Ordre du jour</h5>
-                            <div class="ui divided list">
-                                <span class="item" ng-repeat="item in meeting.items.slice(0, 2)">
-                                    <i class="right triangle icon"></i>
-                                    {{ item.title }}
-                                </span>
-                                <span class="item" ng-if="meeting.items.length > 2">
-                                    <div class="ui simple dropdown item">
-                                      <div class="title">
-                                        <i class="right triangle icon"></i>
-                                        ...
-                                      </div>
-                                      <div class="divided menu">
-                                        <span class="item" ng-repeat="item in meeting.items.slice(2, meeting.items.length)">
-                                            <i class="right triangle icon"></i>
-                                            {{ item.title }}
-                                        </span>
-                                      </div>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="left floated">{{ meeting.place }}</span>
-                        <span class="right floated">{{ meeting.date | date:'dd.MM.yy' }}</span>
-                    </div>
-                </div>
-                {% endraw %} 
-                
-          </div>
-        </div>
-        <!-- FIN REUNIONS PASSEES -->
+    <div ui-view class="ui page grid" ng-app="seanceApp">
     </div>
 
+    <!--
     <script>
     $(document).ready(function(){
         $('.card-popup').popup({})
     });
     </script>
+    -->
 
 
 {% endblock %}
@@ -256,7 +86,6 @@
     '@InterneSeanceBundle/Resources/public/js/services/TagService.js'
     '@InterneSeanceBundle/Resources/public/js/services/APIService.js'
     '@InterneSeanceBundle/Resources/public/js/controllers/*'
-    '@InterneSeanceBundle/Resources/public/js/Meeting/*'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

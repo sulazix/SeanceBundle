@@ -1,6 +1,6 @@
 
-seanceApp.service('ContainerService',['$rootScope', 'APIService', 'Container', 'MeetingService', 'ItemService',
-	function ($rootScope, APIService, Container, MeetingService, ItemService) {
+seanceApp.service('ContainerService',['$rootScope', 'APIService', 'Container',
+	function ($rootScope, APIService, Container) {
 		var that = this;
 
 		that.containers = [];

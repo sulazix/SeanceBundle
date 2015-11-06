@@ -1,0 +1,34 @@
+    <div class="row equal height">
+        <div class="five wide column">
+            <div class="ui icon input large">
+              <input placeholder="Rechercher une réunion..." type="text" ng-model="search">
+              <i class="search icon"></i>
+            </div>
+        </div>
+        <div class="six wide column">
+            <h2 class="ui center aligned icon header">
+              <i class="blue circular users icon"></i>
+              Gestionnaire de séances
+            </h2>
+        </div>
+        <div class="five wide column right aligned">
+            <a class="ui green button large" ui-sref="meeting_add">
+                <i class="plus icon"></i>
+                Préparer une réunion
+            </a>
+        </div>
+    </div>
+
+
+    <div ui-view="stackView" class="sixteen wide column">
+
+    </div>
+
+    
+    <div ui-view="meetingListActiveView" class="sixteen wide column">
+
+    </div>
+
+    <div ui-view="meetingListPastView" class="sixteen wide column">
+
+    </div>

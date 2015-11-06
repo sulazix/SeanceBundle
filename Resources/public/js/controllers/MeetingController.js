@@ -1,11 +1,18 @@
 
-seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$filter', 'ContainerService', 'MeetingService',
-	function($scope, $rootScope, $filter, ContainerService, MeetingService){
+seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'ContainerService', 'MeetingService',
+	function($scope, $rootScope, $stateParams, $state, $filter, ContainerService, MeetingService){
 
 		$rootScope.$on('container:changed_selected', function(){
-			$scope.meetings = ContainerService.getSelectedContainer().meetings;
-			$scope.points = $scope.meetings.items;
+			$scope.meetings = MeetingService.getMeetings();
 		});
+
+		if ($stateParams) {
+			MeetingService.fetch($stateParams.id).then(function(response) {
+				$scope.meeting = response.data;
+				$scope.items = $scope.meeting.items;
+				console.log($scope.meeting);
+			})
+		}
 
 		$scope.activeMeetings = function() {
 			return $filter('dateCompare')($scope.meetings, '>=');
@@ -23,7 +30,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$filter', 'C
 
 		$scope.removeTag = function(itemIndex, tagIndex) {
 			//console.log(itemIndex, tagIndex);
-			delete $scope.points[itemIndex].tags.splice(tagIndex, 1);
+			delete $scope.items[itemIndex].tags.splice(tagIndex, 1);
 		}
 
 		$scope.init = function() {

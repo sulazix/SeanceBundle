@@ -15,7 +15,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 		$scope.init();
 
 		// $rootScope events
-		var changed_selected_listener = $scope.$on('container:changed_selected', function(){
+		$scope.$on('container:changed_selected', function(){
 			$scope.selectedContainer = ContainerService.getSelectedContainer();
 			$scope.stack = $scope.selectedContainer.stack;
 		});

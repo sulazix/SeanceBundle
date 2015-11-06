@@ -13,3 +13,9 @@ interne_seance_demo:
 interne_seance_demo_seance:
     path: /demo_seance
     defaults: { _controller: InterneSeanceBundle:Default:seance }
+
+interne_seance_frontend:
+    resource: "@InterneSeanceBundle/Resources/config/routing/frontend.yml"
+    prefix: /frontend
+    options:
+        expose: true

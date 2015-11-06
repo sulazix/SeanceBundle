@@ -1,5 +1,4 @@
-/**
- * Configuration file for the frontend
- */
+
 seanceApp.constant('config', {
-});
+	templatesUrl: Routing.generate('seance_frontend_base')
+})

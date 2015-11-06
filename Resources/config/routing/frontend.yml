@@ -1,0 +1,7 @@
+seance_frontend_base:
+    path: /
+    defaults: { _controller: InterneSeanceBundle:Frontend:base }
+
+seance_frontend_template:
+    path: /template/{name}
+    defaults: { _controller: InterneSeanceBundle:Frontend:template }
