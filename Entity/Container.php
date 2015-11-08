@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Container
  *
- * @ORM\Table()
+ * @ORM\Table(name="seancebundle_container")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\ContainerRepository")
  */
 class Container

@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tag
  *
- * @ORM\Table()
+ * DO NOT : Inverse relationship with Item entity, this causes serious trouble for object serialization !
+ *
+ * @ORM\Table(name="seancebundle_tag")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\TagRepository")
  */
 class Tag
@@ -55,18 +57,12 @@ class Tag
      * @ORM\Column(name="displayHome", type="boolean")
      */
     private $displayHome;
-    /**
-    * @ORM\ManyToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="tags")
-    * @ORM\JoinTable(name="seancebundle_item_tag")
-    */
-    private $items;
 
 
     /**
     * Constructor 
     */
     public function __construct() {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -202,17 +198,6 @@ class Tag
     public function getDisplayHome()
     {
         return $this->displayHome;
-    }
-
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    public function addItem(\Interne\SeanceBundle\Entity\Item $item)
-    {
-        $this->items[] = $item;
-        return $this;
     }
 }
 

@@ -13,7 +13,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  * @see InterneSeanceBundle\Entity\Container
  * @see InterneSeanceBundle\Entity\Meeting
  *
- * @ORM\Table()
+ * @ORM\Table(name="seancebundle_item")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\ItemRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -72,7 +72,7 @@ class Item
     private $previous;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Interne\SeanceBundle\Entity\Tag", inversedBy="items")
+    * @ORM\ManyToMany(targetEntity="Interne\SeanceBundle\Entity\Tag", cascade={"persist"})
     * @ORM\JoinTable(name="seancebundle_item_tag")
     */
     private $tags;
@@ -268,5 +268,9 @@ class Item
     {
         $this->tags[] = $tag;
         return $this;
+    }
+
+    public function removeTag(\InterneSeanceBundle\Entity\Tag $tag) {
+        $this->tags->removeElement($tag);
     }
 }

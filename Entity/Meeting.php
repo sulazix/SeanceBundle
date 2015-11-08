@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Meeting
  *
- * @ORM\Table()
+ * @ORM\Table(name="seancebundle_meeting")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\MeetingRepository")
  */
 class Meeting
@@ -59,7 +59,7 @@ class Meeting
     private $container;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting", fetch="EXTRA_LAZY")
      */
     private $items;
 

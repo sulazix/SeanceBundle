@@ -41,10 +41,12 @@ class PopulateCommand extends ContainerAwareCommand
         $progress    = $this->getHelperSet()->get('progress');
 
         echo 'Creating a few tags...\n';
-        for($i = 1; $i < 6; $i++) {
+        for($i = 1; $i <= 6; $i++) {
             $tag = $this->createTag();
+            $this->tags[] = $tag;
             $em->persist($tag);
         }
+        //$em->flush();
         echo 'Done!\n\n';
 
         echo 'Will now create a few meetings...\n';
