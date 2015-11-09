@@ -3,7 +3,7 @@
 <div class="ui segment" ng-show="pastMeetings().length == 0">
     <p>Pas de réunions ici !</p>
 </div>
-<div class="ui segment" ng-show="(pastMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
+<div class="ui segment" ng-show="search && (pastMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
     <p>Aucun résultat.</p>
 </div>
 <div class="ui three cards" ng-show="pastMeetings().length > 0">
@@ -11,7 +11,7 @@
     <div class="green card"  ng-repeat="meeting in pastMeetings() | searchFilter:search:['name', 'date', 'place']">
         <div class="content">
             <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
-            <div class="header"><a  ui-sref="meeting_view({id: meeting.id})">{{ meeting.name }}</a></div>
+            <div class="header"><a  ui-sref="meeting.view({id: meeting.id})">{{ meeting.name }}</a></div>
             <div class="ui divider"></div>
             <div class="description">
                 <div class="ui small two steps">

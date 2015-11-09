@@ -6,11 +6,10 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			$scope.meetings = MeetingService.getMeetings();
 		});
 
-		if ($stateParams) {
+		if ($stateParams.id) {
 			MeetingService.fetch($stateParams.id).then(function(response) {
 				$scope.meeting = response.data;
 				$scope.items = $scope.meeting.items;
-				console.log($scope.meeting);
 			})
 		}
 

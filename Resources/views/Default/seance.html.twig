@@ -4,12 +4,13 @@
 {% block titre %}Gestionnaire de séance{% endblock %}
 
 {% block content %}
-    <div class="ui page grid" ng-app="seanceApp" ng-controller="MeetingController">
-        <div class="row">
+    <div class="ui page grid">
             <h1>Gestionnaire de séance - Static demo </h1>
             <h1>Séance du 01 Janvier 2015 </h1>
-            <div class="twelve wide column ui segment" id="example1">
-                  <div class="right ui rail" >
+            <div class="twelve wide column">
+              <div class="ui segment" id="example1">
+                  <div class="right ui rail">
+                    <div class="ui sticky">
                       <h3>Administration</h3>
                       <div class="ui labeled icon vertical buttons">
                           <button class="disabled olive ui button ">
@@ -30,6 +31,7 @@
                             </a>
                             {% endraw %}
                         </div>
+                      </div>
                   </div>
                   <div class="ui three top attached ordered steps">
                       <div class="completed step">
@@ -56,7 +58,7 @@
                   <a class="item" data-tab="oj">Ordre du jour</a>
                   <a class="item" data-tab="presence">Présences</a>
                 </div>
-                <div class="ui tab segment active" data-tab="accueil">
+                <div class="ui tab segment active" data-tab="accueil" style="height:1000px;">
                     {% raw %}
                     <div ng-repeat="point in points">
                         <h3 id="{{ point.id }}"> <span editable-text="point.title" buttons="no" onbeforesave="updatePoint($data)">{{ point.title || 'vide' }}</span>
@@ -85,8 +87,8 @@
                 <div class="ui tab segment" data-tab="presence">
                   Third
                 </div>
+              </div>
             </div>
-        </div>
     </div>
 
 

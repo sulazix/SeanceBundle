@@ -4,14 +4,14 @@
 <div class="ui segment" ng-show="activeMeetings().length == 0">
     <p>Pas de réunions ici !</p>
 </div>
-<div class="ui segment" ng-show="(activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
+<div class="ui segment" ng-show="search && (activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
     <p>Aucun résultat.</p>
 </div>
 <div class="ui three cards" ng-show="activeMeetings().length > 0">
     {% raw %}
     <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place']">
         <div class="content">
-            <div class="header"><a ui-sref="meeting_view({id : meeting.id})" >{{ meeting.name }}</a></div>
+            <div class="header"><a ui-sref="meeting.view({id : meeting.id})" >{{ meeting.name }}</a></div>
             <div class="ui divider"></div>
             <div class="description">
                 <div class="ui small two steps">

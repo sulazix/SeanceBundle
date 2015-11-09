@@ -1,83 +1,85 @@
 {% raw %}
-<div class="row">
-    <h1>{{ meeting.name }}</h1>
-    <div class="twelve wide column ui segment" id="example1">
-          <div class="right ui rail" >
-              <h3>Administration</h3>
-              <div class="ui labeled icon vertical buttons">
-                  <button class="disabled olive ui button ">
-                      <i class="send icon"></i>Envoyer un rappel
-                  </button>
-                  <button class="ui green button">
-                      <i class="send icon"></i>Envoyer le PV
-                  </button>
-                </div>
-                <h3>Ordre du jour</h3>
-                <div class="ui list" ui-sortable="sortableOptions" ng-model="items">
-                    <a ng-repeat="item in items" class="item" href="#{{ item.id }}">
-                        <i class="right triangle icon"></i>
-                        <div class="content">
-                            <div class="header">{{ item.title || 'vide' }}</div>
-                        </div>
-                    </a>
-                </div>
-          </div>
-          <div class="ui three top attached ordered steps">
-              <div class="completed step">
-                  <div class="content">
-                      <div class="title">Ordre du jour</div>
-                      <div class="description">L'ordre du jour a été écrit </div>
-                  </div>
-              </div>
-              <div class="completed step">
-                  <div class="content">
-                      <div class="title">Convocation</div>
-                      <div class="description">Les invitations à la séance ont étés envoyées</div>
-                  </div>
-              </div>
-              <div class="active step">
-                  <div class="content">
-                      <div class="title">Procès verbal</div>
-                      <div class="description">Le procès verbal n'est pas encore complet</div>
-                  </div>
-              </div>
-          </div>
-        <div class="ui pointing secondary menu tab_controller">
-          <a class="item active" data-tab="accueil">Accueil</a>
-          <a class="item" data-tab="oj">Ordre du jour</a>
-          <a class="item" data-tab="presence">Présences</a>
-        </div>
-        <div class="ui tab segment active" data-tab="accueil">
-            <div ng-repeat="item in items">
-                <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onbeforesave="updatePoint($data)">{{ item.title || 'vide' }}</span>
-                    <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
-                    <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
-                </h3>
-                <div editable-textarea="item.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="item.description || 'vide'"></div>
-                <div class="ui hidden divider"></div>
+  <h1 class="ui header">{{ meeting.name }}</h1>
+  <div class="twelve wide column">
+    <div class="ui segment" id="example1">
+      <div class="right ui rail">
+        <div class="ui sticky">
+          <h3>Administration</h3>
+          <div class="ui labeled icon vertical buttons">
+              <button class="disabled olive ui button ">
+                  <i class="send icon"></i>Envoyer un rappel
+              </button>
+              <button class="ui green button">
+                  <i class="send icon"></i>Envoyer le PV
+              </button>
             </div>
-        </div>
-        <div class="ui tab segment" data-tab="oj">
-            <div class="ui list"  ui-sortable="sortableOptions" ng-model="items">
-                <a class="item" ng-repeat="item in items">
+            <h3>Ordre du jour</h3>
+            <div class="ui list" ui-sortable="sortableOptions" ng-model="items">
+                <a ng-repeat="item in items" class="item" href="#{{ item.id }}">
                     <i class="right triangle icon"></i>
                     <div class="content">
-                        <div class="header">
-                        <span editable-text="item.title" onbeforesave="updatePoint($data)">{{ item.title }}</span>
-                        </div>
+                        <div class="header">{{ item.title || 'vide' }}</div>
                     </div>
                 </a>
             </div>
-        </div>
-        <div class="ui tab segment" data-tab="presence">
-          Third
-        </div>
+          </div>
+      </div>
+      <div class="ui three top attached ordered steps">
+          <div class="completed step">
+              <div class="content">
+                  <div class="title">Ordre du jour</div>
+                  <div class="description">L'ordre du jour a été écrit </div>
+              </div>
+          </div>
+          <div class="completed step">
+              <div class="content">
+                  <div class="title">Convocation</div>
+                  <div class="description">Les invitations à la séance ont étés envoyées</div>
+              </div>
+          </div>
+          <div class="active step">
+              <div class="content">
+                  <div class="title">Procès verbal</div>
+                  <div class="description">Le procès verbal n'est pas encore complet</div>
+              </div>
+          </div>
+      </div>
+      <div class="ui pointing secondary menu tab_controller">
+        <a class="item active" data-tab="accueil">Accueil</a>
+        <a class="item" data-tab="oj">Ordre du jour</a>
+        <a class="item" data-tab="presence">Présences</a>
+      </div>
+      <div class="ui tab segment active" data-tab="accueil">
+          <div ng-repeat="item in items">
+              <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onbeforesave="updatePoint($data)">{{ item.title || 'vide' }}</span>
+                  <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
+                  <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
+              </h3>
+              <div editable-textarea="item.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="item.description || 'vide'"></div>
+              <div class="ui hidden divider"></div>
+          </div>
+      </div>
+      <div class="ui tab segment" data-tab="oj">
+          <div class="ui list"  ui-sortable="sortableOptions" ng-model="items">
+              <a class="item" ng-repeat="item in items">
+                  <i class="right triangle icon"></i>
+                  <div class="content">
+                      <div class="header">
+                      <span editable-text="item.title" onbeforesave="updatePoint($data)">{{ item.title }}</span>
+                      </div>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <div class="ui tab segment" data-tab="presence">
+        Third
+      </div>
     </div>
-</div>
+  </div>
 {% endraw %}
 
 {% javascripts 
-    '@InterneSeanceBundle/Resources/public/js/Meeting/*'
+    '@InterneSeanceBundle/Resources/public/js/Meeting/page_seance.js'
 %}
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}

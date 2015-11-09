@@ -11,6 +11,7 @@ seanceApp.config(function($stateProvider, $urlRouterProvider) {
 			url: '',
 			templateUrl: Routing.generate('seance_frontend_template', {name: 'home'}),
 			controller: 'ContainerController'
+			
 		})
 		.state('root.home', {
 			url: "/home",
@@ -31,19 +32,19 @@ seanceApp.config(function($stateProvider, $urlRouterProvider) {
 		})
 
 		/* MEETING ROUTES */
-		.state('meeting_view', {
-			url: '/meeting/:id',
-			templateUrl: Routing.generate('seance_frontend_template', {name: 'view_meeting'}),
-			controller: 'MeetingController',
-			resolve: {
-				meeting: ['$stateParams', 'MeetingService', function($stateParams, MeetingService) {
-					return MeetingService.fetch($stateParams.id)
-				}]
-			}
+		.state('meeting', {
+			abstract: true,
+			url: '/meeting',
+			templateUrl: Routing.generate('seance_frontend_template', {name: 'meeting_base'})
 		})
-		.state('meeting_add', {
-			url: '/meeting/add',
+		.state('meeting.add', {
+			url: '/add',
 			templateUrl: Routing.generate('seance_frontend_template', {name: 'new_meeting'}),
+			controller: 'MeetingController'
+		})
+		.state('meeting.view', {
+			url: '/:id',
+			templateUrl: Routing.generate('seance_frontend_template', {name: 'view_meeting'}),
 			controller: 'MeetingController'
 		})
 });

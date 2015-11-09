@@ -1,10 +1,10 @@
 $(document).ready(function(){
+	console.log("Ready document")
     $('.menu .item').tab();
     $('.ui.sticky')
         .sticky({
-            scrollContext: '#example1',
-            observeChanges: true,
-            debug: false
+            context: '#example1',
+            offset: 100
         });
     $('.tag-popup').popup({title   : 'Tagging',content : 'Le tagging permet de reporter ou marquer un point du procès verbal'})
 ;
