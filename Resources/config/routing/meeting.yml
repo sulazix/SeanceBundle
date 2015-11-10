@@ -13,7 +13,7 @@ get_meeting:
 new_meeting:
     type: rest
     path: /new
-    defaults: {_controller: InterneSeanceBundle:Meeting:newMeeting }
+    defaults: {_controller: InterneSeanceBundle:Meeting:newMeeting, _format: ~ }
     methods: [POST]
 
 edit_meeting:

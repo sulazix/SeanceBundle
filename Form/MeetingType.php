@@ -15,14 +15,15 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', ["label" => "Nom"])
-            ->add('date', 'datepicker', ["label" => "Date et heure"])
-            ->add('place', 'text', ["label" => "Lieu"])
+            ->add('name', 'text')
+            // https://github.com/FriendsOfSymfony/FOSRestBundle/issues/808
+            ->add('date', 'datetime', ["widget" => "single_text", "date_format" => "dd.MM.yyyy"])
+            ->add('place', 'text')
             ->add('items', 'collection', [
-                    "type" => new ItemType,
-                    "label" => "Points",
+                    "type" => new ItemType(),
                     "allow_add" => true,
-                    "allow_delete" => true
+                    "allow_delete" => true,
+                    "by_reference" => true
                 ])
             /*
             TODO : Use the following template to render the field :
@@ -56,7 +57,8 @@ class MeetingType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Interne\SeanceBundle\Entity\Meeting'
+            'data_class' => 'Interne\SeanceBundle\Entity\Meeting',
+            'csrf_protection' => false
         ));
     }
 

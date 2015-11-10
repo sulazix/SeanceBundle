@@ -41,14 +41,14 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="position", type="integer")
+     * @ORM\Column(name="position", type="integer", nullable=true)
      *
      * @Assert\GreaterThan(value="0")
      */
@@ -95,6 +95,7 @@ class Item
      * @ORM\PrePersist
      */
     public function generatePosition(LifeCycleEventArgs $event) {
+        if (!$this->getMeeting()) return;
         $this->setPosition($this->getMeeting()->getNewPosition());
     }
 
@@ -272,5 +273,9 @@ class Item
 
     public function removeTag(\InterneSeanceBundle\Entity\Tag $tag) {
         $this->tags->removeElement($tag);
+    }
+
+    public function __toString() {
+        return 'Item';
     }
 }

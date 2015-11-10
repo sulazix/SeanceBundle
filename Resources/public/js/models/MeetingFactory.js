@@ -7,7 +7,7 @@ seanceApp.factory('Meeting', [
 			this.name = name
 			this.date = date
 			this.place = place
-			this.items = items
+			this.items = (items)? items : [];
 		}
 
 		/* Public methods through prototype */

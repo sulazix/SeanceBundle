@@ -94,7 +94,16 @@ class MeetingController extends FOSRestController
         $form = $this->createForm(new MeetingType(), $meeting);
         $form->handleRequest($this->getRequest());
 
+
+        $view;
         if ($form->isValid()) {
+
+            $items = $meeting->getItems();
+            foreach($items as $item) {
+                $item->setMeeting($meeting);
+                $em->persist($item);
+            }
+
             $em->persist($meeting);
             $em->flush();
 
@@ -107,8 +116,11 @@ class MeetingController extends FOSRestController
                 );
             }
         } else {
+            var_dump($meeting);
             $view = $this->view($form, Response::HTTP_BAD_REQUEST);
         }
+
+
 
         return $this->handleView($view);
     }

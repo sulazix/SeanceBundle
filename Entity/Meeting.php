@@ -59,7 +59,7 @@ class Meeting
     private $container;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting")
      */
     private $items;
 
@@ -196,6 +196,7 @@ class Meeting
     public function addItem(\Interne\SeanceBundle\Entity\Item $item)
     {
         $this->items[] = $item;
+        $item->setMeeting($this);
 
         return $this;
     }

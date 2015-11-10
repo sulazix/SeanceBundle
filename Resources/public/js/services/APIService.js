@@ -25,7 +25,7 @@ seanceApp.service('APIService',['$http',
 
 		that.post = function(route, params, data, config) {
 			var url = that.route(route, params)
-			return $http.post(url, config)
+			return $http.post(url, data, config)
 		}
 
 		that.defaults = $http.defaults;

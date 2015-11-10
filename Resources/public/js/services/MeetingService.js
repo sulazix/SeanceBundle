@@ -3,6 +3,8 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 	function ($rootScope, APIService, Meeting, ContainerService) {
 		var that = this;
 
+		that.form_name = "interne_seance_meeting";
+
 		that.lookup = function(id) {
 			var result = false;
 			angular.forEach(that.getMeetings(), function(meeting, key){
@@ -41,8 +43,18 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 		 * 
 		 * @return Promise 	The resulting promise
 		 */
-		that.create = function(meeting) {
-			// TODO : Send post request
+		that.create = function(container_id, meeting) {
+			log = function(response) {
+				console.log(response);
+			}
+
+			delete meeting.id;
+			angular.forEach(meeting.items, function(item, key){
+				delete item.id
+			});
+
+			console.log(meeting);
+			return APIService.post('new_meeting',{}, {"interne_seancebundle_meeting": meeting }).then(log, log);
 		}
 
 

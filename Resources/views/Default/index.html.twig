@@ -23,6 +23,7 @@
     {% stylesheets
         '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
         '@InterneSeanceBundle/Resources/public/css/style.css'
+        '@InterneSeanceBundle/Resources/public/css/jquery.datetimepicker.css'
 
         output='css/seance.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -86,6 +87,7 @@
     '@InterneSeanceBundle/Resources/public/js/services/TagService.js'
     '@InterneSeanceBundle/Resources/public/js/services/APIService.js'
     '@InterneSeanceBundle/Resources/public/js/controllers/*'
+    '@InterneSeanceBundle/Resources/public/js/jquery.datetimepicker.full.min.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

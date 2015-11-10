@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 use Interne\SeanceBundle\Transformer\EntityToIdTransformer;
+use Interne\SeanceBundle\Form\TagType;
 
 class ItemType extends AbstractType
 {
@@ -23,9 +24,16 @@ class ItemType extends AbstractType
             ->add('title', 'text')
             ->add('description', 'textarea')
             ->add('position', 'hidden')
+            ->add('tags', 'collection', [
+                "type" => new TagType(),
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
         ;
 
+        /*
         $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
+        */
     }
     
     /**

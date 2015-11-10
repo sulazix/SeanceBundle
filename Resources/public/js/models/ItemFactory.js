@@ -30,6 +30,16 @@ seanceApp.factory('Item', [
 			return this.tags;
 		}
 
+		Item.prototype.buildFromJson = function(json) {
+			this.id = json.id;
+			this.title = json.title;
+			this.description = json.description;
+			this.position = json.position;
+			this.tags = json.tags;
+
+			return this;
+		}
+
 		return Item;
 	}]
 );
