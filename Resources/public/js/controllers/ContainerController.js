@@ -9,16 +9,22 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 			$scope.initialized = true;
 			$scope.currentDate = new Date();
 
-			ContainerService.fetchAll();
+			if (ContainerService.getContainers().length == 0)
+				ContainerService.fetchAll();
+			else {
+				$scope.setVars();
+			}
+		}
+
+		$scope.setVars = function() {
+			$scope.selectedContainer = ContainerService.getSelectedContainer();
+			$scope.stack = $scope.selectedContainer.stack;
 		}
 
 		$scope.init();
 
 		// $rootScope events
-		$scope.$on('container:changed_selected', function(){
-			$scope.selectedContainer = ContainerService.getSelectedContainer();
-			$scope.stack = $scope.selectedContainer.stack;
-		});
+		$scope.$on('container:changed_selected', $scope.setVars());
 
 	}]
 );

@@ -1,6 +1,6 @@
 
-seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'ContainerService',
-	function ($rootScope, APIService, Meeting, ContainerService) {
+seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meeting', 'ContainerService',
+	function ($rootScope, $filter, APIService, Meeting, ContainerService) {
 		var that = this;
 
 		that.form_name = "interne_seance_meeting";
@@ -20,6 +20,15 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 
 		that.getMeetings = function() {
 			return ContainerService.getSelectedContainer().meetings;
+		}
+
+		that.getMeeting = function(id) {
+			var result = $filter('filter')(that.getMeetings(), {'id':id});
+
+			if (result.length)
+				return result[0];
+			else
+				return undefined;
 		}
 
 

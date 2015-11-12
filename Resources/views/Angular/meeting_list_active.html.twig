@@ -9,7 +9,7 @@
 </div>
 <div class="ui three cards" ng-show="activeMeetings().length > 0">
     {% raw %}
-    <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place']">
+    <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place'] | orderBy: 'rawDate'">
         <div class="content">
             <div class="header"><a ui-sref="meeting.view({id : meeting.id})" >{{ meeting.name }}</a></div>
             <div class="ui divider"></div>

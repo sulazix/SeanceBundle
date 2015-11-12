@@ -28,30 +28,7 @@ class MeetingType extends AbstractType
                     "allow_add" => true,
                     "allow_delete" => true,
                     "by_reference" => true
-                ])
-            /*
-            TODO : Use the following template to render the field :
-            <div class="ui right labeled left icon input">
-              <i class="plus icon"></i>
-              <input placeholder="Enter items" type="text">
-              <a class="ui circle label">
-                Add Item
-              </a>
-            </div>
-             */
-            //->add('items', 'semantic', ['class' => 'InterneSeanceBundle:Item'])
-            /*
-            ->add('items', 'entity', [
-                    'class' => 'InterneSeanceBundle:Item',
-                    'property' => 'title',
-                    'placeholder' => 'Sélectionner un point',
-                    'multiple' => true,
-                    'query_builder' => function(ItemRepository $repo) {
-                        return $repo->createQueryBuilder('i')
-                                ->orderBy('i.title');
-                    }
-                ])
-            //*/
+              ])
         ;
     }
     

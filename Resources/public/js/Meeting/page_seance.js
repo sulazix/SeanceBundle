@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	console.log("Ready document")
     $('.menu .item').tab();
     $('.ui.sticky')
         .sticky({

@@ -1,16 +1,33 @@
 {% raw %}
-  <h1 class="ui header">{{ meeting.name }}</h1>
+  <div class="twelve wide column grid">
+    <div class="row">
+      <h1 class="ui header" e-class="ui huge input" editable-text="meeting.name" onbeforesave="updateTitle($data)">{{ meeting.name }}</h1>
+    </div>
+    <div class="row">
+      <h4 class="ui dividing header right aligned">
+        <span e-class="datetimepicker" e-ng-init="toDatetimePicker()" e-value="{{ meeting.date }}" editable-text="meeting.date" onbeforesave="">
+          {{ meeting.date }}
+        </span>
+        à
+        <span editable-text="meeting.place" onbeforesave="">
+          {{ meeting.place }}
+        </span>
+      </h4>
+    </div>
+  </div>
   <div class="twelve wide column">
     <div class="ui segment" id="example1">
-      <div class="right ui rail">
-        <div class="ui sticky">
+      <div class="right ui rail" style="width:200px">
+        <div class="ui sticky four wide column">
           <h3>Administration</h3>
-          <div class="ui labeled icon vertical buttons">
-              <button class="disabled olive ui button ">
-                  <i class="send icon"></i>Envoyer un rappel
+          <div class="ui vertical buttons">
+              <button class="ui labeled icon olive disabled button">
+                  <i class="send icon"></i>
+                  Envoyer un rappel
               </button>
-              <button class="ui green button">
-                  <i class="send icon"></i>Envoyer le PV
+              <button class="ui labeled icon green button">
+                  <i class="send icon"></i>
+                  Envoyer le PV
               </button>
             </div>
             <h3>Ordre du jour</h3>
@@ -51,11 +68,11 @@
       </div>
       <div class="ui tab segment active" data-tab="accueil">
           <div ng-repeat="item in items">
-              <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onbeforesave="updatePoint($data)">{{ item.title || 'vide' }}</span>
+              <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onbeforesave="updateItem($data)">{{ item.title || 'vide' }}</span>
                   <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
                   <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
               </h3>
-              <div editable-textarea="item.description" onbeforesave="updatePoint($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="item.description || 'vide'"></div>
+              <div editable-textarea="item.description" onbeforesave="updateItem($data)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="item.description || 'vide'"></div>
               <div class="ui hidden divider"></div>
           </div>
       </div>
@@ -65,7 +82,7 @@
                   <i class="right triangle icon"></i>
                   <div class="content">
                       <div class="header">
-                      <span editable-text="item.title" onbeforesave="updatePoint($data)">{{ item.title }}</span>
+                      <span editable-text="item.title" onbeforesave="updateItem($data)">{{ item.title }}</span>
                       </div>
                   </div>
               </a>

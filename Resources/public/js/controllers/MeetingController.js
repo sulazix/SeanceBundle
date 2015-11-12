@@ -1,16 +1,22 @@
 
-seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'ContainerService', 'MeetingService', 'Meeting', 'Item',
-	function($scope, $rootScope, $stateParams, $state, $filter, ContainerService, MeetingService, Meeting, Item){
+seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'config', 'ContainerService', 'MeetingService', 'Meeting', 'Item',
+	function($scope, $rootScope, $stateParams, $state, $filter, config, ContainerService, MeetingService, Meeting, Item){
 
 		$rootScope.$on('container:changed_selected', function(){
 			$scope.meetings = MeetingService.getMeetings();
 		});
 
 		if ($stateParams.id) {
-			MeetingService.fetch($stateParams.id).then(function(response) {
-				$scope.meeting = response.data;
+			$scope.meeting = MeetingService.getMeeting($stateParams.id);
+
+			if (!$scope.meeting) {
+				MeetingService.fetch($stateParams.id).then(function(response) {
+                       $scope.meeting = (new Meeting()).buildFromJson(response.data);
+                       $scope.items = $scope.meeting.items;
+                });
+			} else {
 				$scope.items = $scope.meeting.items;
-			})
+			}
 		}
 
 		$scope.newMeeting = function() {
@@ -70,22 +76,34 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		}
 
 		$scope.activeMeetings = function() {
-			return $filter('dateCompare')($scope.meetings, '>=');
+			return $filter('dateCompare')(MeetingService.getMeetings(), '>=', 'rawDate');
 		}
 
 		$scope.pastMeetings = function() {
-			return $filter('dateCompare')($scope.meetings, '<');
+			return $filter('dateCompare')(MeetingService.getMeetings(), '<', 'rawDate');
 		}
 		
-		$scope.updatePoint = function(data) {
+		$scope.updateItem = function(data) {
 			// TODO : Envoyer la requete de mise à jour sur le serveur
-			console.log("Do someting before saving");
+			console.log("Do someting for saving item");
+			return true;
+		}
+
+		$scope.updateTitle = function(data) {
+			console.log("Do something for saving remote title")
+
 			return true;
 		}
 
 		$scope.removeTag = function(itemIndex, tagIndex) {
 			//console.log(itemIndex, tagIndex);
 			delete $scope.items[itemIndex].tags.splice(tagIndex, 1);
+		}
+
+		$scope.toDatetimePicker = function() {
+	        $('.datetimepicker').datetimepicker({
+	        	format: config.datetimePickerFormat
+	        });
 		}
 
 		$scope.init = function() {

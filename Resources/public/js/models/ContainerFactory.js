@@ -1,12 +1,18 @@
 
-seanceApp.factory('Container', [
-	function() {
+seanceApp.factory('Container', ['Meeting',
+	function(Meeting) {
 
 		function Container(id, title, description, meetings, items) {
 			this.id = id
 			this.title = title
 			this.description = description
-			this.meetings = meetings
+			this.meetings = [];
+
+			var that = this;
+			angular.forEach(meetings, function(meeting, key){
+				that.meetings.push((new Meeting()).buildFromJson(meeting))
+			});
+			
 			this.stack = items
 		}
 
@@ -36,7 +42,13 @@ seanceApp.factory('Container', [
 			this.id = json.id;
 			this.title = json.title;
 			this.description = json.description;
-			this.meetings = json.meetings;
+			this.meetings = [];
+
+			var that = this;
+			angular.forEach(json.meetings, function(meeting, key){
+				that.meetings.push((new Meeting()).buildFromJson(meeting))
+			});
+			
 			this.stack = json.stack_of_items;
 
 			return this;
