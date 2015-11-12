@@ -116,7 +116,6 @@ class MeetingController extends FOSRestController
                 );
             }
         } else {
-            var_dump($meeting);
             $view = $this->view($form, Response::HTTP_BAD_REQUEST);
         }
 

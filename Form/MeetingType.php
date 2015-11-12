@@ -15,6 +15,10 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('container', 'entity', [
+                'class' => 'InterneSeanceBundle:Container',
+                'choice_label' => 'id'
+              ])
             ->add('name', 'text')
             // https://github.com/FriendsOfSymfony/FOSRestBundle/issues/808
             ->add('date', 'datetime', ["widget" => "single_text", "date_format" => "dd.MM.yyyy"])

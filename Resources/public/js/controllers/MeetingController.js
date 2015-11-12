@@ -30,7 +30,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			// Items are already objects
 
 			container = ContainerService.getSelectedContainer();
-			MeetingService.create(container, $scope.meeting);
+			MeetingService.create(container.id, $scope.meeting);
 
 			return false;
 		}

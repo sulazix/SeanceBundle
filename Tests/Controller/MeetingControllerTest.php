@@ -11,20 +11,19 @@ class MeetingControllerTest extends WebTestCase
         $client = static::createClient();
 
         $client->request('POST', '/api/meeting/new', [
-            "name" => "meeting_test",
-            "date" => "2015-11-04 11:00",
-            "place" => "bussigny",
-            "items" => [
-                ["title" => "test1"],
-                ["title" => "test2"],
-            ],
-            ]);
+            "interne_seancebundle_meeting" => [
+                "name" => "meeting_test",
+                "date" => "2015-11-04 11:00:00",
+                "place" => "Bussigny",
+                "items" => [
+                    ["title" => "test1"],
+                    ["title" => "test2"],
+                ],
+        ]]);
 
         $response = $client->getResponse();
 
-        var_dump($response);
-
-        $this->assertEquals(200, $response->getStatusCode(), "Status code should be HTTP_OK");
+        $this->assertEquals(201, $response->getStatusCode(), "Status code should be HTTP_CREATED");
         $this->assertNotEmpty($response->getContent(), "You got an empty response... that's weird!");
     }
 }

@@ -1,31 +1,50 @@
 
-seanceApp.service('ContainerService',['$rootScope', 'APIService', 'Container',
-	function ($rootScope, APIService, Container) {
+seanceApp.service('ContainerService',['$rootScope', '$localStorage', 'APIService', 'Container',
+	function ($rootScope, $localStorage, APIService, Container) {
 		var that = this;
 
-		that.containers = [];
-		that.selected = 0;
+		// TODO : Replace this by usage of local storage keys
 
-		/* Local data related functions */
+		that.init = function() {
+			that.$storage = $localStorage;
+
+			if (!that.$storage.containers)
+				that.$storage.containers = [];
+
+			if (!that.$storage.selected)
+				that.$storage.selected = 0;
+		}
+
+		/* Accessors */
+		that.getContainer = function(index) {
+			if (index < 0) return undefined;
+
+			return that.$storage.containers[index];
+		}
+
+		that.getContainers = function() {
+			return that.$storage.containers;
+		}
+
 
 		that.setContainers = function(containers) {
 			// Empty array to keep reference !
-			that.containers.splice(0, that.containers.length);
+			that.$storage.containers.splice(0, that.$storage.containers.length);
 
 			angular.forEach(containers, function(container, key){
-				that.containers.push((new Container()).buildFromJson(container));
+				that.$storage.containers.push((new Container()).buildFromJson(container));
 			});
 
 			$rootScope.$broadcast('container:list_updated');
 		}
 
 		that.getSelectedContainer = function() {
-			return that.containers[that.selected];
+			return that.$storage.containers[that.$storage.selected];
 		}
 
 		that.setSelectedContainer = function(index) {
-			if (that.containers.length > 0 && index >= 0 && index < that.containers.length) {
-				that.selected = index;
+			if (that.$storage.containers.length > 0 && index >= 0 && index < that.$storage.containers.length) {
+				that.$storage.selected = index;
 				$rootScope.$broadcast('container:changed_selected');
 				return true;
 			}
@@ -41,5 +60,8 @@ seanceApp.service('ContainerService',['$rootScope', 'APIService', 'Container',
 				that.setSelectedContainer(0);
 			}).then(success, failure);
 		}
+
+		/* Init */
+		that.init();
 	}]
 );

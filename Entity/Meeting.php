@@ -51,10 +51,9 @@ class Meeting
      */
     private $place;
 
-    // TODO : Add nullable=false to enforce storage of meetings in one container
     /**
      * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="meetings")
-     * @ORM\JoinColumn(name="container_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="container_id", referencedColumnName="id", nullable=false)
      */
     private $container;
 

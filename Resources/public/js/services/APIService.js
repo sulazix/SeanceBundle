@@ -7,6 +7,8 @@ seanceApp.service('APIService',['$http',
 		var that = this;
 	
 	
+		/* Wrapped functions of $http service */
+
 		that.delete = function(route, params, config) {
 			var url = that.route(route, params)
 			return $http.delete(url, config)

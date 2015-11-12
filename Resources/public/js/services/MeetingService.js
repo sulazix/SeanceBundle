@@ -5,6 +5,7 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 
 		that.form_name = "interne_seance_meeting";
 
+		/* Helper methods */
 		that.lookup = function(id) {
 			var result = false;
 			angular.forEach(that.getMeetings(), function(meeting, key){
@@ -15,9 +16,14 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 			return result;
 		}
 
+		/* Accessors */
+
 		that.getMeetings = function() {
 			return ContainerService.getSelectedContainer().meetings;
 		}
+
+
+		/* API related functions */
 
 		that.fetchAll = function(containerId) {
 			// TODO : Use the container id
@@ -52,8 +58,8 @@ seanceApp.service('MeetingService',['$rootScope', 'APIService', 'Meeting', 'Cont
 			angular.forEach(meeting.items, function(item, key){
 				delete item.id
 			});
+			meeting.container = container_id;
 
-			console.log(meeting);
 			return APIService.post('new_meeting',{}, {"interne_seancebundle_meeting": meeting }).then(log, log);
 		}
 
