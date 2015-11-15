@@ -1,7 +1,11 @@
 {% raw %}
   <div class="twelve wide column grid">
     <div class="row">
-      <h1 class="ui header" e-class="ui huge input" editable-text="meeting.name" onbeforesave="updateTitle($data)">{{ meeting.name }}</h1>
+      <h1 class="ui header">
+        <span e-class="ui huge input" editable-text="meeting.name" onbeforesave="updateTitle($data)">
+        {{ meeting.name }}
+        </span>
+      </h1>
     </div>
     <div class="row">
       <h4 class="ui dividing header right aligned">

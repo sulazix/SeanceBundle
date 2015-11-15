@@ -19,3 +19,16 @@
 	box-shadow: 0px 2px 5px 0px #A7A9AC;
 }
 */
+
+/* XEditable angular overrides */
+.ui.header.editable-click, .ui.header.editable-click:last-child, .editable-click, .editable-click:hover, a.editable-click, a.editable-click:hover {
+	border: none;
+	border-bottom: 2px solid rgba(0,0,0,0.15);
+	padding-left: 2px;
+	padding-right: 2px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.editable-click:hover, a.editable-click:hover {
+	background-color: rgba(0,0,0, 0.1);
+}
