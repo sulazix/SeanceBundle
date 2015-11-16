@@ -15,12 +15,12 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 			//else {
 			//	$scope.setVars();
 			//}
-		}
+		};
 
 		$scope.setVars = function() {
 			$scope.selectedContainer = ContainerService.getSelectedContainer();
 			$scope.stack = $scope.selectedContainer.stack;
-		}
+		};
 
 		$scope.init();
 

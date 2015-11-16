@@ -1,9 +1,9 @@
 seanceApp.filter('dateCompare', function() {
-  return function (objects, operator, property) {
+  return function (objects, operator, property_arg) {
 
     var filtered_list = [];
     var today = new Date().getTime();
-    var property = property ? property : 'date'
+    var property = property_arg ? property_arg : 'date';
 
     angular.forEach(objects, function(value, key){
        
@@ -38,5 +38,5 @@ seanceApp.filter('dateCompare', function() {
 
     });
     return filtered_list;
-  }
+  };
 });

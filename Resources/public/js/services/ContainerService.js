@@ -13,18 +13,18 @@ seanceApp.service('ContainerService',['$rootScope', '$localStorage', 'APIService
 
 			if (!that.$storage.selected)
 				that.$storage.selected = 0;
-		}
+		};
 
 		/* Accessors */
 		that.getContainer = function(index) {
 			if (index < 0) return undefined;
 
 			return that.$storage.containers[index];
-		}
+		};
 
 		that.getContainers = function() {
 			return that.$storage.containers;
-		}
+		};
 
 
 		that.setContainers = function(containers) {
@@ -36,11 +36,11 @@ seanceApp.service('ContainerService',['$rootScope', '$localStorage', 'APIService
 			});
 
 			$rootScope.$broadcast('container:list_updated');
-		}
+		};
 
 		that.getSelectedContainer = function() {
 			return that.$storage.containers[that.$storage.selected];
-		}
+		};
 
 		that.setSelectedContainer = function(index) {
 			if (that.$storage.containers.length > 0 && index >= 0 && index < that.$storage.containers.length) {
@@ -50,7 +50,7 @@ seanceApp.service('ContainerService',['$rootScope', '$localStorage', 'APIService
 			}
 
 			return false;
-		}
+		};
 
 		/* API Related functions */
 
@@ -59,7 +59,7 @@ seanceApp.service('ContainerService',['$rootScope', '$localStorage', 'APIService
 				that.setContainers(response.data);
 				that.setSelectedContainer(0);
 			}).then(success, failure);
-		}
+		};
 
 		/* Init */
 		that.init();

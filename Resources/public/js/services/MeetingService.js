@@ -14,13 +14,13 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 			});
 
 			return result;
-		}
+		};
 
 		/* Accessors */
 
 		that.getMeetings = function() {
 			return ContainerService.getSelectedContainer().meetings;
-		}
+		};
 
 		that.getMeeting = function(id) {
 			var result = $filter('filter')(that.getMeetings(), {'id':id});
@@ -29,7 +29,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 				return result[0];
 			else
 				return undefined;
-		}
+		};
 
 
 		/* API related functions */
@@ -37,7 +37,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 		that.fetchAll = function(containerId) {
 			// TODO : Use the container id
 			return APIService.get('get_meetings');
-		}
+		};
 
 		/**
 		 * Sends a request for retrieving a Meeting entity corresponding to
@@ -49,7 +49,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 		 */
 		that.fetch = function(id) {
 			return APIService.get('get_meeting', {'id': id});
-		}
+		};
 
 		/**
 		 * Posts a request with data related to a new Meeting entity
@@ -64,11 +64,11 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 		that.create = function(container_id, meeting, success, failure) {
 			log = function(response) {
 				console.log(response);
-			}
+			};
 
 			return APIService.post('new_meeting',{}, that.wrap(meeting, container_id))
 				.then(success, failure);
-		}
+		};
 
 
 		/**
@@ -85,7 +85,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 			
 			return APIService.put('edit_meeting', {'id': meeting.id}, wrapped_data)
 				.then(success, failure);
-		}
+		};
 
 
 		/**
@@ -97,7 +97,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 		 */
 		that.delete = function(id) {
 			// TODO : Send a delete request
-		}
+		};
 
 		/**
 		 * Automatically copies and adds the correct JSON entry for the meeting object and removes unncessary fields (such as ids).
@@ -120,7 +120,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 			});
 
 			if (copy.rawDate)
-				delete copy.rawDate
+				delete copy.rawDate;
 
 			// Add container id if required
 			if (container_id)
@@ -128,7 +128,7 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 
 			return {
 				'interne_seancebundle_meeting': copy
-			}
-		}
+			};
+		};
 	}]
 );

@@ -15,12 +15,12 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				date: "",
 				place: "",
 				items: []
-			}
-		}
+			};
+		};
 
 		$scope.editMeeting = function() {
 			angular.copy($scope.meeting, $scope.form);
-		}
+		};
 
 		$scope.submitNew = function() {
 			$scope.meeting.name = $scope.form.name;
@@ -32,13 +32,13 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			MeetingService.create(container.id, $scope.meeting, function(response) {
 				if (response) {
 					$scope.meeting.id = APIService.idFromLocation(response.headers('Location'));
-					MeetingService.save($scope.meeting)
+					MeetingService.save($scope.meeting);
 					$state.go('meeting.view', {'id': id});
 				}
 			});
 
 			return false;
-		}
+		};
 
 		$scope.addItem = function(event) {
 			if ((event.type == "keypress" && event.keyCode != 13) || !$scope.form.item) return;
@@ -73,10 +73,10 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				$scope.meeting.items.push(item);
 			}, function(response) {
 				$scope.form.item = value;
-			})
+			});
 
 			event.preventDefault();
-		}
+		};
 
 		$scope.removeItem = function(item) {
 			var index = -1;
@@ -88,8 +88,8 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			});
 
 			if (index != -1)
-				$scope.meeting.items.splice(index, 1)
-		}
+				$scope.meeting.items.splice(index, 1);
+		};
 
 		/* Saving functions */
 
@@ -102,35 +102,35 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 			// TODO : Implement loading state
 			return true;
-		}
+		};
 
 		$scope.updateItem = function(data, item) {
 			ItemService.update(item);
 			
 			return true;
-		}
+		};
 
 		/* Filtered values */
 
 		$scope.activeMeetings = function() {
 			return $filter('dateCompare')(MeetingService.getMeetings(), '>=', 'rawDate');
-		}
+		};
 
 		$scope.pastMeetings = function() {
 			return $filter('dateCompare')(MeetingService.getMeetings(), '<', 'rawDate');
-		}
+		};
 
 		$scope.removeTag = function(itemIndex, tagIndex) {
 			//console.log(itemIndex, tagIndex);
-			delete $scope.items[itemIndex].tags.splice(tagIndex, 1);
-		}
+			$scope.items[itemIndex].tags.splice(tagIndex, 1);
+		};
 
 		/* DOM helper functions */
 		$scope.toDatetimePicker = function() {
 	        $('.datetimepicker').datetimepicker({
 	        	format: config.datetimePickerFormat
 	        });
-		}
+		};
 
 		$scope.init = function() {
 
@@ -147,7 +147,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 			$scope.sortableOptions = {
 			    update: function(e, ui) {
-			    	console.log("[ui-sortable] Updating order!")
+			    	console.log("[ui-sortable] Updating order!");
 			    },
 			    stop: function(e, ui) {
 			    	console.log("[ui-sortable] Done !");
@@ -169,7 +169,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 				$scope.editMeeting();
 			}
-		}
+		};
 
 		$scope.init();
 	}]
