@@ -1,2 +1,4 @@
 *~
 Resources/public/bower_components
+Resources/public/dist
+node_modules

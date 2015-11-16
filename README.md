@@ -6,12 +6,18 @@ Bundle de séance pour le Net BS (https://github.com/sysmoh/intranetBS)
 Installation
 ------------
 
-``` composer require interne/seancebundle --prefer-dist dev-stable ```
+```
+cd path/to/intranetBS
+composer require interne/seancebundle --prefer-dist dev-stable
+```
 
-> **Note :**
-
-> Veillez à bien lancer la commande ``` bower install ``` dans le répertoire racine du bundle afin d'installer les composants requis pour le frontend
-
+Si vous souhaitez utiliser le frontend Angular par défaut 
+```
+cd path/to/seance/bundle # vendor/interne/seancebundle si installé via composer
+bower install # charger les dépendances pour angular
+npm install # installer les dépendances grunt
+grunt build # générer les fichiers angular minifiés
+```
 
 Configuration
 -------------
@@ -25,15 +31,16 @@ Enregistrer les routes du bundle dans l'application :
 ```
 # app/config/routing.yml
 
-interne_seance:
-    resource: "@InterneSeanceBundle/Resources/config/routing.yml"
-    prefix:   /interne/seance
-
-
 seance_api:
     type:     rest
     resource: "@InterneSeanceBundle/Resources/config/routing_rest.yml"
-    prefix:   /api
+    prefix:   /intranet/seance-api
+    options:
+        expose: true
+
+seance:
+    resource: "@InterneSeanceBundle/Resources/config/routing.yml"
+    prefix:   /intranet/seance
 
 
 ```
@@ -44,7 +51,7 @@ Enregistrer les services du bundle dans la config :
 # app/config/config.yml
 
 imports:
-	# ...
+    # ...
     - { resource: "@InterneSeanceBundle/Resources/config/services.yml" }
 
 
@@ -68,10 +75,10 @@ Mettre à jour les bundles chargés depuis le kernel Symfony :
 ```
 # /app/AppKernel.php
 
-	$bundles = array (
-		// ...
-		new Interne\SeanceBundle\InterneSeanceBundle(),
-	);
+    $bundles = array (
+        // ...
+        new Interne\SeanceBundle\InterneSeanceBundle(),
+    );
 ```
 
 Générer les tables en base de données
@@ -85,5 +92,6 @@ Technologies utilisées
 
 - http://symfony.com/
 - http://1.semantic-ui.com/
-- http://vitalets.github.io/angular-xeditable/
 - https://angularjs.org/
+
+Voir les fichiers composer.json, bower.json et package.json pour les détails des modules utilisés.
