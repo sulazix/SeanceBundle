@@ -1,24 +1,13 @@
 
-seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'config', 'ContainerService', 'MeetingService', 'Meeting', 'Item',
-	function($scope, $rootScope, $stateParams, $state, $filter, config, ContainerService, MeetingService, Meeting, Item){
+seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'config', 'ContainerService', 'MeetingService', 'ItemService', 'APIService', 'Meeting', 'Item',
+	function($scope, $rootScope, $stateParams, $state, $filter, config, ContainerService, MeetingService, ItemService, APIService, Meeting, Item){
 
 		$rootScope.$on('container:changed_selected', function(){
 			$scope.meetings = MeetingService.getMeetings();
 		});
 
-		if ($stateParams.id) {
-			$scope.meeting = MeetingService.getMeeting($stateParams.id);
 
-			if (!$scope.meeting) {
-				MeetingService.fetch($stateParams.id).then(function(response) {
-                       $scope.meeting = (new Meeting()).buildFromJson(response.data);
-                       $scope.items = $scope.meeting.items;
-                });
-			} else {
-				$scope.items = $scope.meeting.items;
-			}
-		}
-
+		/* Form functions */
 		$scope.newMeeting = function() {
 			$scope.meeting = new Meeting();
 			$scope.form = {
@@ -29,6 +18,10 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			}
 		}
 
+		$scope.editMeeting = function() {
+			angular.copy($scope.meeting, $scope.form);
+		}
+
 		$scope.submitNew = function() {
 			$scope.meeting.name = $scope.form.name;
 			$scope.meeting.date = $scope.form.date;
@@ -36,7 +29,13 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			// Items are already objects
 
 			container = ContainerService.getSelectedContainer();
-			MeetingService.create(container.id, $scope.meeting);
+			MeetingService.create(container.id, $scope.meeting, function(response) {
+				if (response) {
+					$scope.meeting.id = APIService.idFromLocation(response.headers('Location'));
+					MeetingService.save($scope.meeting)
+					$state.go('meeting.view', {'id': id});
+				}
+			});
 
 			return false;
 		}
@@ -55,9 +54,26 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 			if (stop) return;
 
-			var item = new Item(0, $scope.form.item);
-			$scope.meeting.items.push(item);
+			var pos = 1;
+			if ($scope.meeting.items.length > 0) {
+				prevPos = $scope.meeting.items.last().position;
+
+				if (prevPos) pos = prevPos + 1;
+			}
+
+			var item = new Item(0, $scope.form.item, "", pos);
+			var value = $scope.form.item;
 			$scope.form.item = "";
+
+			ItemService.create($scope.meeting.id, item).then(function(response){
+				var id = APIService.idFromLocation(response.headers('Location'));
+
+				item.id = id;
+
+				$scope.meeting.items.push(item);
+			}, function(response) {
+				$scope.form.item = value;
+			})
 
 			event.preventDefault();
 		}
@@ -75,6 +91,27 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				$scope.meeting.items.splice(index, 1)
 		}
 
+		/* Saving functions */
+
+		$scope.updateMeeting = function(data, meeting) {
+			// avoid unnecessary traffic
+			var tmp = angular.copy(meeting);
+			delete tmp.items;
+
+			MeetingService.update(tmp);
+
+			// TODO : Implement loading state
+			return true;
+		}
+
+		$scope.updateItem = function(data, item) {
+			ItemService.update(item);
+			
+			return true;
+		}
+
+		/* Filtered values */
+
 		$scope.activeMeetings = function() {
 			return $filter('dateCompare')(MeetingService.getMeetings(), '>=', 'rawDate');
 		}
@@ -82,24 +119,13 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		$scope.pastMeetings = function() {
 			return $filter('dateCompare')(MeetingService.getMeetings(), '<', 'rawDate');
 		}
-		
-		$scope.updateItem = function(data) {
-			// TODO : Envoyer la requete de mise à jour sur le serveur
-			console.log("Do someting for saving item");
-			return true;
-		}
-
-		$scope.updateTitle = function(data) {
-			console.log("Do something for saving remote title")
-
-			return true;
-		}
 
 		$scope.removeTag = function(itemIndex, tagIndex) {
 			//console.log(itemIndex, tagIndex);
 			delete $scope.items[itemIndex].tags.splice(tagIndex, 1);
 		}
 
+		/* DOM helper functions */
 		$scope.toDatetimePicker = function() {
 	        $('.datetimepicker').datetimepicker({
 	        	format: config.datetimePickerFormat
@@ -127,6 +153,22 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			    	console.log("[ui-sortable] Done !");
 			    }
 			};
+
+			// Get route parameters (viewing a meeting)
+			if ($stateParams.id) {
+				$scope.meeting = MeetingService.getMeeting($stateParams.id);
+
+				if (!$scope.meeting) {
+					MeetingService.fetch($stateParams.id).then(function(response) {
+	                       $scope.meeting = (new Meeting()).buildFromJson(response.data);
+	                       $scope.items = $scope.meeting.items;
+	                });
+				} else {
+					$scope.items = $scope.meeting.items;
+				}
+
+				$scope.editMeeting();
+			}
 		}
 
 		$scope.init();

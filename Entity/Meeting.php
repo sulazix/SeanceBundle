@@ -4,12 +4,14 @@ namespace Interne\SeanceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Meeting
  *
  * @ORM\Table(name="seancebundle_meeting")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\MeetingRepository")
+ * @JMS\ExclusionPolicy("none")
  */
 class Meeting
 {
@@ -54,6 +56,7 @@ class Meeting
     /**
      * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="meetings")
      * @ORM\JoinColumn(name="container_id", referencedColumnName="id", nullable=false)
+     * @JMS\Exclude
      */
     private $container;
 
@@ -75,7 +78,7 @@ class Meeting
     // ========================================================
 
     public function getNewPosition() {
-        return $this->getItems()->count() + 1;
+        return $this->items->count() + 1;
     }
 
 
@@ -195,6 +198,7 @@ class Meeting
     public function addItem(\Interne\SeanceBundle\Entity\Item $item)
     {
         $this->items[] = $item;
+        $item->setPosition($this->getNewPosition());
         $item->setMeeting($this);
 
         return $this;

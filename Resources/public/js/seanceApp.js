@@ -5,6 +5,12 @@
  * DO NOT FORGET TO LOAD THIS FILE BEFORE EVERY OTHER FILE (except angular itself)
  */
 
+if(!Array.prototype.last) {
+	Array.prototype.last = function() {
+		return this[this.length - 1];
+	}
+}
+
 var seanceApp = angular.module('seanceApp', ['xeditable', 'ngSanitize', 'ui.sortable', 'ui.tinymce', 'ui.router', 'ngStorage'])
 ;
 

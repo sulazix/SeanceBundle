@@ -20,14 +20,6 @@
 {% endblock %}
 
 {% block css %}
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
-        '@InterneSeanceBundle/Resources/public/css/style.css'
-        '@InterneSeanceBundle/Resources/public/css/jquery.datetimepicker.css'
-
-        output='css/seance.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
 
     {% stylesheets
         '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/skin.min.css'
@@ -40,6 +32,15 @@
         '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/content.min.css'
 
         output='js/skins/lightgray/content.min.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    {% stylesheets
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
+        '@InterneSeanceBundle/Resources/public/css/style.css'
+        '@InterneSeanceBundle/Resources/public/css/jquery.datetimepicker.css'
+
+        output='css/seance.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}

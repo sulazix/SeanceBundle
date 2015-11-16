@@ -9,11 +9,12 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 			$scope.initialized = true;
 			$scope.currentDate = new Date();
 
-			if (ContainerService.getContainers().length == 0)
+			// Disabled for now until syncing algorithm is in place
+			//if (ContainerService.getContainers().length == 0)
 				ContainerService.fetchAll();
-			else {
-				$scope.setVars();
-			}
+			//else {
+			//	$scope.setVars();
+			//}
 		}
 
 		$scope.setVars = function() {

@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 class MeetingType extends AbstractType
 {
     /**
@@ -15,10 +18,6 @@ class MeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('container', 'entity', [
-                'class' => 'InterneSeanceBundle:Container',
-                'choice_label' => 'id'
-              ])
             ->add('name', 'text')
             // https://github.com/FriendsOfSymfony/FOSRestBundle/issues/808
             ->add('date', 'datetime', ["widget" => "single_text", "date_format" => "dd.MM.yyyy"])
@@ -26,10 +25,22 @@ class MeetingType extends AbstractType
             ->add('items', 'collection', [
                     "type" => new ItemType(),
                     "allow_add" => true,
-                    "allow_delete" => true,
-                    "by_reference" => true
+                    "allow_delete" => true
               ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $meeting = $event->getData();
+            $form = $event->getForm();
+
+            if (!$meeting || null === $meeting->getId()) {
+              $form
+              ->add('container', 'entity', [
+                  'class' => 'InterneSeanceBundle:Container',
+                  'choice_label' => 'id'
+                ]);
+            }
+        });
     }
     
     /**

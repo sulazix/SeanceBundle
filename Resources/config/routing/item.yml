@@ -6,7 +6,7 @@ get_items:
 
 get_item:
     type: rest
-    path: /{item_id}
+    path: /{id}
     defaults: {_controller: InterneSeanceBundle:Item:getItem }
     methods: [GET]
 
@@ -18,12 +18,12 @@ new_item:
 
 edit_item:
     type: rest
-    path: /{item_id}/edit
+    path: /{id}/edit
     defaults: {_controller: InterneSeanceBundle:Item:editItem }
     methods: [PUT]
 
 delete_item:
     type: rest
-    path: /{item_id}
+    path: /{id}/delete
     defaults: {_controller: InterneSeanceBundle:Item:deleteItem }
     methods: [DELETE]

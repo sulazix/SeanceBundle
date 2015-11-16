@@ -44,10 +44,8 @@ class ItemController extends FOSRestController
      *
      * Note : This action is only used to keep up with HTTP standards
      * 
-     * @ParamConverter("item", class="InterneSeanceBundle:Item", options={"id" = "item_id"})
-     * 
      */
-    public function getItemAction(Meeting $meeting, Item $item) {
+    public function getItemAction(Item $item) {
         // TODO : Check if requesting user has access to the corresponding meeting container
 
         $view = $this->view($item, Response::HTTP_OK);
@@ -58,32 +56,28 @@ class ItemController extends FOSRestController
     /**
      * Creates a new Item entity.
      */
-    public function newItemAction(Meeting $meeting) {
+    public function newItemAction() {
 
         $item = new Item();
         // TODO : Add authorization based on meeting container
 
-        return $this->processForm($meeting, $item);
+        return $this->processForm($item);
     }
 
 
     /**
      * Updates an existing Item Entity.
      * 
-     * @ParamConverter("item", class="InterneSeanceBundle:Item", options={"id" = "item_id"})
-     * 
      */
-    public function editItemAction(Meeting $meeting, Item $item) {
-        return $this->processForm($meeting, $item);
+    public function editItemAction(Item $item) {
+        return $this->processForm($item);
     }
 
     /**
      * Deletes an existing Meeting Entity.
      * 
-     * @ParamConverter("item", class="InterneSeanceBundle:Item", options={"id" = "item_id"})
-     * 
      */
-    public function deleteItemAction(Meeting $meeting, Item $item) {
+    public function deleteItemAction(Item $item) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($item);
         $em->flush();
@@ -98,23 +92,25 @@ class ItemController extends FOSRestController
     //                     FORM PROCESSING
     // ========================================================
 
-    private function processForm(Meeting $meeting, Item $item) {
-        $em = $this->getDoctrine()->getManager();
+    private function processForm(Item $item) {
 
-        $statusCode = (!$em->contains($item))? Response::HTTP_CREATED : Response::HTTP_NO_CONTENT;
+        $created = ($item && null === $item->getId());
+        $statusCode = ($created)? Response::HTTP_CREATED : Response::HTTP_NO_CONTENT;
+        $method = ($created) ? "POST" : "PUT";
 
-        $form = $this->createForm(new ItemType(), $item);
+        $form = $this->createForm(new ItemType(), $item, array('method' => $method));
         $form->handleRequest($this->getRequest());
 
+        $view;
         if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->persist($item);
-            $em->persist($meeting);
             $em->flush();
 
             $view = $this->view()->setStatusCode($statusCode);
 
             // HTTP Convention : return HTTP 201 Created + Location of created resource
-            if ($statusCode == Response::HTTP_CREATED) {
+            if ($created) {
                 $view->setLocation(
                     $this->generateUrl('get_item', ['id' => $item->getId()])
                 );

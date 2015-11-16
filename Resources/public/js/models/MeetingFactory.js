@@ -8,7 +8,12 @@ seanceApp.factory('Meeting', ['$filter', 'config',
 			this.rawDate = date;
 			this.date = $filter('date')(date, config.dateFormat)
 			this.place = place
-			this.items = (items)? items : [];
+			this.items = [];
+
+			var that = this;
+			angular.forEach(items, function(item, key){
+				that.items.push((new Item()).buildFromJson(item))
+			});
 		}
 
 		/* Public methods through prototype */

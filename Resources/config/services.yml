@@ -8,6 +8,6 @@ services:
        tags:
        - { name: form.type, alias: entity_hidden }
 
-    interne_seance.decoder.json:
-        class: Interne\SeanceBundle\Decoder\JsonDecoder
-        arguments: []
+#    interne_seance.decoder.json:
+#        class: Interne\SeanceBundle\Decoder\JsonDecoder
+#        arguments: []

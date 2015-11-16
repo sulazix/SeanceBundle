@@ -6,9 +6,7 @@ interne_seance_meeting:
 interne_seance_item:
     type: rest
     resource: "@InterneSeanceBundle/Resources/config/routing/item.yml"
-    prefix: /meeting/{id}/item
-    requirements:
-        id: \d+
+    prefix: /item
 
 interne_seance_container:
     type: rest

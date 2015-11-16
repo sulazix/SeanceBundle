@@ -30,11 +30,22 @@ seanceApp.service('APIService',['$http',
 			return $http.post(url, data, config)
 		}
 
+		that.put = function(route, params, data, config) {
+			var url = that.route(route, params);
+
+			return $http.put(url, data, config);
+		}
+
 		that.defaults = $http.defaults;
 		that.pendingRequests = $http.pendingRequests;
 
 		that.route = function(route, params) {
 			return Routing.generate(route, params);
+		}
+
+		that.idFromLocation = function(location) {
+			var str = location;
+			return str.replace(/[^0-9]+/g,"");
 		}
 
 	}]

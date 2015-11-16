@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
+use JMS\Serializer\Annotation as JMS;
+
 /**
  * Item représente un point d'un ordre du jour, il peut être contenu dans
  * une réunion ou dans le stack de points d'un conteneur.
@@ -15,7 +17,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  *
  * @ORM\Table(name="seancebundle_item")
  * @ORM\Entity(repositoryClass="Interne\SeanceBundle\Entity\ItemRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @JMS\ExclusionPolicy("none")
  */
 class Item
 {
@@ -57,12 +59,14 @@ class Item
     /**
      * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Container", inversedBy="stackOfItems")
      * @ORM\JoinColumn(name="container_id", referencedColumnName="id")
+     * @JMS\Exclude
      */
     private $container;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interne\SeanceBundle\Entity\Meeting", inversedBy="items")
      * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id")
+     * @JMS\Exclude
      */
     private $meeting;
 
@@ -87,16 +91,6 @@ class Item
     */
     public function __construct() {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    /**
-     * Génère une position à partir des positions existantes
-     * des différents points d'une réunion.
-     *
-     * @ORM\PrePersist
-     */
-    public function generatePosition(LifeCycleEventArgs $event) {
-        if (!$this->getMeeting()) return;
-        $this->setPosition($this->getMeeting()->getNewPosition());
     }
 
 

@@ -87,16 +87,18 @@ class MeetingController extends FOSRestController
     // ========================================================
 
     private function processForm(Meeting $meeting) {
-        $em = $this->getDoctrine()->getManager();
 
-        $statusCode = (!$em->contains($meeting))? Response::HTTP_CREATED : Response::HTTP_NO_CONTENT;
+        $created = ($meeting && null === $meeting->getId());
+        $statusCode = ($created)? Response::HTTP_CREATED : Response::HTTP_NO_CONTENT;
+        $method = ($created) ? "POST" : "PUT";
 
-        $form = $this->createForm(new MeetingType(), $meeting);
+        $form = $this->createForm(new MeetingType(), $meeting, array('method' => $method));
         $form->handleRequest($this->getRequest());
 
 
         $view;
         if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
             $items = $meeting->getItems();
             foreach($items as $item) {
@@ -110,7 +112,7 @@ class MeetingController extends FOSRestController
             $view = $this->view()->setStatusCode($statusCode);
 
             // HTTP Convention : return HTTP 201 Created + Location of created resource
-            if ($statusCode == Response::HTTP_CREATED) {
+            if ($created) {
                 $view->setLocation(
                     $this->generateUrl('get_meeting', ['id' => $meeting->getId()])
                 );

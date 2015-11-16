@@ -22,18 +22,31 @@ class ItemType extends AbstractType
     {
         $builder
             ->add('title', 'text')
-            ->add('description', 'textarea')
-            ->add('position', 'hidden')
+            ->add('position', 'text', ["required" => false])
             ->add('tags', 'collection', [
                 "type" => new TagType(),
                 'allow_add' => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                "required" => false
             ])
         ;
 
-        /*
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
-        */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $item = $event->getData();
+            $form = $event->getForm();
+
+            if (!$item || null === $item->getId()) {
+                $form
+                    ->add('meeting', 'entity', [
+                      'class' => 'InterneSeanceBundle:Meeting',
+                      'choice_label' => 'id'
+                    ])
+                    ->add('description', 'textarea', ["required" => false]);
+            } else {
+                $form
+                    ->add('description', 'textarea');
+            }
+        });
     }
     
     /**
@@ -42,7 +55,8 @@ class ItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Interne\SeanceBundle\Entity\Item'
+            'data_class' => 'Interne\SeanceBundle\Entity\Item',
+            'csrf_protection' => false
         ));
     }
 

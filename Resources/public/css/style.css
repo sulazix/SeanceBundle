@@ -1,3 +1,8 @@
+/* content.min.css overrides */
+body {
+	background-color: #EBEDEF;
+}
+
 /* Semantic UI overrides */
 
 .ui.steps .step.custom.start {
@@ -30,5 +35,5 @@
 }
 
 .editable-click:hover, a.editable-click:hover {
-	background-color: rgba(0,0,0, 0.1);
+	background-color: rgba(0,0,0, 0.05);
 }
