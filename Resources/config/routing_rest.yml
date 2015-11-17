@@ -12,3 +12,7 @@ interne_seance_container:
     type: rest
     resource: "@InterneSeanceBundle/Resources/config/routing/container.yml"
     prefix: /container
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: /doc

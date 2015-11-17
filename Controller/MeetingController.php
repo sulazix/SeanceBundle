@@ -11,6 +11,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Interne\SeanceBundle\Entity\Meeting;
 use Interne\SeanceBundle\Form\MeetingType;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
 /**
  * REST Controller for managing Meetings Entities
  *
@@ -25,7 +27,16 @@ class MeetingController extends FOSRestController
     // ========================================================
 
     /**
-     * Gets the list of all Meetings.
+     * Retrieves the list of all existing Meetings.
+     *
+     * @ApiDoc(
+     *     resource=true,
+     *     description="Returns a complete list of meetings",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         404="Returned when something is not found"
+     *     }
+     * )
      */
     public function getMeetingsAction() {
         $em = $this->getDoctrine()->getManager();
