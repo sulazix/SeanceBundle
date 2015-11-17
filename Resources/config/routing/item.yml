@@ -1,8 +1,10 @@
 get_items:
     type: rest
-    path: /all
+    path: /all/{id}
     defaults: {_controller: InterneSeanceBundle:Item:getItems }
     methods: [GET]
+    requirements:
+        id: \d+
 
 get_item:
     type: rest

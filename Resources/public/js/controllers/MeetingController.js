@@ -23,17 +23,26 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		};
 
 		$scope.submitNew = function() {
+			// Copy form values
 			$scope.meeting.name = $scope.form.name;
 			$scope.meeting.date = $scope.form.date;
 			$scope.meeting.place = $scope.form.place;
-			// Items are already objects
 
+			// Get current container
 			container = ContainerService.getSelectedContainer();
+
+			// Create the meeting
 			MeetingService.create(container.id, $scope.meeting, function(response) {
 				if (response) {
-					$scope.meeting.id = APIService.idFromLocation(response.headers('Location'));
-					MeetingService.save($scope.meeting);
-					$state.go('meeting.view', {'id': id});
+					var id = APIService.idFromLocation(response.headers('Location'));
+
+					$scope.meeting.id = id;
+
+					ItemService.fetchAll(id).then(function(response) {
+						$scope.meeting.items = response.data;
+						MeetingService.storeMeeting($scope.meeting);
+						$state.go('meeting.view', {'id': id});
+					});
 				}
 			});
 
@@ -65,15 +74,19 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			var value = $scope.form.item;
 			$scope.form.item = "";
 
-			ItemService.create($scope.meeting.id, item).then(function(response){
-				var id = APIService.idFromLocation(response.headers('Location'));
+			if ($scope.meeting.id) {
+				ItemService.create($scope.meeting.id, item).then(function(response){
+					var id = APIService.idFromLocation(response.headers('Location'));
 
-				item.id = id;
+					item.id = id;
 
+					$scope.meeting.items.push(item);
+				}, function(response) {
+					$scope.form.item = value;
+				});
+			} else {
 				$scope.meeting.items.push(item);
-			}, function(response) {
-				$scope.form.item = value;
-			});
+			}
 
 			event.preventDefault();
 		};
@@ -108,6 +121,12 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			ItemService.update(item);
 			
 			return true;
+		};
+
+		$scope.deleteMeeting = function(meeting) {
+			MeetingService.delete(meeting).then(function(response) {
+				MeetingService.removeMeeting(meeting.id);
+			});
 		};
 
 		/* Filtered values */

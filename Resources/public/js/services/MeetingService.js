@@ -31,6 +31,21 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 				return undefined;
 		};
 
+		that.removeMeeting = function(id) {
+			var index = -1;
+			angular.forEach(that.getMeetings(), function(meeting, key){
+				if (index == -1 && meeting.id == id)
+					index = key;
+			});
+
+			that.getMeetings().splice(index, 1);
+		};
+
+		that.storeMeeting = function(meeting) {
+			var entry = (new Meeting()).buildFromJson(meeting);
+			that.getMeetings().push(entry);
+		};
+
 
 		/* API related functions */
 
@@ -91,12 +106,13 @@ seanceApp.service('MeetingService',['$rootScope', '$filter', 'APIService', 'Meet
 		/**
 		 * Sends a request to delete an existing Meeting entity.
 		 * 
-		 * @param  int id The id of the meeting
+		 * @param  int meeting The meeting entity with property id
 		 * 
 		 * @return Promise 	The resulting promise
 		 */
-		that.delete = function(id) {
-			// TODO : Send a delete request
+		that.delete = function(meeting, success, failure) {
+			return APIService.delete('delete_meeting', {'id': meeting.id})
+				.then(success, failure);
 		};
 
 		/**

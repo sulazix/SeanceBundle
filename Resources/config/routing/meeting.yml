@@ -24,6 +24,6 @@ edit_meeting:
 
 delete_meeting:
     type: rest
-    path: /{id}
+    path: /{id}/delete
     defaults: {_controller: InterneSeanceBundle:Meeting:deleteMeeting }
     methods: [DELETE]

@@ -49,6 +49,7 @@ class Meeting
      *
      * @ORM\Column(name="place", type="string", length=255)
      *
+     * @Assert\NotBlank()
      * @Assert\Length(max="200")
      */
     private $place;
@@ -61,7 +62,7 @@ class Meeting
     private $container;
 
     /**
-     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting", cascade={"persist", "remove"})
      */
     private $items;
 

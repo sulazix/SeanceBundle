@@ -11,6 +11,7 @@
     {% raw %}
     <div class="yellow card" ng-repeat="meeting in activeMeetings() | searchFilter:search:['name', 'date', 'place'] | orderBy: 'rawDate'">
         <div class="content">
+            <button class="ui mini red button right floated card-popup" data-content="Supprimer la réunion" ng-click="deleteMeeting(meeting)"><i class="remove icon"></i></button>
             <div class="header"><a ui-sref="meeting.view({id : meeting.id})" >{{ meeting.name }}</a></div>
             <div class="ui divider"></div>
             <div class="description">

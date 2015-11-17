@@ -100,7 +100,8 @@
           <a ng-repeat="item in items" class="item" ui-sref="meeting.view({'id': meeting.id, '#': item.id})">
               <i class="right triangle icon"></i>
               <div class="content">
-                  <div class="header">{{ item.title || 'vide' }}</div>
+                {{ item.title }}
+                <button class="ui icon red basic mini button" ng-click="removeItem(item)"><i class="fitted remove icon"></i></button>
               </div>
           </a>
       </div>

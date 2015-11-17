@@ -14,7 +14,6 @@ module.exports = function(grunt) {
       maxerr: 10000
     },
     frontend: [
-      'Gruntfile.js',
       path + 'js/config',
       path + 'js/controllers',
       path + 'js/filters',
@@ -56,11 +55,33 @@ module.exports = function(grunt) {
       files: {
         'Resources/public/dist/frontend.min.js': [path + 'dist/frontend.js']
       }
+    },
+    dist_dev: {
+      options: {
+        mangle: false,
+        beautify: true
+      },
+      files: {
+        'Resources/public/dist/frontend.min.js': [path + 'dist/frontend.js']
+      }
+    }
+  });
+
+  // watch
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.config('watch', {
+    options: {
+
+    },
+    js: {
+      files: [path + "/js/**/*.js"],
+      tasks: ['build-dev']
     }
   });
 
 
   // Grunt Tasks
   grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('build-dev', ['jshint', 'concat', 'uglify:dist_dev']);
 
 };
