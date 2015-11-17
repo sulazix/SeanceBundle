@@ -19,11 +19,12 @@
         "MIT"
     ],
     "require" : {
-        "nelmio/api-doc-bundle": "^2.10"
     },
     "autoload" : {
         "psr-4" : {
             "Interne\\SeanceBundle\\" : ""
         }
-    }
+    },
+    "repositories" : [{
+    }]
 }

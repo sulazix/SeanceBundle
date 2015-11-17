@@ -55,10 +55,6 @@ imports:
     - { resource: "@InterneSeanceBundle/Resources/config/services.yml" }
 
 
-framework: # if not using twig
-    templating:
-        engines: ['twig']
-
 assetic:
     # ...
     bundles:
@@ -72,7 +68,6 @@ fos_rest:
         default_format: json
         include_format: false
 
-nelmio_api_doc: ~
 ```
 
 Mettre à jour les bundles chargés depuis le kernel Symfony :
@@ -83,7 +78,6 @@ Mettre à jour les bundles chargés depuis le kernel Symfony :
     $bundles = array (
         // ...
         new Interne\SeanceBundle\InterneSeanceBundle(),
-        new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
     );
 ```
 
