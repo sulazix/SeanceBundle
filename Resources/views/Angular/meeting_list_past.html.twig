@@ -6,11 +6,24 @@
 <div class="ui segment" ng-show="search && (pastMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
     <p>Aucun résultat.</p>
 </div>
-<div class="ui three cards" ng-show="pastMeetings().length > 0">
+<div class="ui two cards" ng-show="pastMeetings().length > 0">
     {% raw %}
     <div class="green card"  ng-repeat="meeting in pastMeetings() | searchFilter:search:['name', 'date', 'place'] | orderBy: '-rawDate'">
         <div class="content">
-            <button class="ui mini gray button right floated card-popup" data-content="Le PV a déjà été envoyé!"><i class="send icon"></i></button>
+            <div class="ui dropdown right floated" ng-init="dropdownInit()">
+                <i class="ellipsis vertical icon"></i>
+                <div class="divided menu">
+                    <div class="item">
+                        <a ui-sref="meeting.view({id: meeting.id})"><i class="fitted eye icon"></i> Voir la réunion</a>
+                    </div>
+                    <div class="item" ng-click="">
+                        <i class="fitted green send icon"></i> (R)envoyer le PV
+                    </div>
+                    <div class="item" ng-click="deleteMeeting(meeting)">
+                        <i class="fitted red trash icon"></i> Supprimer la réunion
+                    </div>
+                </div>
+            </div>
             <div class="header"><a  ui-sref="meeting.view({id: meeting.id})">{{ meeting.name }}</a></div>
             <div class="ui divider"></div>
             <div class="description">

@@ -22,6 +22,12 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 			$scope.stack = $scope.selectedContainer.stack;
 		};
 
+		$scope.dropdownInit = function() {
+		    $('.ui.dropdown').dropdown({
+		    	transition: 'slide down'
+		    });
+		};
+
 		$scope.init();
 
 		// $rootScope events

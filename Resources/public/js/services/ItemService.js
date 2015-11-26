@@ -22,8 +22,9 @@ seanceApp.service('ItemService',['APIService', 'Item',
 				.then(success, failure);
 		};
 
-		that.delete = function(item) {
-			// TODO : Send delete request
+		that.delete = function(item, sucess, failure) {
+			return APIService.delete('delete_item', {'id': item.id})
+				.then(success, failure);
 		};
 
 		that.wrap = function(item, meeting_id) {

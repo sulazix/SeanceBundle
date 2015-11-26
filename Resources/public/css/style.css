@@ -19,6 +19,10 @@ body {
 	font-size: 0.7rem;
 }
 
+.ui.dropdown .menu .item a {
+	color: rgba(0, 0, 0, 0.8);
+}
+
 /*
 .ui.cards .yellow.card, .ui.cards .red.card, .ui.cards .green.card {
 	box-shadow: 0px 2px 5px 0px #A7A9AC;

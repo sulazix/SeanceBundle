@@ -100,8 +100,15 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				}
 			});
 
-			if (index != -1)
-				$scope.meeting.items.splice(index, 1);
+			if (index != -1) {
+				if ($scope.meeting.id) {
+					ItemService.delete(item).then(function(response) {
+						$scope.meeting.items.splice(index, 1);
+					});
+				} else {
+					$scope.meeting.items.splice(index, 1);
+				}
+			}
 		};
 
 		/* Saving functions */
