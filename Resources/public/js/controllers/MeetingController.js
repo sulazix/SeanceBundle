@@ -14,7 +14,8 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				name: "",
 				date: "",
 				place: "",
-				items: []
+				items: [],
+				errors: []
 			};
 		};
 
@@ -44,6 +45,8 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 						$state.go('meeting.view', {'id': id});
 					});
 				}
+			}, function(response) {
+				$scope.form.errors = response.data.errors.children;
 			});
 
 			return false;

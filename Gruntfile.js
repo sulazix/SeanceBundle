@@ -19,6 +19,7 @@ module.exports = function(grunt) {
       path + 'js/filters',
       path + 'js/models',
       path + 'js/services',
+      path + 'js/directives',
       path + 'js/seanceApp.js',
     ]
   });
@@ -33,6 +34,7 @@ module.exports = function(grunt) {
       src: [
         path + 'js/seanceApp.js',
         path + 'js/config/*.js',
+        path + 'js/directives/*.js',
         path + 'js/filters/*.js',
         path + 'js/models/*.js',
         path + 'js/services/*.js',

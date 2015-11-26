@@ -6,14 +6,17 @@
     </div>
 </h2>
 
-<form class="ui form" ng-init="newMeeting()" ng-submit="submitNew()">
+<form class="ui error form custom" ng-init="newMeeting()" ng-submit="submitNew()">
     <div class="ui fluid input">
+        <div class="ui error message" sce-errors="form.errors" sce-field="name"></div>
         <input type="text" placeholder="Nom" ng-model="form.name"/>
     </div>
     <div class="ui fluid input">
+        <div class="ui error message" sce-errors="form.errors" sce-field="date"></div>
         <input type="text" class="datetimepicker" placeholder="Date et heure" ng-model="form.date"/>
     </div>
     <div class="ui fluid input">
+        <div class="ui error message" sce-errors="form.errors" sce-field="place"></div>
         <input type="text" placeholder="Lieu" ng-model="form.place" />
     </div>
     <button class="ui button green">Créer</button>
