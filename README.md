@@ -3,6 +3,18 @@ SeanceBundle
 
 Bundle de séance pour le Net BS (https://github.com/sysmoh/intranetBS)
 
+Pré-requis
+----------
+
+- http://jmsyst.com/bundles/JMSSerializerBundle
+- https://github.com/FriendsOfSymfony/FOSJsRoutingBundle
+- http://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+
+Pour utiliser le le frontend angular en dehors de l'intranet BS il vous faudra également ajouter ce fichier de layout (ainsi que les dépendances qui vont avec) :
+
+- https://github.com/sysmoh/intranetBS/blob/master/src/AppBundle/Resources/views/Layout/layout.html.twig
+
+
 Installation
 ------------
 
