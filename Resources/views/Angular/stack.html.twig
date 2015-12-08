@@ -1,18 +1,21 @@
-
-
-    <h2 class="ui header"><i class="inbox icon"></i> Réserve de points</h2>
-    <div class="ui divider"></div>
     {% raw %}
-    <div class="ui segment">
-        <p ng-show="stack.length == 0">Pas de points ici !</p>
-        <div class="ui four cards" ng-show="stack.length > 0">
-            <div class="orange card" ng-repeat="item in stack">
-                <div class="content">
-                    <div class="description">
-                        {{ item.title }}
+        <div class="ui accordion" ng-controller="FrontendController" ng-init="toAccordion()">
+            <div class="title">
+                <h2 class="ui header">
+                    <i class="dropdown icon"></i> Réserve de points
+                </h2>
+            </div>
+            <div class="content">
+                <p ng-show="stack.length == 0">Pas de points ici !</p>
+                <div class="ui six cards" ng-show="stack.length > 0">
+                    <div class="orange card" ng-repeat="item in stack">
+                        <div class="content">
+                            <div class="description">
+                                {{ item.title }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endraw %}

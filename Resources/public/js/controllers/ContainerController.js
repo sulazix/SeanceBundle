@@ -8,6 +8,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService',
 			// Avoid resetting variables without needed
 			$scope.initialized = true;
 			$scope.currentDate = new Date();
+			$scope.search = "";
 
 			// Disabled for now until syncing algorithm is in place
 			//if (ContainerService.getContainers().length == 0)

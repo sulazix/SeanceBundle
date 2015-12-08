@@ -5,7 +5,17 @@
 
 {% block content %}
 
-    <div ui-view class="ui page grid" ng-app="seanceApp">
+    <div class="ui page grid" ng-app="seanceApp" ng-controller="ContainerController">
+        <h1 class="ui header">
+          <i class="users icon"></i>
+          <div class="content">
+            Gestionnaire de séance
+            <div class="sub header">Mets de la simplicité dans tes PV !</div>
+          </div>
+        </h1>
+        <div ui-view="headerView" class="row"></div>
+        <div class="row"></div>
+        <div ui-view="baseView" class="ui grid"></div>
     </div>
 
     <!--

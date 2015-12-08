@@ -17,7 +17,7 @@ class FrontendController extends Controller
 
     public function templateAction($name)
     {
-        $allowed = ['home', 'stack', 'meeting_base', 'meeting_list_active', 'meeting_list_past', 'view_meeting', 'new_meeting'];
+        $allowed = ['home', 'stack', 'meeting_base', 'meeting_list_active', 'meeting_list_past', 'view_meeting', 'new_meeting', 'header'];
 
         if (!in_array($name, $allowed)) throw Exception();
         

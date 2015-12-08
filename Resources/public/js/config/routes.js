@@ -10,21 +10,27 @@ seanceApp.config(['$stateProvider', '$urlRouterProvider',
 			.state('root', {
 				abstract: true,
 				url: '',
-				templateUrl: Routing.generate('seance_frontend_template', {name: 'home'}),
-				controller: 'ContainerController'
+				views: {
+					"headerView" : {
+						templateUrl: Routing.generate('seance_frontend_template', {name:'header'})
+					}
+				},
 				
 			})
 			.state('root.home', {
 				url: "/home",
 				views: {
-					"stackView" : { 
+					"baseView@" : {
+						templateUrl: Routing.generate('seance_frontend_template', {name:'home'})
+					},
+					"stackView@root.home" : { 
 						templateUrl: Routing.generate('seance_frontend_template', {name:'stack'})
 					},
-					"meetingListActiveView" : { 
+					"meetingListActiveView@root.home" : { 
 						templateUrl: Routing.generate('seance_frontend_template', {name:'meeting_list_active'}),
 						controller: 'MeetingController'
 					},
-					"meetingListPastView" : { 
+					"meetingListPastView@root.home" : { 
 						templateUrl: Routing.generate('seance_frontend_template', {name:'meeting_list_past'}),
 						controller: 'MeetingController'
 					}
@@ -33,19 +39,30 @@ seanceApp.config(['$stateProvider', '$urlRouterProvider',
 			})
 
 			/* MEETING ROUTES */
-			.state('meeting', {
-				abstract: true,
+			.state('root.meeting', {
 				url: '/meeting',
-				templateUrl: Routing.generate('seance_frontend_template', {name: 'meeting_base'})
+				views: {
+					"baseView@" : {
+						templateUrl: Routing.generate('seance_frontend_template', {name: 'meeting_base'})
+					}
+				}
 			})
-			.state('meeting.add', {
+			.state('root.meeting.add', {
 				url: '/add',
-				templateUrl: Routing.generate('seance_frontend_template', {name: 'new_meeting'}),
-				controller: 'MeetingController'
+				views : {
+					"": {
+						templateUrl: Routing.generate('seance_frontend_template', {name: 'new_meeting'}),
+						controller: "MeetingController"
+					}
+				}
 			})
-			.state('meeting.view', {
+			.state('root.meeting.view', {
 				url: '/:id',
-				templateUrl: Routing.generate('seance_frontend_template', {name: 'view_meeting'}),
-				controller: 'MeetingController'
+				views : {
+					"": {
+						templateUrl: Routing.generate('seance_frontend_template', {name: 'view_meeting'}),
+						controller: "MeetingController"
+					}
+				}
 			});
 }]);

@@ -15,7 +15,7 @@
                 <i class="ellipsis vertical icon"></i>
                 <div class="divided menu">
                     <div class="item">
-                        <a ui-sref="meeting.view({id: meeting.id})"><i class="fitted eye icon"></i> Voir la réunion</a>
+                        <a ui-sref="root.meeting.view({id: meeting.id})"><i class="fitted eye icon"></i> Voir la réunion</a>
                     </div>
                     <div class="item" ng-click="">
                         <i class="fitted green send icon"></i> Envoyer la convocation
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header"><a ui-sref="meeting.view({id : meeting.id})" >{{ meeting.name }}</a></div>
+            <div class="header"><a ui-sref="root.meeting.view({id : meeting.id})" >{{ meeting.name }}</a></div>
             <div class="ui divider"></div>
             <div class="description">
                 <div class="ui small two steps">

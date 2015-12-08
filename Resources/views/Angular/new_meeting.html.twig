@@ -1,45 +1,47 @@
 {% raw %}
-<h2 class="ui dividing header">
-    <i class="circular calendar icon"></i>
-    <div class="content">
-    Préparer une réunion
-    </div>
-</h2>
+    <div class="sixteen wide column">
+        <h2 class="ui dividing header">
+            <i class="calendar icon"></i>
+            <div class="content">
+            Préparer une réunion
+            </div>
+        </h2>
 
-<form class="ui error form custom" ng-init="newMeeting()" ng-submit="submitNew()">
-    <div class="ui fluid input">
-        <div class="ui error message" sce-errors="form.errors" sce-field="name"></div>
-        <input type="text" placeholder="Nom" ng-model="form.name"/>
-    </div>
-    <div class="ui fluid input">
-        <div class="ui error message" sce-errors="form.errors" sce-field="date"></div>
-        <input type="text" class="datetimepicker" placeholder="Date et heure" ng-model="form.date"/>
-    </div>
-    <div class="ui fluid input">
-        <div class="ui error message" sce-errors="form.errors" sce-field="place"></div>
-        <input type="text" placeholder="Lieu" ng-model="form.place" />
-    </div>
-    <button class="ui button green">Créer</button>
+        <form class="ui error form custom" ng-init="newMeeting()" ng-submit="submitNew()">
+            <div class="ui fluid input">
+                <div class="ui error message" sce-errors="form.errors" sce-field="name"></div>
+                <input type="text" placeholder="Nom" ng-model="form.name"/>
+            </div>
+            <div class="ui fluid input">
+                <div class="ui error message" sce-errors="form.errors" sce-field="date"></div>
+                <input type="text" class="datetimepicker" placeholder="Date et heure" ng-model="form.date"/>
+            </div>
+            <div class="ui fluid input">
+                <div class="ui error message" sce-errors="form.errors" sce-field="place"></div>
+                <input type="text" placeholder="Lieu" ng-model="form.place" />
+            </div>
+            <button class="ui button green">Créer</button>
 
-    <h4 class="ui dividing header">Ordre du jour</h4>
-    <div class="ui action input">
-        <input placeholder="Entrer un point" type="text" ng-model="form.item" ng-keypress="addItem($event)">
-        <button class="ui button" ng-click="addItem($event)"><i class="plus icon"></i></button>
-        <div class="ui hidden dividing"></div>
-    </div>
-    <div class="ui action input" ng-repeat="item in meeting.items">
-        <input placeholder="Entrer un point" type="text" ng-model="item.title">
-        <button class="ui red icon button" ng-click="removeItem(item)"><i class="remove icon"></i></button>
-    </div>
-</form>
+            <h4 class="ui dividing header">Ordre du jour</h4>
+            <div class="ui action input">
+                <input placeholder="Entrer un point" type="text" ng-model="form.item" ng-keypress="addItem($event)">
+                <button class="ui button" ng-click="addItem($event)"><i class="plus icon"></i></button>
+                <div class="ui hidden dividing"></div>
+            </div>
+            <div class="ui action input" ng-repeat="item in meeting.items">
+                <input placeholder="Entrer un point" type="text" ng-model="item.title">
+                <button class="ui red icon button" ng-click="removeItem(item)"><i class="remove icon"></i></button>
+            </div>
+        </form>
 
-<script>
-    // https://github.com/xdan/datetimepicker
-    $(document).ready(function() {
-        $.datetimepicker.setLocale('fr')
-        $('.datetimepicker').datetimepicker({
-            format: 'd.m.Y H:i'
-        });
-    });
-</script>
+        <script>
+            // https://github.com/xdan/datetimepicker
+            $(document).ready(function() {
+                $.datetimepicker.setLocale('fr')
+                $('.datetimepicker').datetimepicker({
+                    format: 'd.m.Y H:i'
+                });
+            });
+        </script>
+    </div>
 {% endraw %}

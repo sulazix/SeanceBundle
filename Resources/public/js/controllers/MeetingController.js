@@ -42,7 +42,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 					ItemService.fetchAll(id).then(function(response) {
 						$scope.meeting.items = response.data;
 						MeetingService.storeMeeting($scope.meeting);
-						$state.go('meeting.view', {'id': id});
+						$state.go('root.meeting.view', {'id': id});
 					});
 				}
 			}, function(response) {
@@ -157,15 +157,14 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		/* DOM helper functions */
 		$scope.toDatetimePicker = function() {
 	        $('.datetimepicker').datetimepicker({
-	        	format: config.datetimePickerFormat
+	        	format: config.datetimePickerFormat,
+	        	step: 5
 	        });
 		};
 
 		$scope.init = function() {
 
-			if ($scope.initialized) return;
-
-			$scope.initialized = true;
+			//if ($scope.initialized) return;
 
 			$scope.tinymceOptions = {
 				'menubar': false,
@@ -198,6 +197,8 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 				$scope.editMeeting();
 			}
+
+			$scope.initialized = true;
 		};
 
 		$scope.init();
