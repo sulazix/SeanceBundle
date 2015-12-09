@@ -1,10 +1,11 @@
 
-<h2 class="ui header"><i class="calendar icon"></i>Prochaines réunions</h2>
-<div class="ui divider"></div>
+<div class="ui horizontal header divider">
+    <i class="calendar icon"></i> À venir
+</div>
 <div class="ui segment" ng-show="activeMeetings().length == 0">
     <p>Pas de réunions ici !</p>
 </div>
-<div class="ui segment" ng-show="search && (activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
+<div class="ui segment" ng-show="search && activeMeetings().length && (activeMeetings() | searchFilter:search:['name', 'date', 'place']).length == 0">
     <p>Aucun résultat.</p>
 </div>
 <div class="ui two cards" ng-show="activeMeetings().length > 0">

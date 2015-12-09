@@ -12,7 +12,8 @@ seanceApp.config(['$stateProvider', '$urlRouterProvider',
 				url: '',
 				views: {
 					"headerView" : {
-						templateUrl: Routing.generate('seance_frontend_template', {name:'header'})
+						templateUrl: Routing.generate('seance_frontend_template', {name:'header'}),
+						controller: 'FrontendController'
 					}
 				},
 				

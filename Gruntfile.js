@@ -81,9 +81,26 @@ module.exports = function(grunt) {
     }
   });
 
+  // copy
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.config('copy', {
+    dev: {
+      files: [
+        {
+          expand: true,
+          src: [path + "/dist/frontend.js"],
+          dest: ["./"],
+          rename: function(dest, src) {
+            return dest + src.replace('.js', '.min.js');
+          }
+        }
+      ]
+    }
+  });
+
 
   // Grunt Tasks
-  grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
-  grunt.registerTask('build-dev', ['jshint', 'concat']);
+  grunt.registerTask('build', ['jshint', 'concat', 'uglify:dist']);
+  grunt.registerTask('build-dev', ['jshint', 'concat', 'copy:dev']);
 
 };

@@ -5,6 +5,22 @@ body {
 
 /* Semantic UI overrides */
 
+.ui.menu .item {
+	outline: none;
+}
+
+.ui.menu .item.popup-activate:hover {
+	background: rgba(0, 0, 0, 0.03);
+}
+
+.ui.menu .item.small label {
+	font-size: 1rem;
+}
+
+.ui.menu .item.small {
+	font-size: 0.6rem
+}
+
 .ui.steps .step.custom.start {
 	padding:5px;
 	padding-left:5px;
