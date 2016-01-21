@@ -1,29 +1,25 @@
 {% raw %}
-  <div class="twelve wide column grid">
-    <div class="row">
-      <h1 class="ui">
-        <span e-class="ui input" editable-text="meeting.name" onaftersave="updateMeeting($data, meeting)">
-        {{ meeting.name }}
-        </span>
-      </h1>
-    </div>
-    <div class="row">
-      <h4 class="ui dividing header right aligned">
-        <span e-class="datetimepicker" e-ng-init="toDatetimePicker()" e-value="{{ meeting.date }}" editable-text="meeting.date" onaftersave="updateMeeting($data, meeting)">
-          {{ meeting.date }}
-        </span>
-        à
-        <span editable-text="meeting.place" onaftersave="updateMeeting($data, meeting)">
-          {{ meeting.place }}
-        </span>
-      </h4>
-    </div>
-  </div>
-
-  <div class="four wide column"></div>
-
-  <div class="twelve wide column">
-    <div class="ui segment" id="stickyContext">
+  <div class="twelve wide column" ng-controller="FrontendController">
+    <div class="ui segment piled" id="stickyContext">
+      <div class="row">
+        <h1 class="ui">
+          <span e-class="ui input" editable-text="meeting.name" onaftersave="updateMeeting($data, meeting)">
+          {{ meeting.name }}
+          </span>
+        </h1>
+      </div>
+      <div class="row">
+        <h4 class="ui dividing header right aligned">
+          <span e-class="datetimepicker" e-ng-init="toDatetimePicker()" e-value="{{ meeting.date }}" editable-text="meeting.date" onaftersave="updateMeeting($data, meeting)">
+            {{ meeting.date }}
+          </span>
+          à
+          <span editable-text="meeting.place" onaftersave="updateMeeting($data, meeting)">
+            {{ meeting.place }}
+          </span>
+        </h4>
+      </div>
+      <!--
       <div class="ui three top attached ordered steps">
           <div class="completed step">
               <div class="content">
@@ -44,12 +40,12 @@
               </div>
           </div>
       </div>
-      <div class="ui pointing secondary menu tab_controller">
+    -->
+      <div class="ui pointing secondary menu tab_controller" ng-init="toTabs()">
         <a class="item active" data-tab="accueil">Accueil</a>
-        <a class="item" data-tab="oj">Ordre du jour</a>
         <a class="item" data-tab="presence">Présences</a>
       </div>
-      <div class="ui tab segment active" data-tab="accueil">
+      <div class="ui tab active" data-tab="accueil">
           <div ng-repeat="item in items">
               <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onaftersave="updateItem($data, item)">{{ item.title || 'vide' }}</span>
                   <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
@@ -59,31 +55,14 @@
               <div class="ui hidden divider"></div>
           </div>
       </div>
-      <div class="ui tab segment" data-tab="oj">
-          <div class="ui list"  ui-sortable="sortableOptions" ng-model="items">
-              <a class="item" ng-repeat="item in items">
-                  <i class="right triangle icon"></i>
-                  <div class="content">
-                      <div class="header">
-                      <span editable-text="item.title" onaftersave="updateItem($data, item)">{{ item.title }}</span>
-                      </div>
-                  </div>
-              </a>
-          </div>
-
-          <div class="ui small action input">
-            <input placeholder="Entrer un point" type="text" ng-model="form.item" ng-keypress="addItem($event)">
-            <button class="ui icon button" ng-click="addItem($event)"><i class="plus icon"></i></button>
-          </div>
-      </div>
-      <div class="ui tab segment" data-tab="presence">
-        Third
+      <div class="ui tab" data-tab="presence">
+        
       </div>
     </div>
   </div>
 
   <div class="four wide column">
-    <div class="ui sticky">
+    <div class="ui sticky" ng-init="toSticky()">
       <h3>Administration</h3>
       <div class="ui vertical buttons">
         <button class="ui labeled icon olive disabled button">

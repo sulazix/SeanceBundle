@@ -154,14 +154,6 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			$scope.items[itemIndex].tags.splice(tagIndex, 1);
 		};
 
-		/* DOM helper functions */
-		$scope.toDatetimePicker = function() {
-	        $('.datetimepicker').datetimepicker({
-	        	format: config.datetimePickerFormat,
-	        	step: 5
-	        });
-		};
-
 		$scope.init = function() {
 
 			//if ($scope.initialized) return;

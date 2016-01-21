@@ -36,10 +36,15 @@ class ItemType extends AbstractType
             $form = $event->getForm();
 
             if (!$item || null === $item->getId()) {
+
                 $form
                     ->add('meeting', 'entity', [
                       'class' => 'InterneSeanceBundle:Meeting',
                       'choice_label' => 'id'
+                    ])
+                    ->add('container', 'entity', [
+                        'class' => 'InterneSeanceBundle:Container',
+                        'choice_label' => 'id'
                     ])
                     ->add('description', 'textarea', ["required" => false]);
             } else {

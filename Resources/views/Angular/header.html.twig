@@ -7,16 +7,17 @@
             <i class="inbox icon"></i> Réserve <i class="dropdown icon"></i>
             <div class="ui floating blue circular label">{{ stack.length }}</div>
         </div>
-        <div class="ui popup" style="min-width: 0; max-width:400px; width:auto;">
+        <div class="ui popup" style="width: 247.210px;">
             <p ng-show="stack.length == 0">Pas de points ici !</p>
-            <div class="ui small action input">
-                <input placeholder="Entrer un point" type="text">
-                <button class="ui icon button" ng-click=""><i class="plus icon"></i></button>
+            <div class="ui small action input" ng-keypress="addItem($event)">
+                <input placeholder="Entrer un point" type="text" ng-model="form.item">
+                <button class="ui icon button" ng-click="addItem($event)"><i class="plus icon"></i></button>
             </div>
             <div ng-show="stack.length > 0">
-                <div class="ui blue labels">
+                <div class="ui large two labels">
                     <div class="ui label" ng-repeat="item in stack">
                         {{ item.title }}
+                        <i class="delete icon" ng-click="removeItem(item)"></i>
                     </div>
                 </div>
             </div>
@@ -28,12 +29,15 @@
                 <i class="search link icon"></i>
               </div>
             </div>
-            <div class="item small">
+            <!--
+            <a class="item"><i class="settings icon"></i></a>
+            <div class="item">
                 <div class="ui toggle checkbox" ng-init="toCheckbox()">
                     <input name="offline" type="checkbox" />
                     <label>Mode Hors-Ligne</label>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>

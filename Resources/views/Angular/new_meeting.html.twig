@@ -1,5 +1,5 @@
 {% raw %}
-    <div class="sixteen wide column">
+    <div class="sixteen wide column" ng-controller="FrontendController">
         <h2 class="ui dividing header">
             <i class="calendar icon"></i>
             <div class="content">
@@ -14,7 +14,7 @@
             </div>
             <div class="ui fluid input">
                 <div class="ui error message" sce-errors="form.errors" sce-field="date"></div>
-                <input type="text" class="datetimepicker" placeholder="Date et heure" ng-model="form.date"/>
+                <input type="text" class="datetimepicker" placeholder="Date et heure" ng-model="form.date" ng-init="toDatetimePicker()" />
             </div>
             <div class="ui fluid input">
                 <div class="ui error message" sce-errors="form.errors" sce-field="place"></div>
@@ -33,15 +33,5 @@
                 <button class="ui red icon button" ng-click="removeItem(item)"><i class="remove icon"></i></button>
             </div>
         </form>
-
-        <script>
-            // https://github.com/xdan/datetimepicker
-            $(document).ready(function() {
-                $.datetimepicker.setLocale('fr')
-                $('.datetimepicker').datetimepicker({
-                    format: 'd.m.Y H:i'
-                });
-            });
-        </script>
     </div>
 {% endraw %}
