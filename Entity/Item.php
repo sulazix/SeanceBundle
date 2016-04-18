@@ -52,7 +52,7 @@ class Item
      *
      * @ORM\Column(name="position", type="integer", nullable=true)
      *
-     * @Assert\GreaterThan(value="0")
+     * @Assert\GreaterThan(value="-1")
      */
     private $position;
 

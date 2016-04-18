@@ -76,7 +76,7 @@
       </div>
       <h3>Ordre du jour</h3>
       <div class="ui list" ui-sortable="sortableOptions" ng-model="items">
-          <a ng-repeat="item in items" class="item" ui-sref="meeting.view({'id': meeting.id, '#': item.id})">
+          <a ng-repeat="item in items" class="item" ui-sref="root.meeting.view({'id': meeting.id, '#': item.id})">
               <i class="right triangle icon"></i>
               <div class="content">
                 {{ item.title }}

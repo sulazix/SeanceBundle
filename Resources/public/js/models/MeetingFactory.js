@@ -14,6 +14,8 @@ seanceApp.factory('Meeting', ['$filter', 'config',
 			angular.forEach(items, function(item, key){
 				that.items.push((new Item()).buildFromJson(item));
 			});
+			
+			this.items = $filter('orderBy')(that.items, 'position');
 		}
 
 		/* Public methods through prototype */
@@ -44,7 +46,7 @@ seanceApp.factory('Meeting', ['$filter', 'config',
 			this.rawDate = json.date;
 			this.date = $filter('date')(json.date, config.dateFormat);
 			this.place = json.place;
-			this.items = (json.items) ? json.items : [];
+			this.items = (json.items) ? $filter('orderBy')(json.items, 'position') : [];
 
 			return this;
 		};

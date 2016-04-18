@@ -165,12 +165,15 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				'autoresize_bottom_margin': "30"
 			};
 
+			var old_pos = -1;
 			$scope.sortableOptions = {
-			    update: function(e, ui) {
-			    	console.log("[ui-sortable] Updating order!");
-			    },
 			    stop: function(e, ui) {
-			    	console.log("[ui-sortable] Done !");
+			    	// Update positions from all items
+			    	angular.forEach($scope.items, function(item, key){
+			    		item.position = key;
+			    		console.log(key + " " + item.title);
+			    		ItemService.update(item);
+			    	});
 			    }
 			};
 
