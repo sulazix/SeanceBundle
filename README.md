@@ -9,6 +9,7 @@ Pré-requis
 - http://jmsyst.com/bundles/JMSSerializerBundle
 - https://github.com/FriendsOfSymfony/FOSJsRoutingBundle
 - http://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+- https://packagist.org/packages/ensepar/html2pdf-bundle
 
 Pour utiliser le le frontend angular en dehors de l'intranet BS il vous faudra également ajouter ce fichier de layout (ainsi que les dépendances qui vont avec) :
 
@@ -80,6 +81,15 @@ fos_rest:
         default_format: json
         include_format: false
 
+# PDF Exports
+ensepar_html2pdf:
+    orientation: P
+    format: A4
+    lang: fr
+    unicode: true
+    encoding: UTF-8
+    margin: [10,15,10,15]
+
 ```
 
 Mettre à jour les bundles chargés depuis le kernel Symfony :
@@ -90,6 +100,12 @@ Mettre à jour les bundles chargés depuis le kernel Symfony :
     $bundles = array (
         // ...
         new Interne\SeanceBundle\InterneSeanceBundle(),
+
+        // Si pas encore activés :
+        new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+        new JMS\SerializerBundle\JMSSerializerBundle(),
+        new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+        new FOS\RestBundle\FOSRestBundle(),
     );
 ```
 
