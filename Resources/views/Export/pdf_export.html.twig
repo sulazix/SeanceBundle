@@ -1,0 +1,112 @@
+<style>
+* {
+	font-family: times;
+}
+.header p {
+	margin: 0;
+}
+
+.header div.right{
+	position: absolute;
+	right: 0;
+}
+
+.maitrise-header {
+	font-size: 11px;
+	font-style: italic;
+}
+
+.maitrise-header p {
+	margin: 0;
+}
+
+.maitrise-header .right {
+	position: absolute;
+	right: 0;
+	top: 55px;
+}
+
+.maitrise-header .left {
+	position: absolute;
+	left: 0;
+	top: 55px;
+}
+
+.maitrise-header img.logo {
+	height: 80px;
+}
+
+.maitrise-header .main {
+	margin-left: 100px;
+}
+
+.maitrise-title {
+	font-size: 13px;
+	text-align:center;
+	text-decoration: underline;
+	margin-top: 50px;
+}
+
+.maitrise-presence p {
+	margin: 4px;
+}
+
+.maitrise-odj {
+	font-size: 13px;
+	margin-top: 30px;
+}
+
+.maitrise-odj tr.title td {
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+.maitrise-odj tr.title td {
+	padding-top: 15px;
+}
+
+.maitrise-odj table .title {
+	font-style: italic;
+
+}
+</style>
+
+<div class="maitrise-header">
+	<div class="right">
+		<img class="logo" src="./bundles/interneseance/img/logo_scouts.png" alt="Logo GO"/>
+	</div>
+	<div class="left">
+		<img class="logo" src="./bundles/interneseance/img/logo.jpg" alt="Logo GO"/>
+	</div>
+	<div class="main">
+		<p><strong><i>Responsable de Groupe</i></strong></p>
+		<p>Florian Alonso / Cabiai</p>
+		<p>ch. des Grands-Champs 12</p>
+		<p>1033 Cheseaux</p>
+		<p>079 388 14 02</p>
+		<p><a href="mailto:cg@grandeourse.ch">cg@grandeourse.ch</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.grandeourse.ch/">www.grandeouse.ch</a></p>
+	</div>
+</div>
+
+<h1 class="maitrise-title">{{ meeting.name }} - {{ meeting.date|date('d-m-Y') }}</h1>
+
+<div class="maitrise-presence">
+	<p>Présents:</p>
+	<p>Excusés:</p>
+	<p>Absents:</p>
+</div>
+
+<div class="maitrise-odj">
+	<h4>Ordre du jour</h4>
+	<table style="width:100%">
+    {% for item in meeting.items %}
+        <tr class="title" style="width: 100%">
+        	<td style="width: 5%">{{ item.position + 1 }}</td>
+            <td style="width: 95%">{{ item.title }}</td>
+        </tr>
+        <tr class="content">
+        	<td>&nbsp;</td>
+            <td>{{ item.description | raw }}</td>
+        </tr>
+    {% endfor %}
+	</table>
+</div>

@@ -48,8 +48,8 @@
       <div class="ui tab active" data-tab="accueil">
           <div ng-repeat="item in items">
               <h3 id="{{ item.id }}"> <span editable-text="item.title" buttons="no" onaftersave="updateItem($data, item)">{{ item.title || 'vide' }}</span>
-                  <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
-                  <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
+                  <!--<span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
+                  <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>-->
               </h3>
               <textarea ng-model="item.description" ui-tinymce="tinymceOptions(item)" cols="70" >{{ item.description }}</textarea>
               <div class="ui hidden divider"></div>
@@ -65,14 +65,12 @@
     <div class="ui sticky" ng-init="toSticky()">
       <h3>Administration</h3>
       <div class="ui vertical buttons">
-        <button class="ui labeled icon olive disabled button">
-            <i class="send icon"></i>
-            Envoyer un rappel
-        </button>
-        <button class="ui labeled icon green button">
-            <i class="send icon"></i>
-            Envoyer le PV
-        </button>
+        <a href="/app_dev.php/intranet/seance/pdf/{{ meeting.id }}">
+          <button class="ui labeled icon blue button">
+              <i class="download icon"></i>
+              Télécharger en PDF
+          </button>
+        </a>
       </div>
       <h3>Ordre du jour</h3>
       <div class="ui list" ui-sortable="sortableOptions" ng-model="items">

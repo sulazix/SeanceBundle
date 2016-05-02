@@ -19,3 +19,7 @@ interne_seance_frontend:
     prefix: /frontend
     options:
         expose: true
+
+interne_seance_export:
+    path: /pdf/{id}
+    defaults: { _controller: InterneSeanceBundle:Export:exportToPDF}
