@@ -1,6 +1,6 @@
 {% raw %}
   <div class="twelve wide column" ng-controller="FrontendController">
-    <div class="ui segment piled" id="stickyContext">
+    <div class="ui segment" id="stickyContext">
       <div class="row">
         <h1 class="ui">
           <span e-class="ui input" editable-text="meeting.name" onaftersave="updateMeeting($data, meeting)">
@@ -51,7 +51,7 @@
                   <span ng-repeat="tag in item.tags" class="ui {{ tag.color }} label small">{{ tag.title }} <i class="close icon" ng-click="removeTag($parent.$index, $index)"></i></span>
                   <a class="ui label blue small tag-popup" ng-controller="TagController"><i class="add fitted icon"></i>...</a>
               </h3>
-              <div editable-textarea="item.description" onaftersave="updateItem($data, item)" e-ui-tinymce="tinymceOptions" e-cols="70" ng-bind-html="item.description || 'vide'"></div>
+              <textarea ng-model="item.description" ui-tinymce="tinymceOptions(item)" cols="70" >{{ item.description }}</textarea>
               <div class="ui hidden divider"></div>
           </div>
       </div>

@@ -1,6 +1,6 @@
 
-seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', 'config', 'ContainerService', 'MeetingService', 'ItemService', 'APIService', 'Meeting', 'Item',
-	function($scope, $rootScope, $stateParams, $state, $filter, config, ContainerService, MeetingService, ItemService, APIService, Meeting, Item){
+seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams', '$state', '$filter', '$timeout', 'config', 'ContainerService', 'MeetingService', 'ItemService', 'APIService', 'Meeting', 'Item',
+	function($scope, $rootScope, $stateParams, $state, $filter, $timeout, config, ContainerService, MeetingService, ItemService, APIService, Meeting, Item){
 
 		$rootScope.$on('container:changed_selected', function(){
 			$scope.meetings = MeetingService.getMeetings();
@@ -127,7 +127,11 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			return true;
 		};
 
-		$scope.updateItem = function(data, item) {
+		$scope.updateItem = function(item) {
+			console.log(item.description);
+
+			if (!item) return;
+
 			ItemService.update(item);
 			
 			return true;
@@ -158,11 +162,30 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 
 			//if ($scope.initialized) return;
 
-			$scope.tinymceOptions = {
-				'menubar': false,
-				'width': 'auto',
-				'plugins': 'autoresize',
-				'autoresize_bottom_margin': "30"
+			$scope.tinymceOptions = function (item) {
+				return {
+					setup: function(editor) {
+						var timeout;
+						var changed;
+						var delay = 2000;
+						editor.on('change', function(e) {
+							changed = true;
+							$timeout.cancel(timeout);
+							timeout = $timeout(function() { $scope.updateItem(item); changed = false; }, delay);
+						});
+						editor.on('blur', function(e) {
+							$timeout.cancel(timeout);
+							if (changed) {
+								$scope.updateItem(item);
+								changed = false;
+							}
+						});
+					},
+					'menubar': false,
+					'width': 'auto',
+					'plugins': 'autoresize',
+					'autoresize_bottom_margin': "30"
+				};
 			};
 
 			var old_pos = -1;
