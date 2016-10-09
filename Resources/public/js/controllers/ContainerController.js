@@ -21,9 +21,21 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 			//}
 		};
 
+		$scope.changeContainer = function(index) {
+			if(ContainerService.setSelectedContainer(index))
+				console.log("Container changed successfully");
+			else
+				console.log("Container failed to change");
+		};
+
+		$scope.getContainer = function() {
+			return ContainerService.getSelectedContainer();
+		};
+
 		$scope.setVars = function(event) {
 			if (!event) return;
 			
+			$scope.containers = ContainerService.getContainers();
 			$scope.selectedContainer = ContainerService.getSelectedContainer();
 			$scope.stack = $scope.selectedContainer.stack;
 		};

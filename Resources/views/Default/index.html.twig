@@ -7,11 +7,23 @@
 
     <div class="ui page grid" ng-app="seanceApp" ng-controller="ContainerController">
         <h1 class="ui header">
-          <i class="users icon"></i>
-          <div class="content">
-            Gestionnaire de séance
-            <div class="sub header">Mets de la simplicité dans tes PV !</div>
-          </div>
+            <i class="users icon"></i>
+            <div class="content">
+                Gestionnaire de séances
+                {% raw %}
+                <div class="sub header">Mets de la simplicité dans tes PV                     
+                    <div class="ui inline dropdown">
+                        <div class="text">{{ getContainer().title }}</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu" style="z-index: 110;">
+                            <a class="item" ng-repeat="container in containers track by $index" ng-click="changeContainer(container.id)">
+                                {{ container.title }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endraw %}
+            </div>
         </h1>
         <div ui-view="headerView" class="row"></div>
         <div class="row"></div>

@@ -224,5 +224,9 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		};
 
 		$scope.init();
+
+		$scope.$on('container:changed_selected', function(){
+			$state.go('root.home');
+		});
 	}]
 );
