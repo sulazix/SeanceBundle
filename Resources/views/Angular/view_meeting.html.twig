@@ -44,6 +44,7 @@
       <div class="ui pointing secondary menu tab_controller" ng-init="toTabs()">
         <a class="item active" data-tab="accueil">Accueil</a>
         <a class="item" data-tab="presence">Présences</a>
+        <a class="item" data-tab="taches">Tâches</a>
       </div>
       <div class="ui tab active" data-tab="accueil">
           <div ng-repeat="item in items">
@@ -58,6 +59,9 @@
       <div class="ui tab" data-tab="presence">
         
       </div>
+      <div class="ui tab" data-tab="taches">
+        
+      </div>
     </div>
   </div>
 
@@ -65,7 +69,7 @@
     <div class="ui sticky" ng-init="toSticky()">
       <h3>Administration</h3>
       <div class="ui vertical buttons">
-        <a href="/app_dev.php/intranet/seance/pdf/{{ meeting.id }}">
+        <a ng-href="{{ loadUrl() }}">
           <button class="ui labeled icon blue button">
               <i class="download icon"></i>
               Télécharger en PDF

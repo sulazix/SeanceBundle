@@ -63,6 +63,7 @@ class Meeting
 
     /**
      * @ORM\OneToMany(targetEntity="Interne\SeanceBundle\Entity\Item", mappedBy="meeting", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $items;
 

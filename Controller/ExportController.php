@@ -27,6 +27,8 @@ class ExportController extends FOSRestController
     public function exportToPDFAction(Meeting $meeting) {
     	$html = $this->render("InterneSeanceBundle:Export:pdf_export.html.twig", ["meeting" => $meeting])->getContent();
 
+        //return new Response($html);
+
         $html2pdf = $this->get('html2pdf_factory')->create();
         $html2pdf->WriteHTML($html);
         $html2pdf->pdf->SetTitle($meeting->getName());

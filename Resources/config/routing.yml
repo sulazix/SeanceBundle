@@ -23,3 +23,5 @@ interne_seance_frontend:
 interne_seance_export:
     path: /pdf/{id}
     defaults: { _controller: InterneSeanceBundle:Export:exportToPDF}
+    options:
+        expose: true

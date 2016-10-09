@@ -21,7 +21,9 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 			//}
 		};
 
-		$scope.setVars = function() {
+		$scope.setVars = function(event) {
+			if (!event) return;
+			
 			$scope.selectedContainer = ContainerService.getSelectedContainer();
 			$scope.stack = $scope.selectedContainer.stack;
 		};
@@ -89,7 +91,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 		$scope.init();
 
 		// $rootScope events
-		$scope.$on('container:changed_selected', $scope.setVars());
+		$scope.$on('container:changed_selected', $scope.setVars(true));
 
 	}]
 );

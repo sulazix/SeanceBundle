@@ -53,20 +53,26 @@
 
 .maitrise-odj {
 	font-size: 13px;
-	margin-top: 30px;
 }
 
-.maitrise-odj tr.title td {
+.maitrise-odj .title {
 	border-bottom: 1px solid black;
-	border-collapse: collapse;
-}
-.maitrise-odj tr.title td {
 	padding-top: 15px;
+	font-style: italic;
 }
 
-.maitrise-odj table .title {
-	font-style: italic;
+.maitrise-odj .title .number {
+	display: inline;
+	width: 5%;
+}
 
+.maitrise-odj .title .name {
+	display: inline;
+	width: 90%;
+}
+
+.maitrise-odj .content {
+	display: inline;
 }
 </style>
 
@@ -83,30 +89,31 @@
 		<p>ch. des Grands-Champs 12</p>
 		<p>1033 Cheseaux</p>
 		<p>079 388 14 02</p>
-		<p><a href="mailto:cg@grandeourse.ch">cg@grandeourse.ch</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.grandeourse.ch/">www.grandeouse.ch</a></p>
+		<p><a href="mailto:cg@grandeourse.ch">cg@grandeourse.ch</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.grandeourse.ch/">www.grandeourse.ch</a></p>
 	</div>
 </div>
 
-<h1 class="maitrise-title">{{ meeting.name }} - {{ meeting.date|date('d-m-Y') }}</h1>
+<h1 class="maitrise-title">{{ meeting.name }}</h1>
 
+<!--
 <div class="maitrise-presence">
 	<p>Présents:</p>
 	<p>Excusés:</p>
 	<p>Absents:</p>
 </div>
+-->
 
-<div class="maitrise-odj">
+
 	<h4>Ordre du jour</h4>
-	<table style="width:100%">
     {% for item in meeting.items %}
-        <tr class="title" style="width: 100%">
-        	<td style="width: 5%">{{ item.position + 1 }}</td>
-            <td style="width: 95%">{{ item.title }}</td>
-        </tr>
-        <tr class="content">
-        	<td>&nbsp;</td>
-            <td>{{ item.description | raw }}</td>
-        </tr>
+    	<div class="maitrise-odj">
+	        <div class="title">
+	        	<div class="number">{{ item.position + 1 }}</div>
+	            <div class="name">{{ item.title }}</div>
+	        </div>
+	        <div class="content">
+	        	<div>&nbsp;</div>
+	            <div>{{ item.description | raw }}</div>
+	        </div>
+	    </div>
     {% endfor %}
-	</table>
-</div>

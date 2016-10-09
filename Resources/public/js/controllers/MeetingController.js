@@ -73,7 +73,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 				if (prevPos) pos = prevPos + 1;
 			}
 
-			var item = new Item(0, $scope.form.item, "", pos);
+			var item = new Item(0, $scope.form.item, " ", pos);
 			var value = $scope.form.item;
 			$scope.form.item = "";
 
@@ -128,9 +128,10 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 		};
 
 		$scope.updateItem = function(item) {
-			console.log(item.description);
+			console.log(item.id, item.description);
 
 			if (!item) return;
+			//if (item.description === undefined) return;
 
 			ItemService.update(item);
 			
@@ -158,6 +159,10 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			$scope.items[itemIndex].tags.splice(tagIndex, 1);
 		};
 
+		$scope.loadUrl = function() {
+			return Routing.generate('interne_seance_export', { 'id': $scope.meeting.id});
+		};
+
 		$scope.init = function() {
 
 			//if ($scope.initialized) return;
@@ -168,7 +173,7 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 						var timeout;
 						var changed;
 						var delay = 2000;
-						editor.on('change', function(e) {
+						editor.on('keyup', function(e) {
 							changed = true;
 							$timeout.cancel(timeout);
 							timeout = $timeout(function() { $scope.updateItem(item); changed = false; }, delay);
@@ -194,7 +199,6 @@ seanceApp.controller('MeetingController', ['$scope', '$rootScope', '$stateParams
 			    	// Update positions from all items
 			    	angular.forEach($scope.items, function(item, key){
 			    		item.position = key;
-			    		console.log(key + " " + item.title);
 			    		ItemService.update(item);
 			    	});
 			    }
