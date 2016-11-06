@@ -103,7 +103,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 		$scope.init();
 
 		// $rootScope events
-		$scope.$on('container:changed_selected', $scope.setVars(true));
+		$scope.$on('container:changed_selected', $scope.setVars);
 
 	}]
 );
