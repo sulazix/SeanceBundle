@@ -1,103 +1,120 @@
-{% extends "AppBundle:Layout:layout.html.twig" %}
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+    {% block content %}
+
+        <div class="ui page grid" ng-app="seanceApp" ng-controller="ContainerController">
+            <h1 class="ui header">
+              <i class="users icon"></i>
+              <div class="content">
+                Gestionnaire de séance
+                <div class="sub header">Mets de la simplicité dans tes PV !</div>
+              </div>
+            </h1>
+            <div ui-view="headerView" class="row"></div>
+            <div class="row"></div>
+            <div ui-view="baseView" class="ui grid"></div>
+        </div>
+
+        <!--
+        <script>
+        $(document).ready(function(){
+            $('.card-popup').popup({})
+        });
+        </script>
+        -->
 
 
-{% block titre %}Gestionnaire de séance{% endblock %}
+    {% endblock %}
 
-{% block content %}
+    {% block css %}
 
-    <div class="ui page grid" ng-app="seanceApp" ng-controller="ContainerController">
-        <h1 class="ui header">
-          <i class="users icon"></i>
-          <div class="content">
-            Gestionnaire de séance
-            <div class="sub header">Mets de la simplicité dans tes PV !</div>
-          </div>
-        </h1>
-        <div ui-view="headerView" class="row"></div>
-        <div class="row"></div>
-        <div ui-view="baseView" class="ui grid"></div>
-    </div>
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/skin.min.css'
 
-    <!--
-    <script>
-    $(document).ready(function(){
-        $('.card-popup').popup({})
-    });
-    </script>
-    -->
+            output='js/skins/lightgray/skin.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/content.min.css'
 
-{% endblock %}
+            output='js/skins/lightgray/content.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
 
-{% block css %}
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
+            '@InterneSeanceBundle/Resources/public/css/jquery.datetimepicker.css'
+            '@InterneSeanceBundle/Resources/public/bower_components/semantic/dist/semantic.min.css'
+            '@InterneSeanceBundle/Resources/public/css/style.css'
 
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/skin.min.css'
-
-        output='js/skins/lightgray/skin.min.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/content.min.css'
-
-        output='js/skins/lightgray/content.min.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/css/xeditable.css'
-        '@InterneSeanceBundle/Resources/public/css/style.css'
-        '@InterneSeanceBundle/Resources/public/css/jquery.datetimepicker.css'
-
-        output='css/seance.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
+            output='css/seance.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
 
 
-{% block fonts %}
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.ttf'
-        output='js/skins/lightgray/fonts/tinymce.ttf' %}
-    {% endstylesheets %}
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.woff'
-        output='js/skins/lightgray/fonts/tinymce.woff' %}
-    {% endstylesheets %}
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.svg'
-        output='js/skins/lightgray/fonts/tinymce.svg' %}
-    {% endstylesheets %}
-    {% stylesheets
-        '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/skins/lightgray/fonts/tinymce.eot'
-        output='js/skins/lightgray/fonts/tinymce.eot' %}
-    {% endstylesheets %}
-{% endblock %}
+    {% block fonts %}
 
-{% block js %}
-    {% javascripts
-    '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-router/release/angular-ui-router.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/tinymce.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/ngstorage/ngStorage.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/themes/modern/theme.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-tinymce/src/tinymce.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-sortable/sortable.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/ui/minified/core.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/ui/minified/widget.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/ui/minified/mouse.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/ui/minified/sortable.min.js'
-    '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
-    '@InterneSeanceBundle/Resources/public/dist/frontend.min.js'
-    '@InterneSeanceBundle/Resources/public/js/jquery.datetimepicker.full.min.js'
-    %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {% javascripts
-    '@InterneSeanceBundle/Resources/public/bower_components/tinymce-dist/plugins/autoresize/plugin.min.js'
-    output="js/plugins/autoresize/plugin.min.js"
-    %}
-    {% endjavascripts %}
-{% endblock %}
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/semantic/dist/themes/default/assets/fonts/icons.woff'
+            output='css/themes/default/assets/fonts/icons.woff' %}
+        {% endstylesheets %}
+
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/semantic/dist/themes/default/assets/fonts/icons.woff'
+            output='css/themes/default/assets/fonts/icons.woff2' %}
+        {% endstylesheets %}
+
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/fonts/tinymce.ttf'
+            output='js/skins/lightgray/fonts/tinymce.ttf' %}
+        {% endstylesheets %}
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/fonts/tinymce.woff'
+            output='js/skins/lightgray/fonts/tinymce.woff' %}
+        {% endstylesheets %}
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/fonts/tinymce.svg'
+            output='js/skins/lightgray/fonts/tinymce.svg' %}
+        {% endstylesheets %}
+        {% stylesheets
+            '@InterneSeanceBundle/Resources/public/bower_components/tinymce/skins/lightgray/fonts/tinymce.eot'
+            output='js/skins/lightgray/fonts/tinymce.eot' %}
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% block js %}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+        {% javascripts
+        '@InterneSeanceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/semantic/dist/semantic.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular/angular.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-sanitize/angular-sanitize.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-router/release/angular-ui-router.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce/tinymce.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/ngstorage/ngStorage.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce/themes/modern/theme.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-tinymce/src/tinymce.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-ui-sortable/sortable.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/jquery-ui/jquery-ui.min.js'
+        '@InterneSeanceBundle/Resources/public/bower_components/angular-xeditable/dist/js/xeditable.min.js'
+        '@InterneSeanceBundle/Resources/public/dist/frontend.min.js'
+        '@InterneSeanceBundle/Resources/public/js/jquery.datetimepicker.full.min.js'
+
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% javascripts
+        '@InterneSeanceBundle/Resources/public/bower_components/tinymce/plugins/autoresize/plugin.min.js'
+        output="js/plugins/autoresize/plugin.min.js"
+        %}
+        {% endjavascripts %}
+    {% endblock %}
+    </body>
+</html>

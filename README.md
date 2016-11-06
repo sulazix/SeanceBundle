@@ -1,7 +1,7 @@
 SeanceBundle
 ============
 
-Bundle de séance pour le Net BS (https://github.com/sysmoh/intranetBS)
+Gestionnaire de séances pour Symfony
 
 Pré-requis
 ----------
@@ -10,18 +10,21 @@ Pré-requis
 - https://github.com/FriendsOfSymfony/FOSJsRoutingBundle
 - http://symfony.com/doc/master/bundles/FOSRestBundle/index.html
 - https://packagist.org/packages/ensepar/html2pdf-bundle
+- http://symfony.com/doc/2.8/assetic/asset_management.html # Symfony >= 2.8
 
-Pour utiliser le le frontend angular en dehors de l'intranet BS il vous faudra également ajouter ce fichier de layout (ainsi que les dépendances qui vont avec) :
-
-- https://github.com/sysmoh/intranetBS/blob/master/src/AppBundle/Resources/views/Layout/layout.html.twig
 
 
 Installation
 ------------
 
 ```
-cd path/to/intranetBS
+cd path/to/symfony
+# installer le bundle
 composer require interne/seancebundle --prefer-dist dev-stable
+# installer les bundle de dépendences
+composer require jms/serializer-bundle friendsofsymfony/jsrouting-bundle friendsofsymfony/rest-bundle ensepar/html2pdf-bundle
+composer require symfony/assetic-bundle # symfony >= 2.8
+
 ```
 
 Si vous souhaitez utiliser le frontend Angular par défaut 
@@ -47,13 +50,13 @@ Enregistrer les routes du bundle dans l'application :
 seance_api:
     type:     rest
     resource: "@InterneSeanceBundle/Resources/config/routing_rest.yml"
-    prefix:   /intranet/seance-api
+    prefix:   /seance-api
     options:
         expose: true
 
 seance:
     resource: "@InterneSeanceBundle/Resources/config/routing.yml"
-    prefix:   /intranet/seance
+    prefix:   /seance
 
 
 ```
@@ -106,6 +109,7 @@ Mettre à jour les bundles chargés depuis le kernel Symfony :
         new JMS\SerializerBundle\JMSSerializerBundle(),
         new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         new FOS\RestBundle\FOSRestBundle(),
+        new Symfony\Bundle\AsseticBundle\AsseticBundle(),
     );
 ```
 
