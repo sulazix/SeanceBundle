@@ -1,6 +1,7 @@
 /* content.min.css overrides */
 body {
 	background-color: #EBEDEF;
+	margin-top: 20px;
 }
 
 /* Semantic UI overrides */

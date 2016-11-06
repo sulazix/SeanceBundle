@@ -15,7 +15,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 
 			// Disabled for now until syncing algorithm is in place
 			//if (ContainerService.getContainers().length == 0)
-				ContainerService.fetchAll();
+				ContainerService.fetchAll($scope.setVars);
 			//else {
 			//	$scope.setVars();
 			//}
@@ -32,9 +32,7 @@ seanceApp.controller('ContainerController', ['$scope', 'ContainerService', 'Item
 			return ContainerService.getSelectedContainer();
 		};
 
-		$scope.setVars = function(event) {
-			if (!event) return;
-			
+		$scope.setVars = function() {
 			$scope.containers = ContainerService.getContainers();
 			$scope.selectedContainer = ContainerService.getSelectedContainer();
 			$scope.stack = $scope.selectedContainer.stack;
