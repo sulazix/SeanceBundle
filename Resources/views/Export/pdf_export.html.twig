@@ -22,7 +22,7 @@
 
 .maitrise-header .right {
 	position: absolute;
-	right: 0;
+	right: 100px;
 	top: 55px;
 }
 
@@ -37,7 +37,9 @@
 }
 
 .maitrise-header .main {
-	margin-left: 100px;
+	position: relative;
+	left: 100px;
+	top: 25px;
 }
 
 .maitrise-title {
@@ -51,7 +53,7 @@
 	margin: 4px;
 }
 
-.maitrise-odj {
+.maitrise-odj, .content {
 	font-size: 13px;
 }
 
@@ -71,9 +73,6 @@
 	width: 90%;
 }
 
-.maitrise-odj .content {
-	display: inline;
-}
 </style>
 
 <div class="maitrise-header">
@@ -111,9 +110,7 @@
 	        	<div class="number">{{ item.position + 1 }}</div>
 	            <div class="name">{{ item.title }}</div>
 	        </div>
-	        <div class="content">
-	        	<div>&nbsp;</div>
-	            <div>{{ item.description | raw }}</div>
-	        </div>
 	    </div>
+    	<div>&nbsp;</div>
+        {{ item.description | raw }}
     {% endfor %}

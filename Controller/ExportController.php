@@ -29,10 +29,12 @@ class ExportController extends FOSRestController
 
         //return new Response($html);
 
+        //*
         $html2pdf = $this->get('html2pdf_factory')->create();
         $html2pdf->WriteHTML($html);
         $html2pdf->pdf->SetTitle($meeting->getName());
-        $file = $html2pdf->Output("export_". strtolower($meeting->getName()) . ".pdf", "D");
+        $file = $html2pdf->Output("export_". strtolower($meeting->getName()) . ".pdf", "I");
+        //*/
         
     }
 }
